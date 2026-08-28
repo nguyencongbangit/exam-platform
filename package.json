@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start --port 3000",
     "start:lan": "next start --hostname 0.0.0.0 --port 3000",
+    "seed:base": "ts-node --esm prisma/seed.ts",
     "db:push": "prisma db push",
     "db:seed": "ts-node --esm prisma/seed.ts",
     "db:studio": "prisma studio"
