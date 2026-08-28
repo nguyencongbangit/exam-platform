@@ -1,0 +1,243 @@
+// 200 câu hỏi Unit 3 - Community Service - Tiếng Anh lớp 7
+const { PrismaClient } = require('@prisma/client');
+const p = new PrismaClient();
+
+const TOPIC_ID = 'cmt322xjr0005eq3rvok92cgd'; // Unit 3 - Community Service
+
+const QUESTIONS = [
+  // ── TỪ VỰNG (50 câu) ──
+  { d: 'EASY', q: 'A ___ is someone who works without being paid to help others.', opts: ['A. volunteer', 'B. manager', 'C. banker', 'D. pilot'], a: 'A' },
+  { d: 'EASY', q: 'They ___ food and blankets to the flood victims.', opts: ['A. donated', 'B. sold', 'C. bought', 'D. destroyed'], a: 'A' },
+  { d: 'EASY', q: 'We should ___ the environment by not throwing rubbish.', opts: ['A. protect', 'B. pollute', 'C. destroy', 'D. ignore'], a: 'A' },
+  { d: 'EASY', q: 'The students organised a ___ event to raise money for poor children.', opts: ['A. charity', 'B. sport', 'C. music', 'D. science'], a: 'A' },
+  { d: 'EASY', q: 'A ___ is a child whose parents have both died.', opts: ['A. orphan', 'B. volunteer', 'C. donor', 'D. resident'], a: 'A' },
+  { d: 'EASY', q: 'They cleaned up the ___ to make the neighbourhood more beautiful.', opts: ['A. park', 'B. office', 'C. cinema', 'D. airport'], a: 'A' },
+  { d: 'EASY', q: 'Air ___ is caused by smoke from factories and vehicles.', opts: ['A. pollution', 'B. music', 'C. education', 'D. fashion'], a: 'A' },
+  { d: 'EASY', q: 'It is our ___ to keep our community clean.', opts: ['A. responsibility', 'B. hobby', 'C. dream', 'D. excuse'], a: 'A' },
+  { d: 'EASY', q: 'After the flood, many families became ___ and needed shelter.', opts: ['A. homeless', 'B. wealthy', 'C. healthy', 'D. famous'], a: 'A' },
+  { d: 'EASY', q: 'We can ___ old clothes and toys to people who need them.', opts: ['A. donate', 'B. sell', 'C. destroy', 'D. hide'], a: 'A' },
+  { d: 'EASY', q: 'The students ___ money for the local orphanage.', opts: ['A. raised', 'B. spent', 'C. lost', 'D. wasted'], a: 'A' },
+  { d: 'EASY', q: 'Planting trees helps reduce air ___ in cities.', opts: ['A. pollution', 'B. traffic', 'C. noise', 'D. population'], a: 'A' },
+  { d: 'EASY', q: 'The Red Cross is an international ___ organisation.', opts: ['A. humanitarian', 'B. sports', 'C. music', 'D. technology'], a: 'A' },
+  { d: 'EASY', q: 'We should ___ old newspapers and bottles instead of throwing them away.', opts: ['A. recycle', 'B. burn', 'C. bury', 'D. ignore'], a: 'A' },
+  { d: 'EASY', q: 'Children in ___ need our love and support.', opts: ['A. orphanages', 'B. cinemas', 'C. supermarkets', 'D. stadiums'], a: 'A' },
+  { d: 'EASY', q: 'A ___ campaign is an organised effort to raise money for a good cause.', opts: ['A. fundraising', 'B. shopping', 'C. cooking', 'D. gaming'], a: 'A' },
+  { d: 'EASY', q: 'The villagers worked ___ to rebuild houses after the storm.', opts: ['A. together', 'B. alone', 'C. slowly', 'D. quietly'], a: 'A' },
+  { d: 'EASY', q: 'We should separate ___ into different bins for recycling.', opts: ['A. waste', 'B. food', 'C. books', 'D. clothes'], a: 'A' },
+  { d: 'EASY', q: '"Going green" means adopting ___ friendly habits.', opts: ['A. environmentally', 'B. socially', 'C. financially', 'D. politically'], a: 'A' },
+  { d: 'EASY', q: 'She ___ at the local soup kitchen every Saturday morning.', opts: ['A. volunteers', 'B. shops', 'C. dances', 'D. studies'], a: 'A' },
+  { d: 'MEDIUM', q: 'The 3Rs of environmental care stand for ___.', opts: ['A. Reduce, Reuse, Recycle', 'B. Read, Run, Rest', 'C. Race, Ride, Repair', 'D. Report, Record, Review'], a: 'A' },
+  { d: 'MEDIUM', q: 'A ___ is a place where people can drop off items to be given to those in need.', opts: ['A. donation centre', 'B. cinema', 'C. shopping mall', 'D. restaurant'], a: 'A' },
+  { d: 'MEDIUM', q: '"Sustainable" development means development that ___.',  opts: ['A. meets present needs without harming future generations', 'B. destroys the environment quickly', 'C. only benefits wealthy people', 'D. uses all natural resources immediately'], a: 'A' },
+  { d: 'MEDIUM', q: 'The community ___ a petition to save the local forest from being cut down.', opts: ['A. signed', 'B. ignored', 'C. burned', 'D. sold'], a: 'A' },
+  { d: 'MEDIUM', q: 'A ___ is money or goods given freely to help people in need.', opts: ['A. donation', 'B. loan', 'C. salary', 'D. debt'], a: 'A' },
+  { d: 'MEDIUM', q: 'The charity ___ raised over $10,000 to build a new school.', opts: ['A. drive', 'B. lesson', 'C. game', 'D. trip'], a: 'A' },
+  { d: 'MEDIUM', q: '"Civic responsibility" refers to ___.',  opts: ['A. the duties citizens have toward their community and society', 'B. paying for entertainment', 'C. winning competitions', 'D. learning foreign languages'], a: 'A' },
+  { d: 'MEDIUM', q: 'The ___ of rubbish on the beach harmed the local marine life.', opts: ['A. dumping', 'B. collecting', 'C. cleaning', 'D. recycling'], a: 'A' },
+  { d: 'MEDIUM', q: 'She ___ at the animal shelter every weekend, walking dogs and feeding cats.', opts: ['A. volunteers', 'B. works for money', 'C. visits as a tourist', 'D. studies'], a: 'A' },
+  { d: 'MEDIUM', q: '"Outreach" programme means a programme designed to ___.',  opts: ['A. reach and help people who need assistance', 'B. go on holiday', 'C. sell products', 'D. test students'], a: 'A' },
+  { d: 'MEDIUM', q: 'A ___ garden is shared and maintained by community members.', opts: ['A. community', 'B. private', 'C. secret', 'D. expensive'], a: 'A' },
+  { d: 'MEDIUM', q: 'The students ___ trees along the school road to improve air quality.', opts: ['A. planted', 'B. cut', 'C. burned', 'D. painted'], a: 'A' },
+  { d: 'MEDIUM', q: 'A "pro bono" service is one that is ___.',  opts: ['A. provided free of charge for a good cause', 'B. done for profit only', 'C. performed by professionals only for money', 'D. only for government employees'], a: 'A' },
+  { d: 'MEDIUM', q: 'They organised a ___ sale to raise money for the school library.', opts: ['A. book', 'B. car', 'C. computer', 'D. phone'], a: 'A' },
+  { d: 'MEDIUM', q: '"Empathy" in community service means ___.',  opts: ['A. understanding and sharing the feelings of others', 'B. giving orders to others', 'C. earning money for yourself', 'D. criticising people\'s problems'], a: 'A' },
+  { d: 'HARD', q: '"Altruism" means ___.',  opts: ['A. selfless concern for others\' well-being', 'B. selfish behaviour', 'C. fear of helping others', 'D. competitive mindset'], a: 'A' },
+  { d: 'HARD', q: 'What does "NGO" stand for?', opts: ['A. Non-Governmental Organisation', 'B. National Government Office', 'C. New Global Opportunity', 'D. National Geographic Organisation'], a: 'A' },
+  { d: 'HARD', q: '"Grassroots" initiative means ___.',  opts: ['A. an effort started by ordinary community members, not leaders', 'B. a government-funded project', 'C. an international campaign', 'D. a corporate programme'], a: 'A' },
+  { d: 'HARD', q: '"Social cohesion" in a community refers to ___.',  opts: ['A. the sense of unity, trust, and cooperation among community members', 'B. the ability to make profit', 'C. strict rules and regulations', 'D. the size of the population'], a: 'A' },
+  { d: 'HARD', q: 'What is "carbon offsetting"?', opts: ['A. Compensating for CO₂ emissions by funding green projects like tree planting', 'B. Burning more fuel to test emissions', 'C. Measuring air pollution levels', 'D. Building more factories'], a: 'A' },
+  { d: 'HARD', q: '"Philanthropist" refers to a person who ___.',  opts: ['A. donates money and resources generously to help others', 'B. collects money for personal gain', 'C. works for the government', 'D. studies philosophy'], a: 'A' },
+  { d: 'HARD', q: 'What is a "social enterprise"?', opts: ['A. A business that aims to achieve social, environmental, or community goals alongside profit', 'B. A company that earns maximum profit only', 'C. A school club', 'D. A government department'], a: 'A' },
+  { d: 'HARD', q: '"Environmental stewardship" means ___.',  opts: ['A. taking responsibility for protecting and managing the natural environment', 'B. owning land', 'C. investing in oil companies', 'D. building more roads'], a: 'A' },
+  { d: 'HARD', q: 'What does "UNICEF" do?', opts: ['A. Works to protect children\'s rights and provide aid to children worldwide', 'B. Manages international trade', 'C. Controls air traffic', 'D. Regulates global financial markets'], a: 'A' },
+  { d: 'HARD', q: '"Collective action" in community service means ___.',  opts: ['A. a group of people working together to achieve a common goal', 'B. one person doing all the work alone', 'C. competing against each other', 'D. waiting for the government to act'], a: 'A' },
+  { d: 'EASY', q: 'We ___ litter in public places – it harms the environment.', opts: ['A. shouldn\'t drop', 'B. should drop', 'C. must drop', 'D. can drop'], a: 'A' },
+  { d: 'EASY', q: 'The ___ cleaned up the river bank and removed 200 kg of rubbish.', opts: ['A. volunteers', 'B. tourists', 'C. shoppers', 'D. athletes'], a: 'A' },
+  { d: 'MEDIUM', q: 'A "benefit concert" is a concert organised to ___.',  opts: ['A. raise money for a good cause', 'B. entertain rich people only', 'C. promote a new music album', 'D. train musicians'], a: 'A' },
+  { d: 'MEDIUM', q: '"Advocacy" in community service means ___.',  opts: ['A. publicly speaking out and supporting a cause', 'B. hiding problems from the public', 'C. earning money for oneself', 'D. criticising other people'], a: 'A' },
+  { d: 'HARD', q: '"Social capital" in a community refers to ___.',  opts: ['A. the networks, trust, and relationships that make communities function well', 'B. the total amount of money in a community', 'C. the number of schools in an area', 'D. government investment in roads'], a: 'A' },
+
+  // ── NGỮ PHÁP: PAST SIMPLE IN COMMUNITY CONTEXT (20 câu) ──
+  { d: 'EASY', q: 'Last weekend, the students ___ the park near their school.', opts: ['A. cleaned', 'B. clean', 'C. are cleaning', 'D. will clean'], a: 'A' },
+  { d: 'EASY', q: 'She ___ clothes to the flood victims last month.', opts: ['A. donated', 'B. donates', 'C. is donating', 'D. will donate'], a: 'A' },
+  { d: 'EASY', q: 'They ___ trees along the street last Sunday.', opts: ['A. planted', 'B. plant', 'C. are planting', 'D. plants'], a: 'A' },
+  { d: 'EASY', q: 'He ___ at the soup kitchen for three hours yesterday.', opts: ['A. volunteered', 'B. volunteers', 'C. is volunteering', 'D. will volunteer'], a: 'A' },
+  { d: 'EASY', q: 'The community ___ a clean-up campaign last month.', opts: ['A. organised', 'B. organise', 'C. is organising', 'D. organises'], a: 'A' },
+  { d: 'MEDIUM', q: 'The charity ___ (raise) $5,000 at the fundraising concert last night.', opts: ['A. raised', 'B. raises', 'C. is raising', 'D. raise'], a: 'A' },
+  { d: 'MEDIUM', q: 'They ___ (not / collect) enough donations, so the project was delayed.', opts: ['A. didn\'t collect', 'B. don\'t collect', 'C. aren\'t collecting', 'D. won\'t collect'], a: 'A' },
+  { d: 'MEDIUM', q: '___ the volunteers ___ meals to the homeless last weekend?', opts: ['A. Did ... deliver', 'B. Do ... deliver', 'C. Are ... delivering', 'D. Have ... delivered'], a: 'A' },
+  { d: 'MEDIUM', q: 'The local government ___ the rubbish problem a year ago but nothing was done.', opts: ['A. acknowledged', 'B. acknowledges', 'C. is acknowledging', 'D. will acknowledge'], a: 'A' },
+  { d: 'MEDIUM', q: 'She ___ her first community service project when she was only 10 years old.', opts: ['A. started', 'B. starts', 'C. is starting', 'D. start'], a: 'A' },
+  { d: 'MEDIUM', q: 'Choose the correct past simple sentence:', opts: ['A. The students collected rubbish along the beach last Saturday.', 'B. The students collects rubbish along the beach last Saturday.', 'C. The students are collecting rubbish along the beach last Saturday.', 'D. The students collect rubbish along the beach last Saturday.'], a: 'A' },
+  { d: 'MEDIUM', q: 'The flood ___ hundreds of homes in the village last year.', opts: ['A. destroyed', 'B. destroys', 'C. is destroying', 'D. destroy'], a: 'A' },
+  { d: 'HARD', q: 'Rewrite in past simple: "The team collects litter every weekend." → Last weekend, ___', opts: ['A. the team collected litter.', 'B. the team collects litter.', 'C. the team is collecting litter.', 'D. the team will collect litter.'], a: 'A' },
+  { d: 'HARD', q: 'She ___ (teach) elderly people how to use smartphones as a community service project last summer.', opts: ['A. taught', 'B. teaches', 'C. is teaching', 'D. teach'], a: 'A' },
+  { d: 'HARD', q: 'Choose the question in PAST SIMPLE that matches: "Yes, they donated books to the library."', opts: ['A. Did they donate books to the library?', 'B. Do they donate books to the library?', 'C. Are they donating books to the library?', 'D. Have they donated books to the library?'], a: 'A' },
+  { d: 'EASY', q: 'The volunteers ___ (build) a house for a poor family last month.', opts: ['A. built', 'B. build', 'C. are building', 'D. builds'], a: 'A' },
+  { d: 'EASY', q: 'He ___ (not / participate) in the clean-up drive because he was sick.', opts: ['A. didn\'t participate', 'B. doesn\'t participate', 'C. isn\'t participating', 'D. won\'t participate'], a: 'A' },
+  { d: 'MEDIUM', q: 'The school ___ over 500 books to the village library last year.', opts: ['A. sent', 'B. sends', 'C. is sending', 'D. send'], a: 'A' },
+  { d: 'HARD', q: 'Use the past simple correctly: "The NGO ___ (provide) food for 300 families after the earthquake."', opts: ['A. provided', 'B. provides', 'C. is providing', 'D. provide'], a: 'A' },
+  { d: 'HARD', q: 'Identify the CORRECT past simple negative:', opts: ['A. She didn\'t sign the petition.', 'B. She didn\'t signed the petition.', 'C. She not signed the petition.', 'D. She wasn\'t sign the petition.'], a: 'A' },
+
+  // ── ĐỌC HIỂU (30 câu) ──
+  { d: 'EASY', q: '"They organised a bake sale and raised money for new school equipment." What is the PURPOSE of the bake sale?', opts: ['A. To raise money for school equipment', 'B. To practise baking skills', 'C. To celebrate a birthday', 'D. To feed the volunteers'], a: 'A' },
+  { d: 'EASY', q: '"Anna volunteers at the local animal shelter every Saturday." This means Anna ___.',  opts: ['A. helps care for animals in her free time without pay', 'B. works as a paid vet', 'C. visits the shelter as a tourist', 'D. studies veterinary medicine'], a: 'A' },
+  { d: 'EASY', q: '"They planted 100 trees along the riverbank to prevent erosion." "Erosion" means ___.',  opts: ['A. the gradual wearing away of soil by water', 'B. flooding', 'C. drought', 'D. pollution'], a: 'A' },
+  { d: 'EASY', q: '"The community came together to rebuild homes after the flood." This shows ___.',  opts: ['A. community spirit and solidarity', 'B. selfishness', 'C. laziness', 'D. conflict between neighbours'], a: 'A' },
+  { d: 'MEDIUM', q: 'Read: "The students raised $2,000 for the orphanage by holding a talent show." What was the method of fundraising?', opts: ['A. A talent show', 'B. A bake sale', 'C. A book sale', 'D. A sports day'], a: 'A' },
+  { d: 'MEDIUM', q: '"Separating plastic, glass, and paper into different bins reduces landfill waste." "Landfill" is ___.',  opts: ['A. a site where waste is buried in the ground', 'B. a recycling factory', 'C. a type of pollution', 'D. a community garden'], a: 'A' },
+  { d: 'MEDIUM', q: 'Read: "She has volunteered at the food bank for five years. She believes everyone deserves a nutritious meal." What value does she demonstrate?', opts: ['A. Compassion and commitment', 'B. Desire for fame', 'C. Need for money', 'D. Competitive spirit'], a: 'A' },
+  { d: 'MEDIUM', q: '"The local council fined residents for dumping rubbish illegally." "Fined" means ___.',  opts: ['A. charged a penalty amount of money', 'B. praised', 'C. awarded a prize', 'D. warned without punishment'], a: 'A' },
+  { d: 'MEDIUM', q: 'Read: "The litter problem on our beach is out of control. Unless we act now, the marine ecosystem will be permanently damaged." What is the writer\'s MAIN message?', opts: ['A. Immediate action is needed to protect the beach environment.', 'B. The beach is a nice place to visit.', 'C. Marine life is not important.', 'D. Littering is a minor problem.'], a: 'A' },
+  { d: 'MEDIUM', q: '"Through volunteering, young people develop leadership skills and a sense of social responsibility." This suggests volunteering is BENEFICIAL because ___.',  opts: ['A. it builds character and useful life skills', 'B. it is required for school grades', 'C. it replaces academic study', 'D. it makes young people famous'], a: 'A' },
+  { d: 'MEDIUM', q: 'Read: "Forty students gave up their Saturday to clean the school\'s garden and paint the walls." What does "gave up their Saturday" mean?', opts: ['A. They sacrificed their free day to do community work.', 'B. They forgot about Saturday.', 'C. They went shopping on Saturday.', 'D. They stayed home all day.'], a: 'A' },
+  { d: 'MEDIUM', q: '"The NGO built 50 wells in rural communities to provide clean drinking water." What problem did this solve?', opts: ['A. Lack of access to clean water', 'B. Air pollution', 'C. Lack of schools', 'D. Road damage'], a: 'A' },
+  { d: 'HARD', q: 'Read: "Community service teaches young people that they are not isolated individuals but part of a larger whole." "Isolated individuals" means ___.',  opts: ['A. people who feel alone and disconnected from others', 'B. people who are very social', 'C. people who have many friends', 'D. people who lead communities'], a: 'A' },
+  { d: 'HARD', q: '"The ripple effect of a single act of kindness can transform an entire community." "Ripple effect" means ___.',  opts: ['A. one action leading to many further effects, like ripples in water', 'B. a wave at the beach', 'C. a type of water sport', 'D. a negative chain reaction only'], a: 'A' },
+  { d: 'HARD', q: 'Read: "Despite having little free time, she manages to volunteer 10 hours a month at a homeless shelter." What does "despite" indicate?', opts: ['A. A contrast – she is busy, yet she still volunteers.', 'B. A reason – she volunteers because she has time.', 'C. A result – her volunteering caused her to be busy.', 'D. A condition – she only volunteers if she has time.'], a: 'A' },
+  { d: 'HARD', q: '"Volunteerism is not charity; it is a partnership between the helper and those being helped." This statement suggests ___.',  opts: ['A. Both parties benefit from the volunteer relationship.', 'B. Only the helper benefits.', 'C. Only those receiving help benefit.', 'D. Volunteering is the same as charity.'], a: 'A' },
+  { d: 'HARD', q: 'Read: "Our school\'s green committee launched a zero-waste campaign. Within three months, waste sent to landfill decreased by 60%." What was the RESULT?', opts: ['A. A significant reduction in landfill waste', 'B. An increase in recycling costs', 'C. More volunteers joined the school', 'D. The school earned money from the campaign'], a: 'A' },
+  { d: 'HARD', q: '"Rather than waiting for others to act, she decided to be the change she wished to see." This attitude is called ___.',  opts: ['A. proactive leadership', 'B. passive behaviour', 'C. peer pressure', 'D. social isolation'], a: 'A' },
+  { d: 'EASY', q: '"He collects unused medicine and donates it to clinics in remote areas." This is an example of ___.',  opts: ['A. community service', 'B. illegal activity', 'C. wasting resources', 'D. competitive business'], a: 'A' },
+  { d: 'MEDIUM', q: '"The volunteers didn\'t receive any pay, but they felt deeply satisfied." The feeling they experienced is called ___.',  opts: ['A. intrinsic reward', 'B. financial bonus', 'C. peer pressure', 'D. academic achievement'], a: 'A' },
+  { d: 'MEDIUM', q: 'Read: "The beach was covered in plastic bags and bottles. It took 200 volunteers six hours to clean it." What does this tell us about the littering problem?', opts: ['A. It is very serious and widespread.', 'B. It is a small and manageable problem.', 'C. There are enough volunteers to fix it easily.', 'D. Plastic is not harmful.'], a: 'A' },
+  { d: 'HARD', q: 'Read: "Every year, millions of tonnes of food are wasted while millions go hungry. Community food banks help bridge this gap." "Bridge this gap" means ___.',  opts: ['A. reduce the difference between excess and shortage', 'B. build a physical bridge', 'C. increase food waste', 'D. export food abroad'], a: 'A' },
+  { d: 'HARD', q: '"The most direct form of community service is hands-on work." "Hands-on" means ___.',  opts: ['A. practical, involving direct action rather than just planning', 'B. working with your hands only, not your brain', 'C. expensive work requiring tools', 'D. work done by hired professionals'], a: 'A' },
+  { d: 'HARD', q: '"Civic engagement is the backbone of a healthy democracy." "Backbone" here means ___.',  opts: ['A. the most essential and supporting part', 'B. a physical structure', 'C. a minor element', 'D. a decoration'], a: 'A' },
+  { d: 'EASY', q: '"We should take pride in keeping our streets clean." "Take pride in" means ___.',  opts: ['A. feel satisfied and happy about doing something well', 'B. feel ashamed of', 'C. ignore completely', 'D. feel bored with'], a: 'A' },
+  { d: 'MEDIUM', q: 'Read: "The youth group raised awareness about water conservation by distributing leaflets." What does "raise awareness" mean?', opts: ['A. Help people know about an important issue', 'B. Collect money', 'C. Plant trees', 'D. Build water tanks'], a: 'A' },
+  { d: 'MEDIUM', q: '"She tutored struggling students after school for free." This shows she is ___.',  opts: ['A. generous and committed to helping others learn', 'B. doing it for money', 'C. forcing students to study', 'D. avoiding her own studies'], a: 'A' },
+  { d: 'HARD', q: 'Read: "Long-term volunteering creates deeper relationships and more meaningful impact than one-off events." "One-off event" means ___.',  opts: ['A. something that happens only once', 'B. an annual event', 'C. a government programme', 'D. a business project'], a: 'A' },
+  { d: 'HARD', q: '"The marginalised members of society often need the most support from community services." "Marginalised" means ___.',  opts: ['A. excluded from mainstream society and lacking opportunities', 'B. wealthy and powerful', 'C. highly educated', 'D. very healthy and active'], a: 'A' },
+  { d: 'HARD', q: '"Community service builds what money cannot buy – human connection and shared purpose." What is the author\'s main point?', opts: ['A. The value of community service goes beyond money – it builds meaningful bonds.', 'B. Community service is only valuable if it earns money.', 'C. Community service replaces paid employment.', 'D. Human connection is less important than financial gain.'], a: 'A' },
+
+  // ── GIAO TIẾP / HỘI THOẠI (20 câu) ──
+  { d: 'EASY', q: 'A: "Why do you volunteer at the food bank?" B: "___"', opts: ['A. Because I want to help people who don\'t have enough food.', 'B. Because I get paid a lot.', 'C. Because my teacher forces me.', 'D. Because I have nothing else to do.'], a: 'A' },
+  { d: 'EASY', q: 'A: "What did you do last weekend?" B: "I ___ in a charity run to raise money for cancer research."', opts: ['A. participated', 'B. participate', 'C. participating', 'D. to participate'], a: 'A' },
+  { d: 'EASY', q: 'A: "How can students help their community?" B: "They can ___ at local events, clean public spaces, or visit the elderly."', opts: ['A. volunteer', 'B. compete', 'C. earn money', 'D. ignore problems'], a: 'A' },
+  { d: 'EASY', q: 'A: "Is it important to help others?" B: "Absolutely! It ___ both the community and ourselves."', opts: ['A. benefits', 'B. harms', 'C. destroys', 'D. ignores'], a: 'A' },
+  { d: 'MEDIUM', q: 'A: "What community project are you most proud of?" B: "___"', opts: ['A. We built a library for the village and collected over 2,000 books.', 'B. I watched TV all weekend.', 'C. I forgot to do anything.', 'D. I went shopping with friends.'], a: 'A' },
+  { d: 'MEDIUM', q: 'A: "What inspired you to start volunteering?" B: "Seeing my community suffer after the flood made me realise I ___ do something to help."', opts: ['A. had to', 'B. wanted not to', 'C. refused to', 'D. was unable to'], a: 'A' },
+  { d: 'MEDIUM', q: 'A: "How do you feel after volunteering?" B: "___"', opts: ['A. I feel fulfilled and happy knowing I\'ve made a difference.', 'B. I feel bored and tired.', 'C. I feel angry that I wasted my time.', 'D. I feel nothing at all.'], a: 'A' },
+  { d: 'MEDIUM', q: 'A: "Would you like to join our recycling programme?" B: "Of course! What do I need ___?"', opts: ['A. to do', 'B. doing', 'C. done', 'D. do'], a: 'A' },
+  { d: 'MEDIUM', q: 'A: "Our neighbourhood has a lot of litter problems." B: "We ___ organise a community clean-up day."', opts: ['A. should', 'B. shouldn\'t', 'C. can\'t', 'D. won\'t'], a: 'A' },
+  { d: 'MEDIUM', q: 'A: "Can one person really make a difference?" B: "___"', opts: ['A. Yes! Every small action adds up, and one person can inspire many others.', 'B. No, only governments can solve problems.', 'C. No, one person is too small to matter.', 'D. It depends on how much money you have.'], a: 'A' },
+  { d: 'MEDIUM', q: 'A: "I\'d like to help but don\'t know where to start." B: "You could ___ a local charity or join a school community service club."', opts: ['A. contact', 'B. ignore', 'C. criticise', 'D. avoid'], a: 'A' },
+  { d: 'HARD', q: 'A: "Some people say young people don\'t care about society. Do you agree?" B: "___"', opts: ['A. Not at all – many young people lead environmental and social campaigns worldwide.', 'B. Yes, young people only care about social media.', 'C. Absolutely – youth are too selfish.', 'D. I think it\'s true that only adults care.'], a: 'A' },
+  { d: 'HARD', q: 'A: "Is volunteering more valuable than paid work?" B: "___"', opts: ['A. They both have value, but volunteering brings a unique sense of purpose and community connection.', 'B. Volunteering is a complete waste of time.', 'C. Paid work is always more important.', 'D. They are exactly the same.'], a: 'A' },
+  { d: 'HARD', q: 'A: "How can schools encourage more community service?" B: "___"', opts: ['A. By integrating service-learning into the curriculum and rewarding student involvement.', 'B. By banning extracurricular activities.', 'C. By giving students less homework.', 'D. By organising more exams.'], a: 'A' },
+  { d: 'EASY', q: 'A: "Did the students clean the beach?" B: "Yes, they ___ a lot of litter."', opts: ['A. collected', 'B. collect', 'C. are collecting', 'D. will collect'], a: 'A' },
+  { d: 'MEDIUM', q: 'A: "What was the most challenging part of the project?" B: "Getting people ___ participate was difficult, but once they joined, they loved it."', opts: ['A. to', 'B. for', 'C. in', 'D. at'], a: 'A' },
+  { d: 'MEDIUM', q: 'A: "Have you ever helped a stranger?" B: "Yes! Once I ___ an elderly lady carry her groceries home."', opts: ['A. helped', 'B. help', 'C. helping', 'D. to help'], a: 'A' },
+  { d: 'HARD', q: 'A: "What is the difference between charity and community development?" B: "___"', opts: ['A. Charity gives immediate help; community development builds long-term capacity and self-sufficiency.', 'B. They are exactly the same.', 'C. Community development only involves building roads.', 'D. Charity is more important than development.'], a: 'A' },
+  { d: 'EASY', q: 'A: "Why is recycling important?" B: "It ___ waste and helps protect the environment."', opts: ['A. reduces', 'B. increases', 'C. destroys', 'D. ignores'], a: 'A' },
+  { d: 'HARD', q: 'A: "How does community service benefit volunteers themselves?" B: "___"', opts: ['A. It builds empathy, leadership, communication skills, and a sense of purpose.', 'B. It only benefits the people they help.', 'C. It has no benefits for the volunteer.', 'D. It only looks good on a CV.'], a: 'A' },
+
+  // ── NGỮ PHÁP: CONNECTORS & COMPOUND SENTENCES (15 câu) ──
+  { d: 'EASY', q: 'We should recycle ___ it helps protect the environment.', opts: ['A. because', 'B. but', 'C. so', 'D. or'], a: 'A' },
+  { d: 'EASY', q: 'She wants to help ___ she doesn\'t know how to start.', opts: ['A. but', 'B. and', 'C. so', 'D. because'], a: 'A' },
+  { d: 'EASY', q: 'He planted trees, ___ the neighbourhood became greener.', opts: ['A. so', 'B. but', 'C. or', 'D. although'], a: 'A' },
+  { d: 'MEDIUM', q: '___ the weather was bad, the volunteers still came to clean the beach.', opts: ['A. Although', 'B. Because', 'C. So', 'D. And'], a: 'A' },
+  { d: 'MEDIUM', q: 'Choose the correct sentence using "however":', opts: ['A. The project had limited funds; however, the team achieved great results.', 'B. The project had limited funds however the team achieved great results.', 'C. However the project had limited funds, the team achieved great results.', 'D. The project, however had limited funds the team achieved great results.'], a: 'A' },
+  { d: 'MEDIUM', q: 'She not only donated money ___ also gave her time to the cause.', opts: ['A. but', 'B. and', 'C. or', 'D. so'], a: 'A' },
+  { d: 'MEDIUM', q: '___ everyone works together, the community will become stronger.', opts: ['A. If', 'B. Although', 'C. Because', 'D. So'], a: 'A' },
+  { d: 'MEDIUM', q: 'Use "therefore" correctly: "There was too much plastic waste. ___, the beach was unsafe for swimming."', opts: ['A. Therefore', 'B. However', 'C. Although', 'D. Because'], a: 'A' },
+  { d: 'HARD', q: '"Despite having few resources, the community built a school." "Despite" is followed by ___.',  opts: ['A. a noun phrase or gerund (V-ing)', 'B. a clause with a subject and verb', 'C. an adjective', 'D. an adverb'], a: 'A' },
+  { d: 'HARD', q: 'Choose the sentence that uses "in order to" CORRECTLY:', opts: ['A. She volunteered in order to gain experience and help others.', 'B. She volunteered in order gain experience.', 'C. She volunteered in order for helping others.', 'D. She volunteered in order that gain experience.'], a: 'A' },
+  { d: 'EASY', q: 'We can help the poor ___ donating food and clothes.', opts: ['A. by', 'B. for', 'C. in', 'D. at'], a: 'A' },
+  { d: 'MEDIUM', q: 'The team raised funds ___ building a new classroom for the village school.', opts: ['A. for', 'B. to', 'C. by', 'D. with'], a: 'A' },
+  { d: 'HARD', q: '"Not only did the students clean the park, ___ they also painted the benches." Choose the correct connector.', opts: ['A. but', 'B. so', 'C. and', 'D. or'], a: 'A' },
+  { d: 'HARD', q: 'Use the correct form: "___ (Unless / If) we act now, the river will be too polluted to clean."', opts: ['A. Unless', 'B. If not', 'C. Although', 'D. Despite'], a: 'A' },
+  { d: 'HARD', q: 'Choose the BEST sentence that shows cause and effect in community service:', opts: ['A. Because the community planted more trees, air quality improved significantly.', 'B. The community planted trees but air quality improved.', 'C. Air quality improved so the community planted trees.', 'D. Although the community planted trees, air quality improved.'], a: 'A' },
+
+  // ── SUY LUẬN / LÝ LUẬN (25 câu) ──
+  { d: 'EASY', q: 'If everyone drops litter, the community will become ___.',  opts: ['A. dirty and unhealthy', 'B. beautiful and clean', 'C. safe and happy', 'D. rich and modern'], a: 'A' },
+  { d: 'EASY', q: 'If we recycle more, we will ___ waste going to landfill.', opts: ['A. reduce', 'B. increase', 'C. ignore', 'D. destroy'], a: 'A' },
+  { d: 'EASY', q: 'Community service helps people feel more ___ to their neighbourhood.', opts: ['A. connected', 'B. isolated', 'C. bored', 'D. annoyed'], a: 'A' },
+  { d: 'MEDIUM', q: 'If schools include community service in the curriculum, students will ___.',  opts: ['A. develop empathy and social responsibility', 'B. get worse grades', 'C. have less time for friends', 'D. lose interest in helping others'], a: 'A' },
+  { d: 'MEDIUM', q: 'Which statement BEST shows the long-term benefit of teaching children about the environment?', opts: ['A. Children who learn to care for nature grow into adults who protect it.', 'B. Environmental education wastes school time.', 'C. Only scientists need to know about the environment.', 'D. Environmental issues only affect adults.'], a: 'A' },
+  { d: 'MEDIUM', q: 'Why is it better to build a community garden than to import all vegetables?', opts: ['A. It reduces carbon emissions, provides fresh food, and builds community bonds.', 'B. Because local gardens are always cheaper.', 'C. Because imported vegetables are unhealthy.', 'D. Gardens are only for rich communities.'], a: 'A' },
+  { d: 'MEDIUM', q: '"Small actions can have big impacts." Which example BEST supports this idea?', opts: ['A. Turning off one light saves energy; if a million people do it, the saving is enormous.', 'B. One person alone cannot change anything.', 'C. Only large organisations can make a real difference.', 'D. Individual actions don\'t matter.'], a: 'A' },
+  { d: 'MEDIUM', q: 'A community with strong volunteering culture will likely have ___.',  opts: ['A. lower crime rates and higher well-being', 'B. more pollution and poverty', 'C. less social connection', 'D. higher unemployment'], a: 'A' },
+  { d: 'MEDIUM', q: 'What is the MAIN difference between a volunteer and a paid worker?', opts: ['A. A volunteer chooses to work for free for a cause they believe in.', 'B. A volunteer is always more skilled than a paid worker.', 'C. A paid worker cares more than a volunteer.', 'D. There is no difference.'], a: 'A' },
+  { d: 'MEDIUM', q: 'Why should young people start doing community service early in life?', opts: ['A. It shapes their values, builds habits of giving, and develops leadership skills.', 'B. Because it is required by law.', 'C. So they can earn money.', 'D. To avoid doing homework.'], a: 'A' },
+  { d: 'HARD', q: 'Which argument BEST justifies making community service compulsory in schools?', opts: ['A. It ensures all students develop social responsibility and exposure to real-world issues.', 'B. It forces students to do unpaid labour.', 'C. It takes time away from academic subjects.', 'D. It only benefits students from poor backgrounds.'], a: 'A' },
+  { d: 'HARD', q: 'Against making community service compulsory: which is the STRONGEST counterargument?', opts: ['A. Forced service loses the spirit of genuine volunteerism and may breed resentment.', 'B. Students are too young to volunteer.', 'C. Only adults should do community service.', 'D. Community service is always ineffective.'], a: 'A' },
+  { d: 'HARD', q: 'Which scenario shows the MOST effective community service strategy?', opts: ['A. Identifying a real community need, planning systematically, and evaluating impact afterward', 'B. Randomly distributing donations without understanding local needs', 'C. Helping people without asking what they actually need', 'D. Doing one-off activities with no follow-up'], a: 'A' },
+  { d: 'HARD', q: '"Giving a man a fish feeds him for a day; teaching a man to fish feeds him for a lifetime." This proverb supports ___.',  opts: ['A. Community development over short-term charity', 'B. Donating food rather than skills', 'C. Ignoring long-term solutions', 'D. Replacing all charity with fishing lessons'], a: 'A' },
+  { d: 'HARD', q: 'How does cleaning a local park DIRECTLY benefit the community?', opts: ['A. It improves air quality, creates a pleasant space, and encourages outdoor activity.', 'B. It earns money for the council.', 'C. It reduces the need for schools.', 'D. It stops traffic congestion.'], a: 'A' },
+  { d: 'EASY', q: 'Picking up litter is a simple way to show you ___ about your community.', opts: ['A. care', 'B. don\'t care', 'C. are bored', 'D. are angry'], a: 'A' },
+  { d: 'EASY', q: 'Helping an elderly neighbour carry bags is an example of being ___.',  opts: ['A. kind and helpful', 'B. selfish', 'C. competitive', 'D. lazy'], a: 'A' },
+  { d: 'MEDIUM', q: 'Which of these actions has the MOST positive environmental impact?', opts: ['A. Planting native trees and reducing single-use plastic', 'B. Burning plastic waste', 'C. Driving everywhere instead of walking', 'D. Throwing electronics into rivers'], a: 'A' },
+  { d: 'MEDIUM', q: 'A student who tutors younger pupils for free is demonstrating ___.',  opts: ['A. generosity and a sense of community responsibility', 'B. a desire for payment', 'C. academic arrogance', 'D. a lack of confidence'], a: 'A' },
+  { d: 'HARD', q: 'The concept of "paying it forward" in community service means ___.',  opts: ['A. passing on kindness to others after receiving it yourself', 'B. repaying debts in advance', 'C. donating money before receiving it', 'D. volunteering before being asked'], a: 'A' },
+  { d: 'EASY', q: 'We can help reduce global warming by using less ___ fuel.', opts: ['A. fossil', 'B. solar', 'C. wind', 'D. nuclear'], a: 'A' },
+  { d: 'MEDIUM', q: 'A community with strong social bonds is better able to ___.',  opts: ['A. recover from disasters and challenges', 'B. earn more money quickly', 'C. win sports competitions', 'D. build more buildings'], a: 'A' },
+  { d: 'HARD', q: 'How does volunteering ABROAD benefit the volunteer\'s home community?', opts: ['A. They return with new skills, global perspectives, and innovative ideas to share.', 'B. It has no benefit for the home community.', 'C. It only benefits the foreign community.', 'D. Volunteers are less useful after returning.'], a: 'A' },
+  { d: 'HARD', q: '"The strength of a community is measured not by its wealthy members, but by how it treats its most vulnerable." This means ___.',  opts: ['A. True community values are shown in how the weak and poor are supported.', 'B. Only wealthy people build strong communities.', 'C. Poor communities are always stronger.', 'D. Community strength is measured by economic output.'], a: 'A' },
+  { d: 'HARD', q: 'Choose the statement that BEST reflects the spirit of community service:', opts: ['A. We help not because we must, but because we genuinely care about each other.', 'B. We help only when it benefits us financially.', 'C. We help only when the government tells us to.', 'D. We help only family members, no one else.'], a: 'A' },
+
+  // ── VIẾT LẠI CÂU / NGỮ PHÁP TỔNG HỢP (20 câu) ──
+  { d: 'EASY', q: 'Fill in: "She is ___ in helping homeless people." (interest)', opts: ['A. interested', 'B. interest', 'C. interesting', 'D. interests'], a: 'A' },
+  { d: 'EASY', q: 'Fill in: "He is passionate ___ protecting the environment."', opts: ['A. about', 'B. in', 'C. for', 'D. at'], a: 'A' },
+  { d: 'EASY', q: 'Fill in: "She is good ___ organising fundraising events."', opts: ['A. at', 'B. in', 'C. of', 'D. for'], a: 'A' },
+  { d: 'MEDIUM', q: 'Rewrite: "She donated food to the shelter." (negative) → She ___ food to the shelter.', opts: ['A. didn\'t donate', 'B. doesn\'t donate', 'C. hasn\'t donate', 'D. not donated'], a: 'A' },
+  { d: 'MEDIUM', q: 'Change to question: "They planted trees last Sunday." → ___ they plant trees last Sunday?', opts: ['A. Did', 'B. Do', 'C. Were', 'D. Have'], a: 'A' },
+  { d: 'MEDIUM', q: 'Fill in: "We raised money ___ building a school for the village."', opts: ['A. for', 'B. to', 'C. by', 'D. in'], a: 'A' },
+  { d: 'MEDIUM', q: 'Combine: "She volunteers at the hospital. She also helps at the food bank." → She volunteers at the hospital ___ also helps at the food bank.', opts: ['A. and', 'B. but', 'C. so', 'D. or'], a: 'A' },
+  { d: 'MEDIUM', q: 'Fill in: "They succeeded in ___ (raise) enough money for the project."', opts: ['A. raising', 'B. raise', 'C. raised', 'D. to raise'], a: 'A' },
+  { d: 'MEDIUM', q: 'Choose the CORRECT form: "The students are looking forward to ___ in the clean-up drive."', opts: ['A. participating', 'B. participate', 'C. participated', 'D. to participate'], a: 'A' },
+  { d: 'MEDIUM', q: 'Choose the correct preposition: "She volunteered ___ a local charity for two years."', opts: ['A. for', 'B. at', 'C. in', 'D. by'], a: 'A' },
+  { d: 'HARD', q: 'Rewrite using "not only ... but also": "She donated money. She also gave her time." →', opts: ['A. She not only donated money but also gave her time.', 'B. She donated money not only but also time.', 'C. Not only money but also time she donated.', 'D. She donated not only money but time too.'], a: 'A' },
+  { d: 'HARD', q: 'Transform: "They raised funds so that they could build a library." → "They raised funds ___ build a library."', opts: ['A. in order to', 'B. in order for', 'C. so as not to', 'D. despite to'], a: 'A' },
+  { d: 'HARD', q: 'Choose the MOST academic sentence about community service:', opts: ['A. Community service fosters civic responsibility and social cohesion among citizens.', 'B. Community service is good and fun.', 'C. People do community service because it\'s nice.', 'D. Community service is important for students.'], a: 'A' },
+  { d: 'HARD', q: 'Identify the sentence with a RELATIVE CLAUSE:', opts: ['A. The students who cleaned the park won an award.', 'B. The students cleaned the park and won an award.', 'C. The students cleaned the park but won an award.', 'D. The students cleaned the park so they won an award.'], a: 'A' },
+  { d: 'EASY', q: 'Fill in: "Volunteers ___ (work) at the shelter last Saturday."', opts: ['A. worked', 'B. work', 'C. are working', 'D. works'], a: 'A' },
+  { d: 'MEDIUM', q: 'Choose the CORRECT passive form: "They planted 200 trees." →', opts: ['A. 200 trees were planted.', 'B. 200 trees are planted.', 'C. 200 trees planted.', 'D. 200 trees was planted.'], a: 'A' },
+  { d: 'HARD', q: 'Complete the conditional: "If more people volunteered, communities ___  (be) stronger."', opts: ['A. would be', 'B. will be', 'C. are', 'D. were'], a: 'A' },
+  { d: 'HARD', q: 'Which sentence uses a GERUND as the subject?', opts: ['A. Volunteering teaches important life skills.', 'B. To volunteer teaches important life skills.', 'C. We volunteer to teach important life skills.', 'D. The volunteer teaches important life skills.'], a: 'A' },
+  { d: 'HARD', q: 'Choose the BEST topic sentence for a paragraph about the benefits of community service:', opts: ['A. Community service offers young people the opportunity to develop empathy, leadership, and a lifelong commitment to civic responsibility.', 'B. Community service is something students do.', 'C. Volunteering is fun and easy.', 'D. Many students do community service at school.'], a: 'A' },
+  { d: 'HARD', q: 'Which option correctly uses "despite" and "although" in one sentence?', opts: ['A. Although she was exhausted, she continued volunteering despite the bad weather.', 'B. Despite she was exhausted, she continued volunteering although bad weather.', 'C. Although despite exhausted, she continued volunteering bad weather.', 'D. She although was exhausted volunteering despite bad weather continued.'], a: 'A' },
+];
+
+async function main() {
+  const admin = await p.user.findFirst({ where: { role: 'ADMIN' }, select: { id: true } });
+  if (!admin) throw new Error('Admin not found');
+
+  let count = 0;
+  for (const q of QUESTIONS) {
+    const keys = ['A', 'B', 'C', 'D'];
+    const ci = keys.indexOf(q.a);
+    await p.question.create({
+      data: {
+        content: q.q,
+        subjectId: 'sub-anh',
+        gradeId: 'grade-7',
+        topicId: TOPIC_ID,
+        difficulty: q.d,
+        questionType: 'MULTIPLE_CHOICE',
+        status: 'ACTIVE',
+        createdById: admin.id,
+        explanation: `Đáp án đúng: ${q.a}. ${q.opts[ci]}`,
+        options: {
+          create: q.opts.map((text, i) => ({
+            optionKey: keys[i],
+            content: text,
+            isCorrect: i === ci,
+            sortOrder: i,
+          })),
+        },
+      },
+    });
+    count++;
+    if (count % 50 === 0) console.log(`  ${count}/${QUESTIONS.length} câu...`);
+  }
+
+  const total = await p.question.count({ where: { subjectId: 'sub-anh', gradeId: 'grade-7' } });
+  const u3 = await p.question.count({ where: { topicId: TOPIC_ID } });
+  console.log(`\n✅ Đã thêm ${count} câu`);
+  console.log(`📌 Unit 3 - Community Service: ${u3} câu`);
+  console.log(`📊 Tổng Tiếng Anh lớp 7: ${total} câu`);
+}
+
+main().catch(console.error).finally(() => p.$disconnect());

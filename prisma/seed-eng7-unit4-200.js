@@ -1,0 +1,243 @@
+// 200 câu hỏi Unit 4 - Music and Arts - Tiếng Anh lớp 7
+const { PrismaClient } = require('@prisma/client');
+const p = new PrismaClient();
+
+const TOPIC_ID = 'cmt322xjx0007eq3r567dplsb'; // Unit 4 - Music and Arts
+
+const QUESTIONS = [
+  // ── TỪ VỰNG (50 câu) ──
+  { d: 'EASY', q: 'A ___ is a person who plays a musical instrument.', opts: ['A. musician', 'B. painter', 'C. dancer', 'D. writer'], a: 'A' },
+  { d: 'EASY', q: 'She loves to ___ the guitar in her free time.', opts: ['A. play', 'B. draw', 'C. write', 'D. cook'], a: 'A' },
+  { d: 'EASY', q: 'A ___ is a large group of musicians who play together.', opts: ['A. orchestra', 'B. team', 'C. class', 'D. club'], a: 'A' },
+  { d: 'EASY', q: 'The students went to the ___ to see paintings and sculptures.', opts: ['A. gallery', 'B. market', 'C. stadium', 'D. hospital'], a: 'A' },
+  { d: 'EASY', q: 'He has a natural ___ for music – he can sing beautifully.', opts: ['A. talent', 'B. problem', 'C. duty', 'D. fear'], a: 'A' },
+  { d: 'EASY', q: 'The artist used a ___ to create a colourful painting.', opts: ['A. paintbrush', 'B. hammer', 'C. pencil sharpener', 'D. ruler'], a: 'A' },
+  { d: 'EASY', q: 'A ___ is a piece of music written for a film or play.', opts: ['A. soundtrack', 'B. drawing', 'C. poem', 'D. speech'], a: 'A' },
+  { d: 'EASY', q: 'She ___ the stage and began to sing her favourite song.', opts: ['A. walked onto', 'B. hid from', 'C. jumped over', 'D. fell off'], a: 'A' },
+  { d: 'EASY', q: 'A ___ is a room or building where an artist works.', opts: ['A. studio', 'B. library', 'C. factory', 'D. garden'], a: 'A' },
+  { d: 'EASY', q: 'The crowd ___ loudly when the band finished their performance.', opts: ['A. applauded', 'B. slept', 'C. left', 'D. complained'], a: 'A' },
+  { d: 'EASY', q: 'He is learning to ___ the piano at his music school.', opts: ['A. play', 'B. fix', 'C. sell', 'D. buy'], a: 'A' },
+  { d: 'EASY', q: 'A ___ is someone who creates paintings or drawings.', opts: ['A. painter', 'B. singer', 'C. actor', 'D. dancer'], a: 'A' },
+  { d: 'EASY', q: 'The children sang a ___ at the school concert last night.', opts: ['A. song', 'B. speech', 'C. story', 'D. report'], a: 'A' },
+  { d: 'EASY', q: 'She drew a ___ of her family using coloured pencils.', opts: ['A. portrait', 'B. map', 'C. chart', 'D. graph'], a: 'A' },
+  { d: 'EASY', q: 'A ___ is a type of performance where people tell stories through movement.', opts: ['A. ballet', 'B. cricket', 'C. football', 'D. swimming'], a: 'A' },
+  { d: 'EASY', q: 'The ___ at the art festival displayed work by local students.', opts: ['A. exhibition', 'B. examination', 'C. expedition', 'D. experiment'], a: 'A' },
+  { d: 'EASY', q: 'He practises his violin ___ every morning before school.', opts: ['A. scales', 'B. homework', 'C. recipes', 'D. exercises'], a: 'A' },
+  { d: 'EASY', q: 'A ___ is a musical show that includes singing and acting.', opts: ['A. musical', 'B. documentary', 'C. speech', 'D. debate'], a: 'A' },
+  { d: 'EASY', q: 'The artist mixed ___ to create the colour she wanted.', opts: ['A. paints', 'B. water', 'C. sand', 'D. flour'], a: 'A' },
+  { d: 'EASY', q: 'She sang the song with great ___ and moved the whole audience.', opts: ['A. emotion', 'B. speed', 'C. anger', 'D. silence'], a: 'A' },
+  { d: 'MEDIUM', q: 'A "___ " in music is a piece composed for a solo instrument and orchestra.', opts: ['A. concerto', 'B. chorus', 'C. verse', 'D. rhythm'], a: 'A' },
+  { d: 'MEDIUM', q: 'The ___ of a painting refers to how different elements are arranged visually.', opts: ['A. composition', 'B. competition', 'C. conversation', 'D. conclusion'], a: 'A' },
+  { d: 'MEDIUM', q: 'A "___ " is a person who leads an orchestra or choir.', opts: ['A. conductor', 'B. composer', 'C. critic', 'D. curator'], a: 'A' },
+  { d: 'MEDIUM', q: '"Impressionism" is an art movement known for ___.',  opts: ['A. capturing light, colour, and atmosphere rather than precise details', 'B. painting perfectly realistic scenes', 'C. using only black and white', 'D. drawing comic figures'], a: 'A' },
+  { d: 'MEDIUM', q: 'A "___ " is a piece of music in three or four movements for a small group of instruments.', opts: ['A. sonata', 'B. solo', 'C. duet', 'D. chorus'], a: 'A' },
+  { d: 'MEDIUM', q: 'The term "___ " refers to the speed at which a piece of music is played.', opts: ['A. tempo', 'B. tone', 'C. theme', 'D. texture'], a: 'A' },
+  { d: 'MEDIUM', q: 'A "curator" at a museum is responsible for ___.',  opts: ['A. selecting, organising, and caring for the collection of artworks', 'B. selling tickets at the entrance', 'C. cleaning the museum floors', 'D. building new exhibition rooms'], a: 'A' },
+  { d: 'MEDIUM', q: '"Abstract art" is characterised by ___.',  opts: ['A. shapes, colours, and forms that don\'t represent real objects', 'B. extremely realistic depictions of people and places', 'C. paintings of landscapes only', 'D. portraits of famous historical figures'], a: 'A' },
+  { d: 'MEDIUM', q: 'A "___ " is a drawing done quickly, often as a first idea or plan.', opts: ['A. sketch', 'B. sculpture', 'C. mural', 'D. mosaic'], a: 'A' },
+  { d: 'MEDIUM', q: 'When musicians ___ together, they practise their music before a performance.', opts: ['A. rehearse', 'B. record', 'C. release', 'D. repeat'], a: 'A' },
+  { d: 'MEDIUM', q: 'A "___ " is a large painting done directly on a wall.', opts: ['A. mural', 'B. portrait', 'C. canvas', 'D. poster'], a: 'A' },
+  { d: 'MEDIUM', q: 'The art of making three-dimensional works by carving or moulding is called ___.',  opts: ['A. sculpture', 'B. photography', 'C. animation', 'D. printmaking'], a: 'A' },
+  { d: 'MEDIUM', q: '"Genre" in music refers to ___.',  opts: ['A. a category or style of music such as jazz, pop, or classical', 'B. the speed of a song', 'C. the instruments used', 'D. the length of a song'], a: 'A' },
+  { d: 'MEDIUM', q: 'A "___ " is a person who writes music.', opts: ['A. composer', 'B. conductor', 'C. critic', 'D. choreographer'], a: 'A' },
+  { d: 'MEDIUM', q: '"Choreography" is the art of ___.',  opts: ['A. designing and arranging dance movements', 'B. writing song lyrics', 'C. painting large murals', 'D. playing percussion instruments'], a: 'A' },
+  { d: 'HARD', q: '"Renaissance" art (14th–17th century) is characterised by ___.',  opts: ['A. a revival of classical Greek and Roman styles and a focus on humanism', 'B. abstract shapes and distorted figures', 'C. extremely bright pop art colours', 'D. geometric patterns inspired by Islamic art'], a: 'A' },
+  { d: 'HARD', q: 'What does "avant-garde" mean in the context of art and music?', opts: ['A. Innovative, experimental, or ahead of its time', 'B. Traditional and conventional', 'C. Relating to folk art', 'D. A type of opera'], a: 'A' },
+  { d: 'HARD', q: '"Polyphony" in music refers to ___.',  opts: ['A. two or more independent melodic lines played or sung simultaneously', 'B. a single melody performed alone', 'C. a style of percussion music', 'D. music without any rhythm'], a: 'A' },
+  { d: 'HARD', q: 'What is "mixed media" in visual arts?', opts: ['A. Artwork created using more than one type of material or technique', 'B. Digital art only', 'C. Art made exclusively from recycled materials', 'D. Photography combined with music'], a: 'A' },
+  { d: 'HARD', q: 'What does "motif" mean in music or visual art?', opts: ['A. A recurring element, theme, or pattern', 'B. The title of a painting', 'C. The price of an artwork', 'D. The signature of the artist'], a: 'A' },
+  { d: 'HARD', q: '"Aesthetics" is the study of ___.',  opts: ['A. beauty, art, and what makes things visually or artistically pleasing', 'B. the history of music', 'C. the biology of hearing', 'D. mathematical patterns in nature'], a: 'A' },
+  { d: 'HARD', q: 'What is a "leitmotif" in music?', opts: ['A. A recurring musical theme associated with a character, place, or idea', 'B. A type of jazz solo', 'C. The opening note of a symphony', 'D. A silent pause in a composition'], a: 'A' },
+  { d: 'HARD', q: '"Chiaroscuro" in visual arts refers to ___.',  opts: ['A. the use of strong contrasts between light and dark to give depth and volume', 'B. painting only in shades of blue', 'C. the use of very small brushstrokes', 'D. creating patterns using geometric shapes only'], a: 'A' },
+  { d: 'HARD', q: 'What does it mean when a musician "improvises"?', opts: ['A. Creates and performs music spontaneously without preparation', 'B. Reads music from a sheet carefully', 'C. Plays a song incorrectly', 'D. Copies another musician\'s style exactly'], a: 'A' },
+  { d: 'HARD', q: 'What is "cultural heritage" in the context of arts?', opts: ['A. Traditions, art forms, and cultural expressions passed down through generations', 'B. Modern pop music only', 'C. Government-funded art projects', 'D. Art bought and sold at auctions'], a: 'A' },
+  { d: 'EASY', q: 'She studies ___ at school – she learns to draw, paint, and sculpt.', opts: ['A. Fine Arts', 'B. Mathematics', 'C. Science', 'D. Geography'], a: 'A' },
+  { d: 'EASY', q: 'He sang the ___ of the song very clearly so everyone could understand the words.', opts: ['A. lyrics', 'B. rhythm', 'C. beat', 'D. tempo'], a: 'A' },
+  { d: 'MEDIUM', q: 'A "___ " is a person who designs buildings and structures.', opts: ['A. architect', 'B. sculptor', 'C. composer', 'D. critic'], a: 'A' },
+  { d: 'MEDIUM', q: '"Folk music" is ___.',  opts: ['A. traditional music passed down within a community or culture', 'B. music played only in nightclubs', 'C. music composed by one famous person', 'D. electronic dance music'], a: 'A' },
+  { d: 'HARD', q: 'A "___ " is a piece of music for a solo voice or instrument, usually in an opera.', opts: ['A. aria', 'B. duet', 'C. chorus', 'D. refrain'], a: 'A' },
+
+  // ── NGỮ PHÁP: PAST SIMPLE vs PAST CONTINUOUS (20 câu) ──
+  { d: 'EASY', q: 'She ___ the piano when her friend arrived.', opts: ['A. was playing', 'B. played', 'C. plays', 'D. is playing'], a: 'A' },
+  { d: 'EASY', q: 'The artist ___ a beautiful painting last year.', opts: ['A. created', 'B. was creating', 'C. creates', 'D. is creating'], a: 'A' },
+  { d: 'EASY', q: 'They ___ to music when the power went out.', opts: ['A. were listening', 'B. listened', 'C. listen', 'D. are listening'], a: 'A' },
+  { d: 'EASY', q: 'He ___ (finish) the sculpture last month.', opts: ['A. finished', 'B. was finishing', 'C. finishes', 'D. is finishing'], a: 'A' },
+  { d: 'EASY', q: 'The choir ___ a song when the judge walked in.', opts: ['A. was singing', 'B. sang', 'C. sings', 'D. is singing'], a: 'A' },
+  { d: 'MEDIUM', q: 'While she ___ (practise) the violin, her sister ___ (read) a book.', opts: ['A. was practising / was reading', 'B. practised / read', 'C. practises / reads', 'D. was practising / read'], a: 'A' },
+  { d: 'MEDIUM', q: 'The audience ___ (clap) when the conductor raised his baton.', opts: ['A. was clapping', 'B. clapped', 'C. claps', 'D. is clapping'], a: 'A' },
+  { d: 'MEDIUM', q: 'He ___ (paint) a mural all morning; he finally finished it at 3 pm.', opts: ['A. was painting', 'B. painted', 'C. paints', 'D. is painting'], a: 'A' },
+  { d: 'MEDIUM', q: 'Choose the CORRECT sentence using past continuous:', opts: ['A. The band was rehearsing when the power failed.', 'B. The band rehearsed when the power was failing.', 'C. The band rehearses when the power failed.', 'D. The band is rehearsing when the power failed.'], a: 'A' },
+  { d: 'MEDIUM', q: 'They ___ (not / rehearse) when I arrived – they were already on stage.', opts: ['A. weren\'t rehearsing', 'B. didn\'t rehearse', 'C. don\'t rehearse', 'D. aren\'t rehearsing'], a: 'A' },
+  { d: 'MEDIUM', q: '___ she ___ (draw) a portrait or a landscape at the time?', opts: ['A. Was ... drawing', 'B. Did ... draw', 'C. Does ... draw', 'D. Is ... drawing'], a: 'A' },
+  { d: 'MEDIUM', q: 'The students ___ (learn) folk songs when the teacher announced the art festival.', opts: ['A. were learning', 'B. learned', 'C. learn', 'D. are learning'], a: 'A' },
+  { d: 'HARD', q: 'Use past simple and past continuous: "He ___ (walk) home when he ___ (hear) beautiful music from the concert hall."', opts: ['A. was walking / heard', 'B. walked / was hearing', 'C. was walking / was hearing', 'D. walked / heard'], a: 'A' },
+  { d: 'HARD', q: 'Rewrite: "During the performance, the artist painted." → The artist ___ during the performance.', opts: ['A. was painting', 'B. painted', 'C. is painting', 'D. paints'], a: 'A' },
+  { d: 'HARD', q: 'Choose the CORRECT sentence:', opts: ['A. While the orchestra was playing, the audience sat silently.', 'B. While the orchestra played, the audience was sat silently.', 'C. While the orchestra was playing, the audience was sat silently.', 'D. While the orchestra played, the audience is sitting silently.'], a: 'A' },
+  { d: 'EASY', q: 'She ___ (not / sing) yesterday because she had a sore throat.', opts: ['A. didn\'t sing', 'B. wasn\'t singing', 'C. doesn\'t sing', 'D. isn\'t singing'], a: 'A' },
+  { d: 'EASY', q: 'What ___ the musicians ___ (do) when the lights went out?', opts: ['A. were ... doing', 'B. did ... do', 'C. do ... do', 'D. are ... doing'], a: 'A' },
+  { d: 'MEDIUM', q: 'He ___ (compose) a symphony for three months before he completed it.', opts: ['A. was composing', 'B. composed', 'C. composes', 'D. is composing'], a: 'A' },
+  { d: 'HARD', q: '"She realised she ___ (play) the wrong note only after the song ended." Choose the CORRECT form.', opts: ['A. had been playing', 'B. was playing', 'C. played', 'D. has been playing'], a: 'A' },
+  { d: 'HARD', q: 'Identify the sentence that uses past continuous INCORRECTLY:', opts: ['A. They were finished the painting when we arrived.', 'B. They were finishing the painting when we arrived.', 'C. She was practising while he was composing.', 'D. The band was rehearsing all evening.'], a: 'A' },
+
+  // ── ĐỌC HIỂU (30 câu) ──
+  { d: 'EASY', q: '"Music is a universal language that connects people across cultures." This means music ___.',  opts: ['A. can be understood and appreciated by people everywhere', 'B. is only for professional musicians', 'C. is difficult to understand', 'D. belongs to one culture only'], a: 'A' },
+  { d: 'EASY', q: '"She practises piano for two hours every day." This tells us she is ___.',  opts: ['A. dedicated and disciplined', 'B. lazy and careless', 'C. afraid of music', 'D. bored with the piano'], a: 'A' },
+  { d: 'EASY', q: '"The painting used bright colours to show happiness." The mood of this painting is ___.',  opts: ['A. joyful and cheerful', 'B. sad and dark', 'C. frightening', 'D. angry'], a: 'A' },
+  { d: 'EASY', q: '"He won first prize at the art competition." This shows he ___.',  opts: ['A. is a very skilled artist', 'B. is a poor student', 'C. does not like art', 'D. never practises'], a: 'A' },
+  { d: 'MEDIUM', q: 'Read: "The school organised an art week to encourage creativity among students. Pupils showcased paintings, sculptures, and musical performances." What was the PURPOSE of art week?', opts: ['A. To promote creative expression among students', 'B. To replace science lessons', 'C. To raise money for the school', 'D. To practise for exams'], a: 'A' },
+  { d: 'MEDIUM', q: '"Listening to classical music has been shown to improve concentration and reduce stress." This suggests classical music ___.',  opts: ['A. has beneficial effects on mental focus and well-being', 'B. causes headaches', 'C. is only for elderly people', 'D. reduces academic performance'], a: 'A' },
+  { d: 'MEDIUM', q: 'Read: "Van Gogh painted with bold, swirling brushstrokes and vivid colours. His work was not appreciated during his lifetime." What can we infer about Van Gogh?', opts: ['A. He was a creative artist whose talent was recognised only after his death.', 'B. He was a poor painter who made many mistakes.', 'C. He became rich and famous while alive.', 'D. He stopped painting because no one liked his work.'], a: 'A' },
+  { d: 'MEDIUM', q: '"The gallery displayed 200 works of art by young Vietnamese artists." What does the gallery celebrate?', opts: ['A. Young Vietnamese artistic talent', 'B. International pop stars', 'C. Classical European painting', 'D. Government artwork'], a: 'A' },
+  { d: 'MEDIUM', q: 'Read: "Without arts education, children lose the ability to think creatively and express themselves." What is the writer\'s MAIN argument?', opts: ['A. Arts education is essential for children\'s creative and emotional development.', 'B. Arts are not useful for children.', 'C. Science is more important than arts.', 'D. Arts education should be removed from schools.'], a: 'A' },
+  { d: 'MEDIUM', q: '"She wrote the lyrics to express her feelings about leaving home." What is the PURPOSE of the song?', opts: ['A. To express personal emotions about a difficult experience', 'B. To earn money', 'C. To teach grammar', 'D. To advertise a product'], a: 'A' },
+  { d: 'MEDIUM', q: 'Read: "The young composer wrote his first symphony at the age of fourteen." "Symphony" refers to ___.',  opts: ['A. a large-scale musical work for orchestra, usually in several movements', 'B. a short, simple folk song', 'C. a dance performance', 'D. a type of painting'], a: 'A' },
+  { d: 'MEDIUM', q: '"Public art such as murals can transform a neighbourhood and inspire pride." This means public art ___.',  opts: ['A. makes communities feel more positive and beautiful', 'B. destroys buildings', 'C. has no effect on people', 'D. is only for art collectors'], a: 'A' },
+  { d: 'HARD', q: 'Read: "The impressionists rejected the rigid rules of academic painting and chose to capture fleeting moments of light and colour." "Fleeting moments" means ___.',  opts: ['A. brief, passing moments that quickly disappear', 'B. long, still scenes', 'C. dark, gloomy images', 'D. detailed, accurate depictions'], a: 'A' },
+  { d: 'HARD', q: '"Art is not what you see, but what you make others see." (Edgar Degas) This quote means ___.',  opts: ['A. Great art is about creating a vision or emotion in the viewer, not just copying reality.', 'B. Art is only about realistic painting.', 'C. Artists should copy nature exactly.', 'D. Art is invisible.'], a: 'A' },
+  { d: 'HARD', q: 'Read: "The orchestra\'s performance was flawless – every musician played in perfect harmony." "Flawless" means ___.',  opts: ['A. without any mistakes or imperfections', 'B. very loud', 'C. extremely slow', 'D. slightly wrong'], a: 'A' },
+  { d: 'HARD', q: '"Music can evoke emotions that words alone cannot capture." "Evoke" means ___.',  opts: ['A. bring out or create a feeling or response', 'B. destroy feelings', 'C. prevent emotions', 'D. measure emotions scientifically'], a: 'A' },
+  { d: 'HARD', q: 'Read: "The fusion of traditional Vietnamese music with modern jazz created a completely new sound." "Fusion" means ___.',  opts: ['A. a combination of different styles or elements', 'B. a type of instrument', 'C. a traditional art form', 'D. a classical performance'], a: 'A' },
+  { d: 'HARD', q: '"Street art challenges the boundary between art and vandalism." The writer suggests street art ___.',  opts: ['A. raises questions about what counts as art and where art belongs', 'B. is always illegal', 'C. has no artistic value', 'D. should be banned completely'], a: 'A' },
+  { d: 'EASY', q: '"She was nervous before the performance, but once she started singing, all her fears disappeared." What does this tell us?', opts: ['A. Performing helped her overcome her nervousness.', 'B. She was always confident.', 'C. She stopped the performance.', 'D. She never felt nervous again.'], a: 'A' },
+  { d: 'MEDIUM', q: '"Learning a musical instrument teaches patience and perseverance." "Perseverance" means ___.',  opts: ['A. the ability to keep going despite difficulties', 'B. the ability to play quickly', 'C. enjoying music easily', 'D. giving up when things are hard'], a: 'A' },
+  { d: 'MEDIUM', q: 'Read: "The art teacher encouraged students to express their unique perspectives through their work." What does "unique perspectives" mean?', opts: ['A. Each student\'s own personal viewpoint and way of seeing the world', 'B. Copying famous paintings exactly', 'C. Following strict art rules', 'D. Using only traditional techniques'], a: 'A' },
+  { d: 'HARD', q: 'Read: "In many cultures, music has always served a ritual or ceremonial function." "Ritual function" means ___.',  opts: ['A. being used as part of religious or cultural ceremonies and traditions', 'B. entertaining audiences for profit', 'C. being used only for entertainment', 'D. being played in concert halls'], a: 'A' },
+  { d: 'HARD', q: '"Contemporary art often reflects and comments on current social and political issues." This suggests contemporary artists are ___.',  opts: ['A. engaged with and responding to the world around them', 'B. only interested in making money', 'C. isolated from society', 'D. focused only on traditional techniques'], a: 'A' },
+  { d: 'HARD', q: 'Read: "The restoration of ancient artworks requires exceptional skill, patience, and deep historical knowledge." What does "restoration" mean here?', opts: ['A. Repairing and preserving old artworks to their original condition', 'B. Selling old paintings at auction', 'C. Creating copies of old paintings', 'D. Moving artworks between museums'], a: 'A' },
+  { d: 'EASY', q: '"She prefers jazz to pop because she loves the improvised solos." This means she likes ___.',  opts: ['A. music where musicians create notes freely in the moment', 'B. pre-recorded music played exactly the same each time', 'C. music without any instruments', 'D. classical symphonies'], a: 'A' },
+  { d: 'MEDIUM', q: 'Read: "Art therapy uses creative activities to help people express emotions and manage mental health." What is the PURPOSE of art therapy?', opts: ['A. To support emotional well-being through creative expression', 'B. To train professional artists', 'C. To decorate hospital walls', 'D. To sell artwork for charity'], a: 'A' },
+  { d: 'MEDIUM', q: '"The concert attracted thousands of fans who waited hours for tickets." This shows the band ___.',  opts: ['A. is very popular', 'B. has very few fans', 'C. is not well known', 'D. gives free concerts only'], a: 'A' },
+  { d: 'HARD', q: 'Read: "Without access to music education, many talented children from disadvantaged backgrounds never develop their full potential." What is the author arguing?', opts: ['A. Equal access to arts education is important for giving all children the same opportunities.', 'B. Disadvantaged children are less talented.', 'C. Music education is only for wealthy students.', 'D. Talent is less important than wealth.'], a: 'A' },
+  { d: 'HARD', q: '"Music has the power to cross linguistic and cultural boundaries in ways that spoken language cannot." This means ___.',  opts: ['A. Music communicates emotions and ideas universally, beyond language barriers', 'B. Music is less important than language', 'C. Only musicians understand music', 'D. Language is more powerful than music'], a: 'A' },
+  { d: 'HARD', q: '"The artist\'s most famous work fetched $10 million at auction." "Fetched" here means ___.',  opts: ['A. sold for / achieved a price of', 'B. was given away for free', 'C. was stolen', 'D. was destroyed'], a: 'A' },
+
+  // ── GIAO TIẾP / HỘI THOẠI (20 câu) ──
+  { d: 'EASY', q: 'A: "Do you play any musical instrument?" B: "Yes, I ___ the guitar since I was eight."', opts: ['A. have played', 'B. played', 'C. play', 'D. playing'], a: 'A' },
+  { d: 'EASY', q: 'A: "What kind of music do you like?" B: "I love pop music ___ it has catchy melodies."', opts: ['A. because', 'B. but', 'C. so', 'D. although'], a: 'A' },
+  { d: 'EASY', q: 'A: "Did you enjoy the concert?" B: "Absolutely! The performance was ___."', opts: ['A. outstanding', 'B. terrible', 'C. boring', 'D. ordinary'], a: 'A' },
+  { d: 'EASY', q: 'A: "What does your sister do in her free time?" B: "She ___ painting very much."', opts: ['A. enjoys', 'B. hates', 'C. avoids', 'D. ignores'], a: 'A' },
+  { d: 'MEDIUM', q: 'A: "What were you doing when I called?" B: "I ___ in the music studio."', opts: ['A. was recording', 'B. recorded', 'C. record', 'D. am recording'], a: 'A' },
+  { d: 'MEDIUM', q: 'A: "Why do you think arts are important in school?" B: "___"', opts: ['A. Arts help students develop creativity, problem-solving skills, and emotional expression.', 'B. Arts are a waste of time in school.', 'C. Only maths and science matter.', 'D. Arts are too difficult for students.'], a: 'A' },
+  { d: 'MEDIUM', q: 'A: "Have you ever been to a live concert?" B: "Yes! I ___ a jazz concert last year and it was amazing."', opts: ['A. attended', 'B. attend', 'C. was attending', 'D. am attending'], a: 'A' },
+  { d: 'MEDIUM', q: 'A: "Which do you prefer – painting or music?" B: "I prefer music ___ it helps me express my feelings better."', opts: ['A. because', 'B. but', 'C. although', 'D. however'], a: 'A' },
+  { d: 'MEDIUM', q: 'A: "Could you describe your favourite artwork?" B: "___"', opts: ['A. It\'s a vivid oil painting of a sunset over the sea – the colours are absolutely stunning.', 'B. I don\'t have a favourite artwork.', 'C. I\'ve never seen any artwork.', 'D. Artwork is too boring to describe.'], a: 'A' },
+  { d: 'MEDIUM', q: 'A: "What makes a good musician?" B: "___"', opts: ['A. A good musician combines technical skill with emotion and a deep love for music.', 'B. A good musician is one who earns the most money.', 'C. A good musician must be famous.', 'D. A good musician only performs classical music.'], a: 'A' },
+  { d: 'MEDIUM', q: 'A: "Are you interested in traditional Vietnamese music?" B: "Yes! I find ___ fascinating."', opts: ['A. it', 'B. them', 'C. that', 'D. this'], a: 'A' },
+  { d: 'HARD', q: 'A: "Some people say schools should focus only on academic subjects, not arts. What do you think?" B: "___"', opts: ['A. I disagree. Arts are essential because they develop creativity, empathy, and critical thinking – skills that academic subjects alone can\'t provide.', 'B. I agree – arts waste valuable study time.', 'C. Schools should teach only maths and science.', 'D. Arts are only for gifted students.'], a: 'A' },
+  { d: 'HARD', q: 'A: "How has music influenced your life?" B: "___"', opts: ['A. Music has helped me manage stress, connect with others, and express emotions I couldn\'t put into words.', 'B. Music has had no effect on my life.', 'C. I don\'t listen to music.', 'D. Music is just entertainment with no real impact.'], a: 'A' },
+  { d: 'HARD', q: 'A: "Can anyone be an artist, or is it a special gift?" B: "___"', opts: ['A. I believe anyone can develop artistic skills with practice, though natural talent may give some people a head start.', 'B. Only people born with talent can be artists.', 'C. Art is impossible to learn.', 'D. Only rich people can become artists.'], a: 'A' },
+  { d: 'EASY', q: 'A: "What instrument does she play?" B: "She ___ the violin in the school orchestra."', opts: ['A. plays', 'B. played', 'C. is play', 'D. play'], a: 'A' },
+  { d: 'MEDIUM', q: 'A: "Did you see the art exhibition?" B: "Yes, the paintings ___ me speechless – they were so beautiful."', opts: ['A. left', 'B. leave', 'C. leaving', 'D. have left'], a: 'A' },
+  { d: 'MEDIUM', q: 'A: "What style of painting is that?" B: "It\'s an ___ painting – look how it captures light rather than precise details."', opts: ['A. impressionist', 'B. illegal', 'C. informative', 'D. industrial'], a: 'A' },
+  { d: 'HARD', q: 'A: "What is the difference between classical and popular music?" B: "___"', opts: ['A. Classical music follows formal structures and has a long tradition, while popular music is often simpler and aimed at a broad audience.', 'B. Classical music is newer than popular music.', 'C. There is no real difference.', 'D. Popular music is always better.'], a: 'A' },
+  { d: 'EASY', q: 'A: "Did you enjoy the ballet performance?" B: "Yes, the ___ was extraordinary – the dancers moved so gracefully."', opts: ['A. choreography', 'B. food', 'C. uniform', 'D. ticket price'], a: 'A' },
+  { d: 'HARD', q: 'A: "Why should we preserve traditional music and arts?" B: "___"', opts: ['A. Traditional arts are part of our cultural identity and heritage – losing them means losing a part of who we are.', 'B. Traditional arts are outdated and should be forgotten.', 'C. Only modern arts matter in today\'s world.', 'D. Traditional arts are not interesting to young people.'], a: 'A' },
+
+  // ── NGỮ PHÁP: COMPARATIVES & SUPERLATIVES (15 câu) ──
+  { d: 'EASY', q: 'Classical music is ___ complex ___ pop music.', opts: ['A. more ... than', 'B. more ... as', 'C. most ... than', 'D. as ... than'], a: 'A' },
+  { d: 'EASY', q: 'She is the ___ singer in our school choir.', opts: ['A. best', 'B. better', 'C. good', 'D. most good'], a: 'A' },
+  { d: 'EASY', q: 'This painting is ___ beautiful ___ any I\'ve ever seen.', opts: ['A. more ... than', 'B. more ... as', 'C. most ... than', 'D. as ... that'], a: 'A' },
+  { d: 'MEDIUM', q: 'Jazz is ___ (creative) music genre because it encourages improvisation.', opts: ['A. the most creative', 'B. more creative', 'C. most creative', 'D. the more creative'], a: 'A' },
+  { d: 'MEDIUM', q: 'He practises ___ than any other student in the orchestra.', opts: ['A. harder', 'B. hardest', 'C. more hard', 'D. most hard'], a: 'A' },
+  { d: 'MEDIUM', q: 'Choose the CORRECT superlative sentence:', opts: ['A. This is the most moving piece of music I have ever heard.', 'B. This is the more moving piece of music I have ever heard.', 'C. This is the moving piece of music I have ever heard.', 'D. This is the most moving piece of music I ever heard.'], a: 'A' },
+  { d: 'MEDIUM', q: 'Her portrait is ___ (realistic) than his abstract painting.', opts: ['A. more realistic', 'B. most realistic', 'C. realisticker', 'D. realisticer'], a: 'A' },
+  { d: 'MEDIUM', q: 'Modern art is often ___ traditional art because it has no fixed rules.', opts: ['A. more controversial than', 'B. most controversial than', 'C. as controversial that', 'D. more controversial as'], a: 'A' },
+  { d: 'HARD', q: 'Complete: "The ___ (old) the instrument, the ___ (valuable) it becomes."', opts: ['A. older ... more valuable', 'B. oldest ... most valuable', 'C. more old ... more valuable', 'D. older ... most valuable'], a: 'A' },
+  { d: 'HARD', q: 'Choose the CORRECT comparative sentence:', opts: ['A. The orchestra played more beautifully tonight than at the rehearsal.', 'B. The orchestra played more beautifully tonight than at the rehearsal did.', 'C. The orchestra played more beautifuller tonight than the rehearsal.', 'D. The orchestra played beautifuller tonight than the rehearsal.'], a: 'A' },
+  { d: 'EASY', q: 'The violin is ___ difficult ___ the recorder to learn.', opts: ['A. more ... than', 'B. most ... than', 'C. as ... that', 'D. much ... as'], a: 'A' },
+  { d: 'MEDIUM', q: 'Among all the performers, she danced ___.', opts: ['A. the most gracefully', 'B. more gracefully', 'C. the gracefulest', 'D. most gracefully'], a: 'A' },
+  { d: 'HARD', q: '"The Mona Lisa is ___ (famous) painting in the world." Fill in correctly.', opts: ['A. the most famous', 'B. the more famous', 'C. more famous', 'D. most famous'], a: 'A' },
+  { d: 'EASY', q: 'Pop music is ___ rock music – they are equally loud.', opts: ['A. as loud as', 'B. louder than', 'C. the loudest', 'D. more louder than'], a: 'A' },
+  { d: 'HARD', q: 'Identify the INCORRECT sentence:', opts: ['A. This is the most unique painting in the gallery. (unique cannot be compared)', 'B. This is the most colourful painting in the gallery.', 'C. This is the largest painting in the gallery.', 'D. This is the most detailed painting in the gallery.'], a: 'A' },
+
+  // ── SUY LUẬN / LÝ LUẬN (25 câu) ──
+  { d: 'EASY', q: 'If a student learns to play a musical instrument, they will likely ___.',  opts: ['A. develop discipline, patience, and coordination', 'B. fail all their exams', 'C. become less creative', 'D. lose interest in other subjects'], a: 'A' },
+  { d: 'EASY', q: 'Visiting an art gallery helps students ___.',  opts: ['A. appreciate different cultures and artistic styles', 'B. learn mathematics faster', 'C. improve their sports skills', 'D. memorise historical dates'], a: 'A' },
+  { d: 'EASY', q: 'If schools cut arts programmes, students will likely ___.',  opts: ['A. have fewer opportunities to develop creativity and self-expression', 'B. perform better in all subjects', 'C. become more creative independently', 'D. focus only on science'], a: 'A' },
+  { d: 'MEDIUM', q: 'Why is it important to expose children to different genres of music?', opts: ['A. It broadens their understanding of different cultures and emotions.', 'B. It confuses them and makes learning harder.', 'C. It is only important for children who want to be musicians.', 'D. It has no educational benefit.'], a: 'A' },
+  { d: 'MEDIUM', q: 'Which best explains why music can help people who are stressed?', opts: ['A. Music activates the brain\'s emotional centres and can release tension and elevate mood.', 'B. Music simply distracts the brain from all thought.', 'C. Music makes people sleepy and helps them ignore problems.', 'D. Music has no proven effect on stress levels.'], a: 'A' },
+  { d: 'MEDIUM', q: 'Why might a community invest in public art such as murals?', opts: ['A. To create beauty, inspire pride, and make public spaces more welcoming.', 'B. To waste taxpayers\' money on unnecessary decoration.', 'C. Because murals always increase property values.', 'D. To cover up damaged buildings with advertisements.'], a: 'A' },
+  { d: 'MEDIUM', q: 'What can we conclude about a student who plays in both the school orchestra and the art club?', opts: ['A. They are passionate about the arts and are developing multiple creative skills.', 'B. They are avoiding academic work.', 'C. They have no time for studies.', 'D. They will definitely become a professional musician.'], a: 'A' },
+  { d: 'MEDIUM', q: 'Which statement BEST explains why traditional music is worth preserving?', opts: ['A. It carries the history, identity, and values of a culture that might otherwise be lost.', 'B. Traditional music always sounds better than modern music.', 'C. Modern people cannot create their own music.', 'D. Traditional music is easier to learn than modern styles.'], a: 'A' },
+  { d: 'MEDIUM', q: 'What can we infer about a country with a vibrant arts scene?', opts: ['A. It likely has a rich cultural life and values creativity and self-expression.', 'B. It has less academic achievement than countries without arts.', 'C. Its economy is always weaker than countries focused only on technology.', 'D. Its people prefer arts to social interaction.'], a: 'A' },
+  { d: 'MEDIUM', q: 'Why is learning to appreciate art important even for people who are not artists?', opts: ['A. It develops critical thinking, emotional intelligence, and an understanding of different perspectives.', 'B. It is not important for non-artists at all.', 'C. It teaches people how to earn money from art.', 'D. It replaces the need to learn other subjects.'], a: 'A' },
+  { d: 'HARD', q: 'Should street art be considered legitimate art? Choose the BEST argument in favour:', opts: ['A. Street art brings art to public spaces, challenges social norms, and gives a voice to artists who lack access to galleries.', 'B. Street art is always vandalism with no artistic value.', 'C. Only gallery art is legitimate.', 'D. Street art decreases property values and should be banned.'], a: 'A' },
+  { d: 'HARD', q: 'What is the STRONGEST argument for funding arts education in schools?', opts: ['A. Arts education develops creativity and critical thinking, which are essential skills for any future career.', 'B. Arts education is only useful for students pursuing artistic careers.', 'C. Arts education should be funded only if it produces famous artists.', 'D. Arts funding is a waste of money that should go to STEM subjects.'], a: 'A' },
+  { d: 'HARD', q: 'How does exposure to diverse art forms contribute to global understanding?', opts: ['A. It helps people appreciate and respect different cultures, values, and perspectives.', 'B. It has no effect on how people perceive other cultures.', 'C. It makes people prefer their own culture over others.', 'D. It teaches only technical artistic skills.'], a: 'A' },
+  { d: 'HARD', q: 'What can we conclude from the fact that music therapy is now used in hospitals?', opts: ['A. Music has measurable, evidence-based therapeutic benefits for physical and mental health.', 'B. Music has replaced traditional medicine completely.', 'C. Hospitals use music only to entertain patients.', 'D. Music therapy has no scientific evidence behind it.'], a: 'A' },
+  { d: 'HARD', q: '"A society without art is a society without a soul." This metaphor means ___.',  opts: ['A. Art gives societies their identity, emotion, and meaning – without it, communities lose depth and humanity.', 'B. Art is as important as human biology.', 'C. Societies literally cannot function without artists.', 'D. Art is a luxury that only rich societies can afford.'], a: 'A' },
+  { d: 'EASY', q: 'Music can bring people together because ___.',  opts: ['A. it creates shared emotional experiences that everyone can participate in', 'B. it always has the same meaning for everyone', 'C. only musicians can enjoy it', 'D. it must be in a specific language to be understood'], a: 'A' },
+  { d: 'EASY', q: 'An artist who practises every day will likely ___.',  opts: ['A. improve their skills steadily over time', 'B. get worse at painting', 'C. lose interest in art', 'D. become famous immediately'], a: 'A' },
+  { d: 'MEDIUM', q: 'Which is the MOST logical reason for including arts in a school curriculum?', opts: ['A. Arts develop well-rounded individuals who can think creatively and empathise with others.', 'B. Arts are the most important subject in school.', 'C. Arts help students pass mathematics exams more easily.', 'D. Arts are important only for those who plan to study at art school.'], a: 'A' },
+  { d: 'MEDIUM', q: 'A student who studies both music and maths might ___.',  opts: ['A. develop stronger logical and pattern-recognition skills from both disciplines', 'B. struggle more in both subjects than students who study only one', 'C. find that the two subjects have nothing in common', 'D. become less creative over time'], a: 'A' },
+  { d: 'HARD', q: 'What does the widespread global popularity of K-pop suggest about the relationship between music and culture?', opts: ['A. Music can act as a powerful ambassador for a country\'s culture and soft power.', 'B. All music sounds the same across cultures.', 'C. Language barriers make music impossible to export.', 'D. Only English-language music can achieve global popularity.'], a: 'A' },
+  { d: 'EASY', q: 'Which activity would MOST help a student improve at drawing?', opts: ['A. Practising regularly, observing details carefully, and studying other artists\' techniques', 'B. Watching television for hours every day', 'C. Reading only science textbooks', 'D. Avoiding art until they feel confident'], a: 'A' },
+  { d: 'MEDIUM', q: 'If a school builds a music room and hires a music teacher, students will MOST LIKELY ___.',  opts: ['A. have greater access to music education and be more likely to develop musical skills', 'B. stop studying other subjects', 'C. only become professional musicians', 'D. find it harder to concentrate in class'], a: 'A' },
+  { d: 'HARD', q: 'Which argument BEST explains why digital art should be accepted alongside traditional art forms?', opts: ['A. Digital tools are simply new media, and art is defined by creativity and intention, not the tools used.', 'B. Digital art is always inferior to traditional painting.', 'C. Traditional art is the only form that requires real skill.', 'D. Digital art cannot be considered art because it uses technology.'], a: 'A' },
+  { d: 'HARD', q: '"Art imitates life." What does this suggest about the purpose of art?', opts: ['A. Art reflects and interprets human experience and the world around us.', 'B. Art is simply a copy of photographs.', 'C. Art has no connection to real life.', 'D. Art only imitates nature.'], a: 'A' },
+  { d: 'HARD', q: 'What is the best reason why governments should fund the arts?', opts: ['A. The arts contribute to national identity, tourism, education, and overall quality of life.', 'B. Governments should only fund defence and healthcare.', 'C. Art funding guarantees that the country wins international awards.', 'D. Government funding always improves the quality of art.'], a: 'A' },
+
+  // ── VIẾT LẠI CÂU / NGỮ PHÁP TỔNG HỢP (20 câu) ──
+  { d: 'EASY', q: 'Fill in: "She is ___ (interest) in learning the piano."', opts: ['A. interested', 'B. interesting', 'C. interest', 'D. interests'], a: 'A' },
+  { d: 'EASY', q: 'Fill in: "He is passionate ___ classical music."', opts: ['A. about', 'B. in', 'C. at', 'D. for'], a: 'A' },
+  { d: 'EASY', q: 'Fill in: "She is ___ at drawing portraits." (good)', opts: ['A. good', 'B. well', 'C. better', 'D. best'], a: 'A' },
+  { d: 'MEDIUM', q: 'Rewrite: "She plays the piano. She also plays the violin." → She plays the piano ___ the violin.', opts: ['A. as well as', 'B. because of', 'C. instead of', 'D. despite'], a: 'A' },
+  { d: 'MEDIUM', q: 'Change to question: "They were rehearsing at 5 pm." → ___ they rehearsing at 5 pm?', opts: ['A. Were', 'B. Did', 'C. Do', 'D. Are'], a: 'A' },
+  { d: 'MEDIUM', q: 'Fill in: "The concert ___ (hold) in the city hall last Saturday."', opts: ['A. was held', 'B. held', 'C. holds', 'D. is holding'], a: 'A' },
+  { d: 'MEDIUM', q: 'Combine: "The painting is beautiful. It is also very valuable." → The painting is not only beautiful ___ very valuable.', opts: ['A. but also', 'B. and also', 'C. or also', 'D. so also'], a: 'A' },
+  { d: 'MEDIUM', q: 'Fill in: "She is looking forward to ___ (perform) at the school concert."', opts: ['A. performing', 'B. perform', 'C. performed', 'D. to perform'], a: 'A' },
+  { d: 'MEDIUM', q: 'Choose the CORRECT passive form: "The artist painted the mural last year." →', opts: ['A. The mural was painted by the artist last year.', 'B. The mural is painted by the artist last year.', 'C. The mural painted by the artist last year.', 'D. The mural were painted by the artist last year.'], a: 'A' },
+  { d: 'MEDIUM', q: 'Fill in the correct preposition: "She has been playing the violin ___ five years."', opts: ['A. for', 'B. since', 'C. in', 'D. at'], a: 'A' },
+  { d: 'HARD', q: 'Rewrite using "in order to": "He practised every day. He wanted to improve." → He practised every day ___ improve.', opts: ['A. in order to', 'B. so as not to', 'C. in spite of', 'D. despite'], a: 'A' },
+  { d: 'HARD', q: 'Transform: "Although she was nervous, she performed brilliantly." → ___ her nervousness, she performed brilliantly.', opts: ['A. Despite', 'B. Because of', 'C. Although', 'D. In spite that'], a: 'A' },
+  { d: 'HARD', q: 'Choose the MOST formal sentence about music:', opts: ['A. Music serves as a powerful medium for cultural expression and emotional communication.', 'B. Music is good and nice to listen to.', 'C. I really like music a lot.', 'D. Music helps you feel better sometimes.'], a: 'A' },
+  { d: 'HARD', q: 'Identify the sentence with a RELATIVE CLAUSE used correctly:', opts: ['A. The musician who composed this piece won an international award.', 'B. The musician which composed this piece won an international award.', 'C. The musician that he composed this piece won an international award.', 'D. The musician composed this piece who won an international award.'], a: 'A' },
+  { d: 'EASY', q: 'Fill in: "The students ___ (listen) to music while they were working on their art projects."', opts: ['A. were listening', 'B. listened', 'C. listen', 'D. are listening'], a: 'A' },
+  { d: 'MEDIUM', q: 'Choose the CORRECT form: "She is used to ___ (perform) in front of large audiences."', opts: ['A. performing', 'B. perform', 'C. performed', 'D. to perform'], a: 'A' },
+  { d: 'HARD', q: 'Complete the conditional: "If he ___ (practise) more, he ___ (win) the competition."', opts: ['A. practised / would win', 'B. practises / will win', 'C. had practised / would have won', 'D. practised / wins'], a: 'A' },
+  { d: 'HARD', q: 'Which sentence uses a GERUND as the object of a preposition?', opts: ['A. She is fond of playing the cello.', 'B. She is fond to play the cello.', 'C. She is fond that she plays the cello.', 'D. She is fond play the cello.'], a: 'A' },
+  { d: 'HARD', q: 'Choose the BEST concluding sentence for an essay on the importance of arts education:', opts: ['A. In conclusion, arts education equips students with creativity, resilience, and cultural awareness – qualities that are indispensable in an increasingly complex world.', 'B. In conclusion, arts are fun and students like them.', 'C. In conclusion, arts education is okay for some students.', 'D. In conclusion, we should sometimes study arts.'], a: 'A' },
+  { d: 'HARD', q: 'Which option correctly combines the two sentences using "whose": "The violinist won the prize. Her performance was outstanding."', opts: ['A. The violinist whose performance was outstanding won the prize.', 'B. The violinist who her performance was outstanding won the prize.', 'C. The violinist which performance was outstanding won the prize.', 'D. The violinist that her performance was outstanding won the prize.'], a: 'A' },
+];
+
+async function main() {
+  const admin = await p.user.findFirst({ where: { role: 'ADMIN' }, select: { id: true } });
+  if (!admin) throw new Error('Admin not found');
+
+  let count = 0;
+  for (const q of QUESTIONS) {
+    const keys = ['A', 'B', 'C', 'D'];
+    const ci = keys.indexOf(q.a);
+    await p.question.create({
+      data: {
+        content: q.q,
+        subjectId: 'sub-anh',
+        gradeId: 'grade-7',
+        topicId: TOPIC_ID,
+        difficulty: q.d,
+        questionType: 'MULTIPLE_CHOICE',
+        status: 'ACTIVE',
+        createdById: admin.id,
+        explanation: `Đáp án đúng: ${q.a}. ${q.opts[ci]}`,
+        options: {
+          create: q.opts.map((text, i) => ({
+            optionKey: keys[i],
+            content: text,
+            isCorrect: i === ci,
+            sortOrder: i,
+          })),
+        },
+      },
+    });
+    count++;
+    if (count % 50 === 0) console.log(`  ${count}/${QUESTIONS.length} câu...`);
+  }
+
+  const total = await p.question.count({ where: { subjectId: 'sub-anh', gradeId: 'grade-7' } });
+  const u4 = await p.question.count({ where: { topicId: TOPIC_ID } });
+  console.log(`\n✅ Đã thêm ${count} câu`);
+  console.log(`📌 Unit 4 - Music and Arts: ${u4} câu`);
+  console.log(`📊 Tổng Tiếng Anh lớp 7: ${total} câu`);
+}
+
+main().catch(console.error).finally(() => p.$disconnect());

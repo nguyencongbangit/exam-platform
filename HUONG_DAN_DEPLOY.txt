@@ -1,0 +1,91 @@
+================================================================
+  HƯỚNG DẪN CHUYỂN APP WEB LUYỆN TẬP SANG MÁY MỚI
+  (Chạy liên tục cho mạng LAN)
+================================================================
+
+== BƯỚC 1: CHUẨN BỊ TRÊN MÁY HIỆN TẠI ==
+
+Copy TOÀN BỘ thư mục "exam-platform" sang máy đích.
+Thư mục này bao gồm: source code, database, build sẵn.
+
+Lưu ý: thư mục node_modules ~500MB, nếu copy chậm có thể
+bỏ qua node_modules - script sẽ tự cài lại trên máy đích.
+
+Cách copy nhanh (qua USB hoặc chia sẻ mạng):
+  - Nén thư mục exam-platform thành .zip trước khi chuyển
+  - Hoặc copy trực tiếp qua mạng LAN
+
+================================================================
+
+== BƯỚC 2: TRÊN MÁY ĐÍCH (Windows 10/11) ==
+
+1. Giải nén / copy thư mục exam-platform vào vị trí muốn đặt
+   Ví dụ: C:\WebServer\exam-platform\
+
+2. Mở PowerShell với quyền Administrator:
+   - Nhấn Windows + X → chọn "Windows PowerShell (Admin)"
+
+3. Chạy script cài đặt:
+   cd "C:\WebServer\exam-platform"
+   powershell -ExecutionPolicy Bypass -File setup-server.ps1
+
+Script sẽ tự động:
+   ✅ Kiểm tra và cài Node.js (nếu chưa có)
+   ✅ Cài PM2 (process manager - giữ app chạy liên tục)
+   ✅ Cài dependencies (nếu thiếu node_modules)
+   ✅ Tự phát hiện IP LAN và cập nhật cấu hình
+   ✅ Mở Windows Firewall cho cổng 3000
+   ✅ Khởi động server và cài đặt tự khởi động khi boot
+
+================================================================
+
+== BƯỚC 3: TRUY CẬP TỪ CÁC MÁY TRONG MẠNG LAN ==
+
+Sau khi script chạy xong, màn hình sẽ hiện địa chỉ IP, ví dụ:
+  http://192.168.1.50:3000
+
+Tất cả máy trong mạng LAN truy cập bằng địa chỉ đó.
+
+================================================================
+
+== QUẢN LÝ SERVER ==
+
+Xem trạng thái:     pm2 status
+Xem log real-time:  pm2 logs
+Khởi động lại:      pm2 restart web-luyen-tap
+Dừng:               pm2 stop web-luyen-tap
+Xóa:                pm2 delete web-luyen-tap
+
+================================================================
+
+== XỬ LÝ SỰ CỐ ==
+
+Nếu máy đích không kết nối được từ LAN:
+1. Kiểm tra Windows Firewall đã mở cổng 3000 chưa:
+   Control Panel → Windows Defender Firewall →
+   Advanced Settings → Inbound Rules →
+   Tìm "WebLuyenTap-Port3000"
+
+2. Kiểm tra IP máy chủ:
+   ipconfig → tìm dòng "IPv4 Address"
+
+3. Thử ping từ máy client:
+   ping [IP máy chủ]
+
+4. Xem log lỗi:
+   pm2 logs web-luyen-tap
+
+================================================================
+
+== LƯU Ý QUAN TRỌNG ==
+
+- Database (dev.db) nằm trong thư mục prisma/
+  Backup file này định kỳ để bảo toàn dữ liệu học sinh
+
+- Nếu thay đổi IP máy chủ, phải cập nhật .env:
+  NEXTAUTH_URL="http://[IP_MỚI]:3000"
+  Rồi restart: pm2 restart web-luyen-tap
+
+- App tự khởi động lại khi máy reboot (đã cài pm2-startup)
+
+================================================================

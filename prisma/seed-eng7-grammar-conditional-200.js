@@ -1,0 +1,223 @@
+// 200 câu hỏi Grammar - Câu điều kiện - Tiếng Anh lớp 7
+const { PrismaClient } = require('@prisma/client');
+const p = new PrismaClient();
+
+const TOPIC_ID = 'cmt322xlp000teq3rt2st1e45'; // Grammar - Câu điều kiện
+
+const QUESTIONS = [
+  // ── ZERO CONDITIONAL (30 câu) ──
+  { d: 'EASY', q: 'If you heat water to 100°C, it ___.', opts: ['A. boils', 'B. will boil', 'C. would boil', 'D. boiled'], a: 'A' },
+  { d: 'EASY', q: 'If it ___ (rain), the ground gets wet.', opts: ['A. rains', 'B. rained', 'C. will rain', 'D. would rain'], a: 'A' },
+  { d: 'EASY', q: 'Plants die if they ___ (not / get) water.', opts: ['A. don\'t get', 'B. didn\'t get', 'C. won\'t get', 'D. wouldn\'t get'], a: 'A' },
+  { d: 'EASY', q: 'Zero conditional is used for ___.', opts: ['A. general truths and scientific facts', 'B. real future possibilities', 'C. unreal present situations', 'D. unreal past situations'], a: 'A' },
+  { d: 'EASY', q: 'If you mix blue and yellow, you ___ green.', opts: ['A. get', 'B. will get', 'C. would get', 'D. got'], a: 'A' },
+  { d: 'EASY', q: 'Ice melts if you ___ it.', opts: ['A. heat', 'B. heated', 'C. will heat', 'D. would heat'], a: 'A' },
+  { d: 'EASY', q: 'If the temperature drops below 0°C, water ___ (freeze).', opts: ['A. freezes', 'B. will freeze', 'C. froze', 'D. would freeze'], a: 'A' },
+  { d: 'EASY', q: '"When" can replace "if" in zero conditional. Which is CORRECT?', opts: ['A. When you heat metal, it expands.', 'B. When you will heat metal, it expands.', 'C. When you heated metal, it expands.', 'D. When you would heat metal, it expands.'], a: 'A' },
+  { d: 'MEDIUM', q: 'Choose the correct zero conditional: "If you ___ (not/sleep) enough, you ___ (feel) tired."', opts: ['A. don\'t sleep / feel', 'B. didn\'t sleep / feel', 'C. don\'t sleep / will feel', 'D. didn\'t sleep / would feel'], a: 'A' },
+  { d: 'MEDIUM', q: '"If babies ___ (be) hungry, they ___." Fill in correctly.', opts: ['A. are / cry', 'B. were / cry', 'C. are / will cry', 'D. were / would cry'], a: 'A' },
+  { d: 'MEDIUM', q: 'Zero conditional structure is: If + ___, ___.', opts: ['A. present simple / present simple', 'B. present simple / will + V', 'C. past simple / would + V', 'D. past perfect / would have + V3'], a: 'A' },
+  { d: 'MEDIUM', q: 'Choose the CORRECT zero conditional sentence:', opts: ['A. If you leave ice in the sun, it melts.', 'B. If you leave ice in the sun, it will melt.', 'C. If you left ice in the sun, it would melt.', 'D. If you had left ice in the sun, it would have melted.'], a: 'A' },
+  { d: 'MEDIUM', q: '"If you ___ (eat) too much sugar, your teeth ___." Fill in for zero conditional.', opts: ['A. eat / decay', 'B. eat / will decay', 'C. ate / would decay', 'D. had eaten / would have decayed'], a: 'A' },
+  { d: 'MEDIUM', q: '"Dogs ___ their tails if they are happy." Fill in for zero conditional.', opts: ['A. wag', 'B. will wag', 'C. would wag', 'D. wagged'], a: 'A' },
+  { d: 'MEDIUM', q: '"If light ___ a prism, it splits into colours." Fill in.', opts: ['A. passes through', 'B. passed through', 'C. will pass through', 'D. would pass through'], a: 'A' },
+  { d: 'HARD', q: '"If iron ___ exposed to moisture, it ___." (rusts) Fill in with zero conditional.', opts: ['A. is / rusts', 'B. is / will rust', 'C. was / would rust', 'D. has been / rusts'], a: 'A' },
+  { d: 'HARD', q: 'Identify the sentence that is NOT a zero conditional:', opts: ['A. If she studies hard, she will pass. (first conditional)', 'B. If you press this button, the light turns on.', 'C. Water boils if you heat it to 100°C.', 'D. If you don\'t water plants, they die.'], a: 'A' },
+  { d: 'HARD', q: 'Zero conditional can also use IMPERATIVE in the result clause: "If you feel ill, ___."', opts: ['A. see a doctor.', 'B. you will see a doctor.', 'C. you would see a doctor.', 'D. you would have seen a doctor.'], a: 'A' },
+  { d: 'MEDIUM', q: '"If you ___ (not/exercise), you ___ unfit." Fill in zero conditional.', opts: ['A. don\'t exercise / become', 'B. didn\'t exercise / would become', 'C. don\'t exercise / will become', 'D. hadn\'t exercised / would become'], a: 'A' },
+  { d: 'MEDIUM', q: '"Metals ___ when you ___ them." Fill in (zero conditional).', opts: ['A. expand / heat', 'B. will expand / heat', 'C. expand / heated', 'D. would expand / heat'], a: 'A' },
+  { d: 'EASY', q: 'If you ___ (add) salt to water, the boiling point rises.', opts: ['A. add', 'B. added', 'C. will add', 'D. would add'], a: 'A' },
+  { d: 'EASY', q: 'If she doesn\'t eat, she ___ hungry.', opts: ['A. gets', 'B. will get', 'C. would get', 'D. got'], a: 'A' },
+  { d: 'MEDIUM', q: '"What ___ if you mix red and white?" "You ___ pink." (zero conditional)', opts: ['A. happens / get', 'B. will happen / will get', 'C. happened / would get', 'D. happens / will get'], a: 'A' },
+  { d: 'HARD', q: '"If a country ___ its resources wisely, the economy ___." Fill in zero conditional.', opts: ['A. manages / grows', 'B. manages / will grow', 'C. managed / would grow', 'D. had managed / would have grown'], a: 'A' },
+  { d: 'MEDIUM', q: '"He always feels nervous if he ___ in public." Fill in.', opts: ['A. speaks', 'B. spoke', 'C. will speak', 'D. would speak'], a: 'A' },
+  { d: 'HARD', q: '"If the clause uses \'whenever\' or \'every time\', it is likely a ___ conditional."', opts: ['A. zero', 'B. first', 'C. second', 'D. third'], a: 'A' },
+  { d: 'EASY', q: 'If you ___ (not/water) flowers, they die.', opts: ['A. don\'t water', 'B. didn\'t water', 'C. won\'t water', 'D. wouldn\'t water'], a: 'A' },
+  { d: 'MEDIUM', q: '"The screen ___ off if you ___ the button." Fill in (zero conditional).', opts: ['A. turns / press', 'B. will turn / press', 'C. turns / pressed', 'D. would turn / press'], a: 'A' },
+  { d: 'HARD', q: 'Zero conditional is different from first conditional because ___.',  opts: ['A. Zero describes facts/habits; first describes real future possibilities.', 'B. Zero uses future tense; first uses past tense.', 'C. Zero is impossible; first is possible.', 'D. There is no real difference.'], a: 'A' },
+  { d: 'MEDIUM', q: '"Glass ___ if you ___ it." Fill in for zero conditional.', opts: ['A. breaks / drop', 'B. will break / drop', 'C. broke / dropped', 'D. would break / dropped'], a: 'A' },
+
+  // ── FIRST CONDITIONAL (60 câu) ──
+  { d: 'EASY', q: 'If it ___ tomorrow, we will cancel the picnic.', opts: ['A. rains', 'B. rained', 'C. will rain', 'D. would rain'], a: 'A' },
+  { d: 'EASY', q: 'She will pass the exam if she ___ hard.', opts: ['A. studies', 'B. studied', 'C. will study', 'D. would study'], a: 'A' },
+  { d: 'EASY', q: 'If he ___ (not / hurry), he will miss the bus.', opts: ['A. doesn\'t hurry', 'B. didn\'t hurry', 'C. won\'t hurry', 'D. wouldn\'t hurry'], a: 'A' },
+  { d: 'EASY', q: '___ she help you if you ask her?', opts: ['A. Will', 'B. Would', 'C. Does', 'D. Did'], a: 'A' },
+  { d: 'EASY', q: 'First conditional expresses ___.', opts: ['A. real or likely future situations', 'B. unreal present situations', 'C. unreal past situations', 'D. general scientific truths'], a: 'A' },
+  { d: 'EASY', q: 'First conditional structure: If + ___, ___.', opts: ['A. present simple / will + V', 'B. past simple / would + V', 'C. present simple / present simple', 'D. past perfect / would have + V3'], a: 'A' },
+  { d: 'EASY', q: 'If you ___ (eat) too much, you will feel sick.', opts: ['A. eat', 'B. ate', 'C. will eat', 'D. would eat'], a: 'A' },
+  { d: 'EASY', q: 'We will go hiking if the weather ___ fine.', opts: ['A. is', 'B. was', 'C. will be', 'D. would be'], a: 'A' },
+  { d: 'EASY', q: 'If she ___ (finish) early, she can join us.', opts: ['A. finishes', 'B. finished', 'C. will finish', 'D. would finish'], a: 'A' },
+  { d: 'EASY', q: 'He ___ be late if he doesn\'t leave now.', opts: ['A. will', 'B. would', 'C. might', 'D. could'], a: 'A' },
+  { d: 'MEDIUM', q: 'Choose the CORRECT first conditional sentence:', opts: ['A. If she works hard, she will get a promotion.', 'B. If she works hard, she would get a promotion.', 'C. If she worked hard, she will get a promotion.', 'D. If she will work hard, she will get a promotion.'], a: 'A' },
+  { d: 'MEDIUM', q: '"If it ___ (not/stop) raining, we ___ (not/be able to) play outside." Fill in.', opts: ['A. doesn\'t stop / won\'t be able to', 'B. didn\'t stop / wouldn\'t be able to', 'C. won\'t stop / won\'t be able to', 'D. doesn\'t stop / would not be able to'], a: 'A' },
+  { d: 'MEDIUM', q: 'First conditional can use CAN/MAY/MIGHT in the result clause: "If you practice, you ___ improve." Fill in.', opts: ['A. might', 'B. would', 'C. could have', 'D. would have'], a: 'A' },
+  { d: 'MEDIUM', q: '"Unless you study, you ___." Complete the first conditional.', opts: ['A. will fail', 'B. would fail', 'C. would have failed', 'D. fail'], a: 'A' },
+  { d: 'MEDIUM', q: '"Unless" means ___ in conditionals.', opts: ['A. if not', 'B. if', 'C. even if', 'D. only if'], a: 'A' },
+  { d: 'MEDIUM', q: '"Unless he ___ on time, the meeting will start without him." Fill in.', opts: ['A. arrives', 'B. arrived', 'C. will arrive', 'D. would arrive'], a: 'A' },
+  { d: 'MEDIUM', q: '"If you ___ (press) the red button, the alarm ___ (go off)." First conditional.', opts: ['A. press / will go off', 'B. press / goes off', 'C. pressed / would go off', 'D. will press / will go off'], a: 'A' },
+  { d: 'MEDIUM', q: '"What ___ you ___ if you win the competition?" Fill in.', opts: ['A. will ... do', 'B. would ... do', 'C. do ... do', 'D. did ... do'], a: 'A' },
+  { d: 'MEDIUM', q: '"If she ___ (call) you, ___ answer." Fill in with imperative result.', opts: ['A. calls / please', 'B. called / please', 'C. will call / please', 'D. calls / you will'], a: 'A' },
+  { d: 'MEDIUM', q: 'In first conditional, the result clause can use IMPERATIVE: "If you see him, ___ him to call me."', opts: ['A. tell', 'B. told', 'C. will tell', 'D. would tell'], a: 'A' },
+  { d: 'MEDIUM', q: '"She won\'t go ___ he apologises." Fill in with the correct connector.', opts: ['A. unless', 'B. if', 'C. when', 'D. although'], a: 'A' },
+  { d: 'MEDIUM', q: '"If we ___ (not/leave) now, we ___ (miss) the train." Fill in.', opts: ['A. don\'t leave / will miss', 'B. didn\'t leave / would miss', 'C. won\'t leave / will miss', 'D. don\'t leave / would miss'], a: 'A' },
+  { d: 'HARD', q: '"If she ___ (be) free this evening, she ___ (might/come) with us." Fill in.', opts: ['A. is / might come', 'B. were / might come', 'C. is / would come', 'D. were / will come'], a: 'A' },
+  { d: 'HARD', q: '"If you ___ (not/eat) breakfast, you ___ (not/be able to) concentrate." Fill in.', opts: ['A. don\'t eat / won\'t be able to', 'B. didn\'t eat / wouldn\'t be able to', 'C. don\'t eat / wouldn\'t be able to', 'D. haven\'t eaten / won\'t be able to'], a: 'A' },
+  { d: 'HARD', q: 'Identify the INCORRECT first conditional sentence:', opts: ['A. If she will come, I will be happy. ("will" cannot be in the if-clause)', 'B. If she comes, I will be happy.', 'C. She will be happy if he calls.', 'D. Unless they hurry, they will be late.'], a: 'A' },
+  { d: 'HARD', q: '"Provided that you ___ (submit) the form before Friday, you ___ (receive) the discount." Fill in.', opts: ['A. submit / will receive', 'B. submitted / would receive', 'C. will submit / will receive', 'D. submit / would receive'], a: 'A' },
+  { d: 'HARD', q: '"As long as you ___ (try) your best, you ___ (not / regret) it." Fill in.', opts: ['A. try / won\'t regret', 'B. tried / wouldn\'t regret', 'C. will try / won\'t regret', 'D. try / would regret'], a: 'A' },
+  { d: 'EASY', q: 'If she ___ (be) hungry, she will eat something.', opts: ['A. is', 'B. was', 'C. will be', 'D. would be'], a: 'A' },
+  { d: 'EASY', q: 'If I ___ (have) enough money, I will buy a new laptop.', opts: ['A. have', 'B. had', 'C. will have', 'D. would have'], a: 'A' },
+  { d: 'MEDIUM', q: '"If you ___ (tell) me earlier, I ___ (help) you." First conditional.', opts: ['A. tell / will help', 'B. told / would help', 'C. tell / would help', 'D. told / will help'], a: 'A' },
+  { d: 'MEDIUM', q: '"If they ___ (not/pay) their bill, the electricity ___ (cut off)." First conditional.', opts: ['A. don\'t pay / will be cut off', 'B. didn\'t pay / would be cut off', 'C. won\'t pay / will be cut off', 'D. don\'t pay / would be cut off'], a: 'A' },
+  { d: 'HARD', q: 'First conditional with FUTURE TIME clause: "When she ___, give her this message."', opts: ['A. arrives (present simple in time clause)', 'B. will arrive', 'C. arrived', 'D. would arrive'], a: 'A' },
+  { d: 'HARD', q: '"___ you help me if I ___ (need) you?" Fill in.', opts: ['A. Will / need', 'B. Would / needed', 'C. Would / need', 'D. Will / needed'], a: 'A' },
+  { d: 'EASY', q: 'If he ___ (work) harder, his boss will give him a raise.', opts: ['A. works', 'B. worked', 'C. will work', 'D. would work'], a: 'A' },
+  { d: 'MEDIUM', q: '"If you mix red and blue, you ___ purple." Is this zero or first conditional?', opts: ['A. Zero conditional (scientific fact – always true)', 'B. First conditional (likely future)', 'C. Second conditional (unreal)', 'D. Third conditional (past unreal)'], a: 'A' },
+  { d: 'EASY', q: 'She will be angry if you ___ (forget) her birthday.', opts: ['A. forget', 'B. forgot', 'C. will forget', 'D. would forget'], a: 'A' },
+  { d: 'MEDIUM', q: '"If it ___ a beautiful day tomorrow, we ___ (go) to the park." First conditional.', opts: ['A. is / will go', 'B. was / would go', 'C. will be / will go', 'D. is / would go'], a: 'A' },
+  { d: 'HARD', q: '"Even if she ___ (try) her best, it ___ (not/be) enough." Fill in.', opts: ['A. tries / won\'t be', 'B. tried / wouldn\'t be', 'C. will try / won\'t be', 'D. tries / wouldn\'t be'], a: 'A' },
+  { d: 'EASY', q: 'If you ___ (not / study), you will fail the test.', opts: ['A. don\'t study', 'B. didn\'t study', 'C. won\'t study', 'D. wouldn\'t study'], a: 'A' },
+  { d: 'MEDIUM', q: '"What ___ happen if she refuses?" Fill in.', opts: ['A. will', 'B. would', 'C. might have', 'D. could have'], a: 'A' },
+  { d: 'HARD', q: '"If you should need help, ___ hesitate to call me." This is a first conditional variant. Fill in.', opts: ['A. don\'t', 'B. didn\'t', 'C. won\'t', 'D. wouldn\'t'], a: 'A' },
+  { d: 'MEDIUM', q: '"If he ___ (not / be) careful, he ___ (hurt) himself." First conditional.', opts: ['A. isn\'t / will hurt', 'B. wasn\'t / would hurt', 'C. isn\'t / would hurt', 'D. wasn\'t / will hurt'], a: 'A' },
+  { d: 'HARD', q: '"Suppose you ___ (find) a wallet, what ___ you ___?" Fill in using first conditional.', opts: ['A. find / will ... do', 'B. found / would ... do', 'C. find / would ... do', 'D. will find / will ... do'], a: 'A' },
+  { d: 'EASY', q: 'If the weather ___ (be) good, we will have a barbecue.', opts: ['A. is', 'B. was', 'C. will be', 'D. would be'], a: 'A' },
+  { d: 'MEDIUM', q: '"She might get a scholarship ___ she maintains her grades." Fill in.', opts: ['A. if', 'B. unless', 'C. although', 'D. despite'], a: 'A' },
+  { d: 'HARD', q: '"If you ___ (apply) early, you ___ (be) more likely to get a place." First conditional.', opts: ['A. apply / will be', 'B. applied / would be', 'C. apply / would be', 'D. will apply / will be'], a: 'A' },
+  { d: 'EASY', q: 'If you ___ (touch) the stove, you will burn yourself.', opts: ['A. touch', 'B. touched', 'C. will touch', 'D. would touch'], a: 'A' },
+  { d: 'MEDIUM', q: '"They ___ (lose) the match if they ___ (not/improve)." First conditional.', opts: ['A. will lose / don\'t improve', 'B. would lose / didn\'t improve', 'C. will lose / won\'t improve', 'D. would lose / don\'t improve'], a: 'A' },
+
+  // ── SECOND CONDITIONAL (60 câu) ──
+  { d: 'EASY', q: 'If I ___ (be) rich, I would travel the world.', opts: ['A. were', 'B. am', 'C. will be', 'D. had been'], a: 'A' },
+  { d: 'EASY', q: 'She would buy a car if she ___ (have) enough money.', opts: ['A. had', 'B. has', 'C. will have', 'D. had had'], a: 'A' },
+  { d: 'EASY', q: 'If he ___ (study) harder, he would pass all his exams.', opts: ['A. studied', 'B. studies', 'C. will study', 'D. had studied'], a: 'A' },
+  { d: 'EASY', q: 'What ___ you do if you ___ (see) an accident?', opts: ['A. would / saw', 'B. will / see', 'C. would / see', 'D. will / saw'], a: 'A' },
+  { d: 'EASY', q: 'Second conditional expresses ___.', opts: ['A. unreal or hypothetical present/future situations', 'B. general scientific facts', 'C. real future possibilities', 'D. completed past actions'], a: 'A' },
+  { d: 'EASY', q: 'Second conditional structure: If + ___, ___.', opts: ['A. past simple / would + V', 'B. present simple / will + V', 'C. present simple / present simple', 'D. past perfect / would have + V3'], a: 'A' },
+  { d: 'EASY', q: 'If I ___ (be) you, I would apologise immediately.', opts: ['A. were', 'B. am', 'C. will be', 'D. have been'], a: 'A' },
+  { d: 'EASY', q: 'She wouldn\'t be so tired if she ___ (sleep) more.', opts: ['A. slept', 'B. sleeps', 'C. will sleep', 'D. had slept'], a: 'A' },
+  { d: 'EASY', q: 'If they ___ (have) more time, they would finish the project.', opts: ['A. had', 'B. have', 'C. will have', 'D. had had'], a: 'A' },
+  { d: 'EASY', q: '"I wish I ___ fly." Fill in.', opts: ['A. could', 'B. can', 'C. will be able to', 'D. had been able to'], a: 'A' },
+  { d: 'MEDIUM', q: 'Choose the CORRECT second conditional sentence:', opts: ['A. If she spoke English better, she would get the job.', 'B. If she speaks English better, she would get the job.', 'C. If she spoke English better, she will get the job.', 'D. If she would speak English better, she would get the job.'], a: 'A' },
+  { d: 'MEDIUM', q: '"If I ___ (not/have) a fear of heights, I ___ (go) skydiving." Fill in.', opts: ['A. didn\'t have / would go', 'B. don\'t have / will go', 'C. hadn\'t had / would have gone', 'D. didn\'t have / will go'], a: 'A' },
+  { d: 'MEDIUM', q: '"Would" in second conditional can be replaced by ___ for weaker probability.', opts: ['A. might / could', 'B. will / shall', 'C. must / should', 'D. has to / need to'], a: 'A' },
+  { d: 'MEDIUM', q: '"If she ___ (know) the answer, she ___ tell us." Fill in.', opts: ['A. knew / would', 'B. knows / would', 'C. knew / will', 'D. had known / would'], a: 'A' },
+  { d: 'MEDIUM', q: '"I wish I ___ (live) near the beach." Fill in.', opts: ['A. lived', 'B. live', 'C. will live', 'D. had lived'], a: 'A' },
+  { d: 'MEDIUM', q: '"What would you do if you ___ (find) a million dollars?" Fill in.', opts: ['A. found', 'B. find', 'C. will find', 'D. had found'], a: 'A' },
+  { d: 'MEDIUM', q: '"If animals ___ (can/talk), the world would be very different." Fill in.', opts: ['A. could talk', 'B. can talk', 'C. could have talked', 'D. will be able to talk'], a: 'A' },
+  { d: 'MEDIUM', q: '"She ___ (be) happier if she ___ (have) more friends." Fill in.', opts: ['A. would be / had', 'B. will be / has', 'C. would be / has', 'D. will be / had'], a: 'A' },
+  { d: 'MEDIUM', q: '"If I ___ (be) the president, I ___ reduce taxes." Fill in.', opts: ['A. were / would', 'B. am / will', 'C. was / would (also accepted)', 'D. had been / would have'], a: 'A' },
+  { d: 'MEDIUM', q: '"Unless he ___ more, he ___ (not/succeed)." Second conditional.', opts: ['A. tried / wouldn\'t succeed', 'B. tries / won\'t succeed', 'C. tried / won\'t succeed', 'D. tries / wouldn\'t succeed'], a: 'A' },
+  { d: 'HARD', q: 'Identify the INCORRECT second conditional sentence:', opts: ['A. If I would have more time, I would learn Japanese. ("would" in if-clause is wrong)', 'B. If I had more time, I would learn Japanese.', 'C. I would help you if I knew how.', 'D. She could finish faster if she weren\'t so tired.'], a: 'A' },
+  { d: 'HARD', q: '"If he ___ (not/be) so stubborn, things ___ be easier." Fill in.', opts: ['A. weren\'t / would', 'B. isn\'t / will', 'C. hadn\'t been / would have', 'D. wasn\'t / would'], a: 'A' },
+  { d: 'HARD', q: '"___ I you, I would accept the offer." Fill in.', opts: ['A. Were', 'B. Am', 'C. Was', 'D. Being'], a: 'A' },
+  { d: 'HARD', q: '"What ___ happen if gravity ___ (stop) working?" Fill in.', opts: ['A. would / stopped', 'B. will / stops', 'C. would / stop', 'D. will / stopped'], a: 'A' },
+  { d: 'HARD', q: '"If I could change one thing about the world, I ___ (eliminate) poverty." Fill in.', opts: ['A. would eliminate', 'B. will eliminate', 'C. would have eliminated', 'D. eliminated'], a: 'A' },
+  { d: 'EASY', q: 'If she ___ (not / be) so busy, she would come to the party.', opts: ['A. weren\'t', 'B. isn\'t', 'C. will not be', 'D. hadn\'t been'], a: 'A' },
+  { d: 'EASY', q: 'He would feel better if he ___ (exercise) regularly.', opts: ['A. exercised', 'B. exercises', 'C. will exercise', 'D. had exercised'], a: 'A' },
+  { d: 'MEDIUM', q: '"If you ___ (could/live) anywhere in the world, where ___ you ___?" Fill in.', opts: ['A. could live / would ... go', 'B. can live / will ... go', 'C. could live / will ... go', 'D. can live / would ... go'], a: 'A' },
+  { d: 'MEDIUM', q: '"I wish I ___ (not/have) to work so hard." Fill in.', opts: ['A. didn\'t have', 'B. don\'t have', 'C. hadn\'t had', 'D. won\'t have'], a: 'A' },
+  { d: 'HARD', q: '"If the government ___ (invest) in education, the country ___ (develop) faster." Second conditional.', opts: ['A. invested / would develop', 'B. invests / will develop', 'C. had invested / would have developed', 'D. invested / will develop'], a: 'A' },
+  { d: 'EASY', q: 'If I ___ (know) her number, I would call her.', opts: ['A. knew', 'B. know', 'C. will know', 'D. had known'], a: 'A' },
+  { d: 'MEDIUM', q: '"She ___ (might/come) if you ___ (invite) her." Fill in.', opts: ['A. might come / invited', 'B. will come / invite', 'C. might come / invite', 'D. would come / invited'], a: 'A' },
+  { d: 'HARD', q: '"If water ___ (not/exist), life as we know it ___ (not/be) possible." Fill in.', opts: ['A. didn\'t exist / wouldn\'t be', 'B. doesn\'t exist / won\'t be', 'C. hadn\'t existed / wouldn\'t have been', 'D. didn\'t exist / won\'t be'], a: 'A' },
+  { d: 'EASY', q: 'What would you do if you ___ (lose) your phone?', opts: ['A. lost', 'B. lose', 'C. will lose', 'D. had lost'], a: 'A' },
+  { d: 'MEDIUM', q: '"If I ___ (be) taller, I would play basketball professionally." Fill in.', opts: ['A. were', 'B. am', 'C. will be', 'D. had been'], a: 'A' },
+  { d: 'HARD', q: '"She acts as if she ___ (know) everything." Fill in.', opts: ['A. knew', 'B. knows', 'C. will know', 'D. had known'], a: 'A' },
+  { d: 'EASY', q: 'If he ___ (not / be) afraid of dogs, he would have a pet.', opts: ['A. weren\'t', 'B. isn\'t', 'C. won\'t be', 'D. hadn\'t been'], a: 'A' },
+  { d: 'MEDIUM', q: '"If you ___ (could/choose) any superpower, what ___ it ___?" Fill in.', opts: ['A. could choose / would ... be', 'B. can choose / will ... be', 'C. could choose / will ... be', 'D. can choose / would ... be'], a: 'A' },
+  { d: 'HARD', q: '"If I ___ (speak) Vietnamese fluently, I ___ (move) to Hanoi." Fill in.', opts: ['A. spoke / would move', 'B. speak / will move', 'C. had spoken / would have moved', 'D. spoke / will move'], a: 'A' },
+  { d: 'MEDIUM', q: '"He ___ (travel) more if he ___ (not/have) so much work." Fill in.', opts: ['A. would travel / didn\'t have', 'B. will travel / doesn\'t have', 'C. would travel / doesn\'t have', 'D. will travel / didn\'t have'], a: 'A' },
+  { d: 'HARD', q: '"___ she have the opportunity, she would take it." Fill in.', opts: ['A. Were', 'B. Would', 'C. Had', 'D. Should'], a: 'A' },
+
+  // ── THIRD CONDITIONAL (30 câu) ──
+  { d: 'EASY', q: 'If she ___ (study) harder, she would have passed.', opts: ['A. had studied', 'B. studied', 'C. has studied', 'D. were studying'], a: 'A' },
+  { d: 'EASY', q: 'He would have won if he ___ (practise) more.', opts: ['A. had practised', 'B. practised', 'C. has practised', 'D. was practising'], a: 'A' },
+  { d: 'EASY', q: 'Third conditional structure: If + ___, ___.', opts: ['A. past perfect / would have + V3', 'B. past simple / would + V', 'C. present simple / will + V', 'D. past simple / would have + V3'], a: 'A' },
+  { d: 'EASY', q: 'Third conditional expresses ___.', opts: ['A. unreal situations in the PAST – opposite of what happened', 'B. unreal situations in the present', 'C. real future possibilities', 'D. general truths'], a: 'A' },
+  { d: 'EASY', q: 'If I ___ (know) the truth, I would have told you.', opts: ['A. had known', 'B. knew', 'C. know', 'D. have known'], a: 'A' },
+  { d: 'EASY', q: 'She ___ (not / be) injured if she had been more careful.', opts: ['A. wouldn\'t have been', 'B. wouldn\'t be', 'C. won\'t be', 'D. didn\'t be'], a: 'A' },
+  { d: 'MEDIUM', q: 'Choose the CORRECT third conditional sentence:', opts: ['A. If he had called earlier, she would have waited.', 'B. If he had called earlier, she will have waited.', 'C. If he called earlier, she would have waited.', 'D. If he has called earlier, she would have waited.'], a: 'A' },
+  { d: 'MEDIUM', q: '"If the weather ___ (be) better, we ___ (go) to the beach." Third conditional.', opts: ['A. had been / would have gone', 'B. were / would go', 'C. was / would have gone', 'D. had been / would go'], a: 'A' },
+  { d: 'MEDIUM', q: '"She wishes she ___ (not/say) those words." Fill in.', opts: ['A. hadn\'t said', 'B. didn\'t say', 'C. hasn\'t said', 'D. wasn\'t saying'], a: 'A' },
+  { d: 'MEDIUM', q: '"If he ___ (not/miss) the interview, he ___ (get) the job." Third conditional.', opts: ['A. hadn\'t missed / would have got', 'B. didn\'t miss / would have got', 'C. hadn\'t missed / would get', 'D. didn\'t miss / would get'], a: 'A' },
+  { d: 'HARD', q: 'Identify the INCORRECT third conditional sentence:', opts: ['A. If she would have come, we would have celebrated. ("would have" in if-clause is wrong)', 'B. If she had come, we would have celebrated.', 'C. We would have left earlier if the traffic hadn\'t been so bad.', 'D. She wouldn\'t have failed if she had revised properly.'], a: 'A' },
+  { d: 'HARD', q: '"___ he warned me, I would have been more careful." (Inverted third conditional)', opts: ['A. Had', 'B. If had', 'C. Would', 'D. Were'], a: 'A' },
+  { d: 'HARD', q: '"If I ___ (be) there, I ___ (stop) the argument." Third conditional.', opts: ['A. had been / would have stopped', 'B. were / would stop', 'C. had been / would stop', 'D. were / would have stopped'], a: 'A' },
+  { d: 'HARD', q: '"She ___ (might/arrive) on time if her taxi ___ (not/break down)." Fill in.', opts: ['A. might have arrived / hadn\'t broken down', 'B. might arrive / didn\'t break down', 'C. would have arrived / hadn\'t broken down', 'D. would arrive / didn\'t break down'], a: 'A' },
+  { d: 'HARD', q: '"If the scientists ___ (discover) the vaccine sooner, millions of lives ___ (save)." Third conditional (passive).', opts: ['A. had discovered / would have been saved', 'B. discovered / would have been saved', 'C. had discovered / would be saved', 'D. discovered / would be saved'], a: 'A' },
+  { d: 'EASY', q: '___ they ___ (win) if they had trained harder?', opts: ['A. Would ... have won', 'B. Would ... won', 'C. Did ... win', 'D. Could ... won'], a: 'A' },
+  { d: 'MEDIUM', q: '"I ___ (not/buy) that jacket if I ___ (know) it would shrink." Fill in.', opts: ['A. wouldn\'t have bought / had known', 'B. wouldn\'t buy / knew', 'C. wouldn\'t have bought / knew', 'D. wouldn\'t buy / had known'], a: 'A' },
+  { d: 'HARD', q: '"If he ___ (take) his umbrella, he ___ (not/get) soaked." Third conditional.', opts: ['A. had taken / wouldn\'t have got', 'B. took / wouldn\'t get', 'C. had taken / wouldn\'t get', 'D. took / wouldn\'t have got'], a: 'A' },
+  { d: 'MEDIUM', q: '"She regrets not studying. If she ___ (study), she ___ (pass)." Fill in.', opts: ['A. had studied / would have passed', 'B. studied / would pass', 'C. had studied / would pass', 'D. studied / would have passed'], a: 'A' },
+  { d: 'HARD', q: '"___ I known you were coming, I would have baked a cake." (Inverted conditional)', opts: ['A. Had', 'B. Were', 'C. If', 'D. Should'], a: 'A' },
+  { d: 'MEDIUM', q: '"If the accident ___ (not/happen), he ___ (not/be) in hospital now." Fill in (mixed conditional).', opts: ['A. hadn\'t happened / wouldn\'t be', 'B. didn\'t happen / wouldn\'t be', 'C. hadn\'t happened / wouldn\'t have been', 'D. didn\'t happen / wouldn\'t have been'], a: 'A' },
+  { d: 'HARD', q: 'Third conditional can be shortened: "I would have been there ___." Fill in.', opts: ['A. if invited (= if I had been invited)', 'B. if I invite', 'C. if I will be invited', 'D. if I am invited'], a: 'A' },
+  { d: 'HARD', q: '"She ___ (could/become) a doctor if she ___ (study) medicine." Third conditional.', opts: ['A. could have become / had studied', 'B. could become / studied', 'C. would have become / had studied', 'D. could have become / studied'], a: 'A' },
+  { d: 'MEDIUM', q: '"If you ___ (not/stay) up so late, you ___ (not/oversleep) this morning." Fill in.', opts: ['A. hadn\'t stayed / wouldn\'t have overslept', 'B. didn\'t stay / wouldn\'t have overslept', 'C. hadn\'t stayed / wouldn\'t oversleep', 'D. didn\'t stay / wouldn\'t oversleep'], a: 'A' },
+  { d: 'HARD', q: '"What ___ happened if the firefighters ___ (not/arrive) in time?" Fill in.', opts: ['A. would have / hadn\'t arrived', 'B. would / didn\'t arrive', 'C. will / don\'t arrive', 'D. would / hadn\'t arrived'], a: 'A' },
+
+  // ── SO SÁNH, PHÂN BIỆT + UNLESS / WISH (20 câu) ──
+  { d: 'MEDIUM', q: '"If I ___ a bird, I would fly." Which type of conditional is this?', opts: ['A. Second conditional (unreal present)', 'B. First conditional (real future)', 'C. Zero conditional (general truth)', 'D. Third conditional (unreal past)'], a: 'A' },
+  { d: 'MEDIUM', q: '"If you drop the glass, it will break." Which type of conditional is this?', opts: ['A. First conditional (real/likely future)', 'B. Zero conditional (always true)', 'C. Second conditional (unreal)', 'D. Third conditional (past unreal)'], a: 'A' },
+  { d: 'MEDIUM', q: '"If she had told the truth, she wouldn\'t be in trouble now." This is a ___ conditional.', opts: ['A. mixed (third if-clause + second result)', 'B. second', 'C. third', 'D. first'], a: 'A' },
+  { d: 'MEDIUM', q: '"I wish I ___ (be) taller." This is related to which conditional?', opts: ['A. Second conditional (unreal present wish)', 'B. First conditional', 'C. Third conditional (past wish)', 'D. Zero conditional'], a: 'A' },
+  { d: 'MEDIUM', q: '"I wish I ___ (not/say) that yesterday." Fill in (past wish).', opts: ['A. hadn\'t said', 'B. didn\'t say', 'C. wouldn\'t say', 'D. wasn\'t saying'], a: 'A' },
+  { d: 'HARD', q: '"Unless you ___ harder, you ___ catch up." Fill in with first conditional.', opts: ['A. try / won\'t', 'B. tried / wouldn\'t', 'C. will try / won\'t', 'D. try / wouldn\'t'], a: 'A' },
+  { d: 'HARD', q: '"If only I ___ (listen) to your advice!" Fill in.', opts: ['A. had listened', 'B. listened', 'C. would listen', 'D. have listened'], a: 'A' },
+  { d: 'HARD', q: 'Choose the CORRECT mixed conditional: "If she ___ (save) more in the past, she ___ (be) rich now."', opts: ['A. had saved / would be', 'B. saved / would be', 'C. had saved / would have been', 'D. saved / would have been'], a: 'A' },
+  { d: 'HARD', q: '"___ he study more consistently, he could improve his grades." Fill in (inverted first conditional).', opts: ['A. Should', 'B. Were', 'C. Had', 'D. If'], a: 'A' },
+  { d: 'HARD', q: '"___ it not for her support, I would have given up." Fill in.', opts: ['A. Were', 'B. Had', 'C. Should', 'D. If'], a: 'A' },
+  { d: 'MEDIUM', q: 'Identify the type: "You will feel better if you rest."', opts: ['A. First conditional', 'B. Zero conditional', 'C. Second conditional', 'D. Third conditional'], a: 'A' },
+  { d: 'MEDIUM', q: 'Identify the type: "If I had wings, I would fly to you."', opts: ['A. Second conditional', 'B. First conditional', 'C. Third conditional', 'D. Zero conditional'], a: 'A' },
+  { d: 'MEDIUM', q: 'Identify the type: "If it snows, schools close."', opts: ['A. Zero conditional', 'B. First conditional', 'C. Second conditional', 'D. Third conditional'], a: 'A' },
+  { d: 'HARD', q: '"She wishes she ___ (can) go back and change things." Fill in.', opts: ['A. could', 'B. can', 'C. would be able to', 'D. had been able to'], a: 'A' },
+  { d: 'HARD', q: 'Choose the CORRECT sentence:', opts: ['A. If she had worked harder, she would be successful now. (mixed conditional)', 'B. If she had worked harder, she would have been successful now.', 'C. If she worked harder, she would be successful now. (second conditional)', 'D. A and C are both correct for different meanings.'], a: 'A' },
+  { d: 'MEDIUM', q: '"I would accept the job ___ the salary were higher." Fill in.', opts: ['A. if', 'B. unless', 'C. although', 'D. since'], a: 'A' },
+  { d: 'HARD', q: '"___ she not been so tired, she would have finished the task." (Third conditional, inverted)', opts: ['A. Had', 'B. Were', 'C. Should', 'D. Would'], a: 'A' },
+  { d: 'HARD', q: '"If ___ anything suspicious, please report it immediately." (First conditional – formal)', opts: ['A. you see', 'B. you saw', 'C. you will see', 'D. you had seen'], a: 'A' },
+  { d: 'HARD', q: 'Choose the MOST appropriate conditional type for: "I regret quitting my job."', opts: ['A. Third conditional: If I hadn\'t quit my job, I would still have it.', 'B. Second conditional: If I don\'t quit my job, I will still have it.', 'C. First conditional: If I quit my job, I will regret it.', 'D. Zero conditional: If you quit your job, you regret it.'], a: 'A' },
+  { d: 'HARD', q: '"What ___ you have done differently ___ you had the chance?" Fill in.', opts: ['A. would / if', 'B. will / when', 'C. would / when', 'D. could / unless'], a: 'A' },
+];
+
+async function main() {
+  const admin = await p.user.findFirst({ where: { role: 'ADMIN' }, select: { id: true } });
+  if (!admin) throw new Error('Admin not found');
+
+  let count = 0;
+  for (const q of QUESTIONS) {
+    const keys = ['A', 'B', 'C', 'D'];
+    const ci = keys.indexOf(q.a);
+    await p.question.create({
+      data: {
+        content: q.q,
+        subjectId: 'sub-anh',
+        gradeId: 'grade-7',
+        topicId: TOPIC_ID,
+        difficulty: q.d,
+        questionType: 'MULTIPLE_CHOICE',
+        status: 'ACTIVE',
+        createdById: admin.id,
+        explanation: `Đáp án đúng: ${q.a}. ${q.opts[ci]}`,
+        options: {
+          create: q.opts.map((text, i) => ({
+            optionKey: keys[i],
+            content: text,
+            isCorrect: i === ci,
+            sortOrder: i,
+          })),
+        },
+      },
+    });
+    count++;
+    if (count % 50 === 0) console.log(`  ${count}/${QUESTIONS.length} câu...`);
+  }
+
+  const total = await p.question.count({ where: { subjectId: 'sub-anh', gradeId: 'grade-7' } });
+  const grammar = await p.question.count({ where: { topicId: TOPIC_ID } });
+  console.log(`\n✅ Đã thêm ${count} câu`);
+  console.log(`📌 Grammar - Câu điều kiện: ${grammar} câu`);
+  console.log(`📊 Tổng Tiếng Anh lớp 7: ${total} câu`);
+}
+
+main().catch(console.error).finally(() => p.$disconnect());

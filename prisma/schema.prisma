@@ -1,0 +1,494 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  fullName     String
+  phone        String?
+  avatar       String?
+  role         String   @default("STUDENT") // STUDENT, PARENT, TEACHER, ADMIN
+  status       String   @default("ACTIVE")  // ACTIVE, INACTIVE, BANNED
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  student  Student?
+  teacher  Teacher?
+  parent   Parent?
+
+  createdQuestions Question[] @relation("CreatedQuestions")
+  createdExams     Exam[]     @relation("CreatedExams")
+}
+
+model Student {
+  id          String   @id @default(cuid())
+  userId      String   @unique
+  studentCode String   @unique
+  dateOfBirth String?
+  gradeId     String?
+  schoolName  String?
+  targetScore Float?
+  level       String   @default("MEDIUM") // EASY, MEDIUM, HARD
+  createdAt   DateTime @default(now())
+
+  user     User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  grade    Grade?  @relation(fields: [gradeId], references: [id])
+
+  parents         StudentParent[]
+  attempts        Attempt[]
+  studySessions   StudySession[]
+  bookmarks       Bookmark[]
+  achievements    StudentAchievement[]
+  questionStats   StudentQuestionStat[]
+  studentPoints   StudentPoint[]
+  hostedRooms      GameRoom[]       @relation("HostedRooms")
+  gameParticipants GameParticipant[]
+  gameMessages     GameMessage[]
+  classMembers     ClassMember[]
+  classInvitations ClassInvitation[]
+}
+
+model Teacher {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  createdAt DateTime @default(now())
+
+  user       User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  classrooms Classroom[]
+}
+
+model Parent {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  createdAt DateTime @default(now())
+
+  user           User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  children       StudentParent[]
+  classMonitors  ClassParent[]
+}
+
+model StudentParent {
+  studentId    String
+  parentId     String
+  relationship String  @default("PARENT") // PARENT, GUARDIAN
+  isPrimary    Boolean @default(false)
+
+  student Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  parent  Parent  @relation(fields: [parentId], references: [id], onDelete: Cascade)
+
+  @@id([studentId, parentId])
+}
+
+model Grade {
+  id          String  @id @default(cuid())
+  name        String
+  description String?
+  sortOrder   Int     @default(0)
+
+  students Student[]
+  topics   Topic[]
+  questions Question[]
+  exams    Exam[]
+}
+
+model Subject {
+  id          String  @id @default(cuid())
+  name        String
+  code        String  @unique
+  description String?
+  icon        String?
+  status      String  @default("ACTIVE")
+
+  topics        Topic[]
+  questions     Question[]
+  exams         Exam[]
+  studySessions StudySession[]
+  studentPoints StudentPoint[]
+  attempts      Attempt[]
+}
+
+model Topic {
+  id          String  @id @default(cuid())
+  subjectId   String
+  gradeId     String?
+  parentId    String?
+  name        String
+  description String?
+  sortOrder   Int     @default(0)
+
+  subject   Subject  @relation(fields: [subjectId], references: [id])
+  grade     Grade?   @relation(fields: [gradeId], references: [id])
+  parent    Topic?   @relation("TopicChildren", fields: [parentId], references: [id])
+  children  Topic[]  @relation("TopicChildren")
+
+  questions Question[]
+}
+
+model Question {
+  id           String   @id @default(cuid())
+  subjectId    String
+  gradeId      String?
+  topicId      String?
+  content      String
+  questionType String   @default("MULTIPLE_CHOICE") // MULTIPLE_CHOICE, ESSAY
+  difficulty   String   @default("MEDIUM")           // EASY, MEDIUM, HARD, VERY_HARD
+  explanation  String?
+  createdById  String
+  status       String   @default("ACTIVE")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  subject   Subject   @relation(fields: [subjectId], references: [id])
+  grade     Grade?    @relation(fields: [gradeId], references: [id])
+  topic     Topic?    @relation(fields: [topicId], references: [id])
+  createdBy User      @relation("CreatedQuestions", fields: [createdById], references: [id])
+
+  options          QuestionOption[]
+  examQuestions    ExamQuestion[]
+  answers          Answer[]
+  bookmarks        Bookmark[]
+  questionStats    StudentQuestionStat[]
+  attemptQuestions AttemptQuestion[]
+  gameRoomQuestions GameRoomQuestion[]
+  gameAnswers       GameAnswer[]
+}
+
+model QuestionOption {
+  id         String  @id @default(cuid())
+  questionId String
+  optionKey  String  // A, B, C, D
+  content    String
+  isCorrect  Boolean @default(false)
+  sortOrder  Int     @default(0)
+
+  question Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  answers  Answer[]
+}
+
+model Exam {
+  id             String    @id @default(cuid())
+  title          String
+  description    String?
+  subjectId      String
+  gradeId        String?
+  durationMinutes Int      @default(45)
+  totalQuestions Int       @default(40)
+  maxScore       Float     @default(10)
+  difficulty     String    @default("MEDIUM")
+  examType       String    @default("PRACTICE") // PRACTICE, MOCK_EXAM, OFFICIAL
+  createdById    String
+  status         String    @default("DRAFT")    // DRAFT, PUBLISHED, HIDDEN
+  publishedAt    DateTime?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  subject   Subject @relation(fields: [subjectId], references: [id])
+  grade     Grade?  @relation(fields: [gradeId], references: [id])
+  createdBy User    @relation("CreatedExams", fields: [createdById], references: [id])
+
+  questions   ExamQuestion[]
+  attempts    Attempt[]
+  assignments ClassExamAssignment[]
+}
+
+model ExamQuestion {
+  examId        String
+  questionId    String
+  questionOrder Int    @default(0)
+  points        Float  @default(0.25)
+
+  exam     Exam     @relation(fields: [examId], references: [id], onDelete: Cascade)
+  question Question @relation(fields: [questionId], references: [id])
+
+  @@id([examId, questionId])
+}
+
+model Attempt {
+  id               String    @id @default(cuid())
+  examId           String?
+  studentId        String
+  subjectId        String?
+  practiceMode     String?   // EASY, MEDIUM, HARD
+  durationMinutes  Int       @default(20)
+  startedAt        DateTime  @default(now())
+  submittedAt      DateTime?
+  status           String    @default("IN_PROGRESS") // IN_PROGRESS, SUBMITTED, ABANDONED
+  score            Float?
+  correctCount     Int       @default(0)
+  wrongCount       Int       @default(0)
+  blankCount       Int       @default(0)
+  timeSpentSeconds Int       @default(0)
+
+  exam    Exam?    @relation(fields: [examId], references: [id])
+  student Student  @relation(fields: [studentId], references: [id])
+  subject Subject? @relation(fields: [subjectId], references: [id])
+
+  answers          Answer[]
+  attemptQuestions AttemptQuestion[]
+  studentPoints    StudentPoint[]
+}
+
+model AttemptQuestion {
+  attemptId    String
+  questionId   String
+  displayOrder Int    @default(0)
+
+  attempt  Attempt  @relation(fields: [attemptId], references: [id], onDelete: Cascade)
+  question Question @relation(fields: [questionId], references: [id])
+
+  @@id([attemptId, questionId])
+}
+
+model Answer {
+  id               String    @id @default(cuid())
+  attemptId        String
+  questionId       String
+  selectedOptionId String?
+  isCorrect        Boolean?
+  answeredAt       DateTime?
+  timeSpentSeconds Int       @default(0)
+
+  attempt        Attempt         @relation(fields: [attemptId], references: [id], onDelete: Cascade)
+  question       Question        @relation(fields: [questionId], references: [id])
+  selectedOption QuestionOption? @relation(fields: [selectedOptionId], references: [id])
+}
+
+model StudentQuestionStat {
+  studentId      String
+  questionId     String
+  attemptCount   Int      @default(0)
+  correctCount   Int      @default(0)
+  wrongCount     Int      @default(0)
+  lastAnsweredAt DateTime?
+  lastResult     Boolean?
+
+  student  Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  question Question @relation(fields: [questionId], references: [id])
+
+  @@id([studentId, questionId])
+}
+
+model StudySession {
+  id               String    @id @default(cuid())
+  studentId        String
+  subjectId        String?
+  startedAt        DateTime  @default(now())
+  endedAt          DateTime?
+  durationSeconds  Int       @default(0)
+  activityType     String    @default("EXAM") // EXAM, PRACTICE, REVIEW
+  referenceId      String?
+
+  student Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  subject Subject? @relation(fields: [subjectId], references: [id])
+}
+
+model Bookmark {
+  id        String   @id @default(cuid())
+  studentId String
+  questionId String
+  createdAt DateTime @default(now())
+
+  student  Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  question Question @relation(fields: [questionId], references: [id])
+
+  @@unique([studentId, questionId])
+}
+
+model Achievement {
+  id             String @id @default(cuid())
+  name           String
+  description    String
+  icon           String
+  conditionType  String // EXAM_COUNT, CORRECT_STREAK, SCORE_TARGET, STUDY_DAYS
+  conditionValue Int    @default(1)
+
+  studentAchievements StudentAchievement[]
+}
+
+model StudentAchievement {
+  studentId     String
+  achievementId String
+  earnedAt      DateTime @default(now())
+
+  student     Student     @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  achievement Achievement @relation(fields: [achievementId], references: [id])
+
+  @@id([studentId, achievementId])
+}
+
+// Bảng tích điểm thành tích theo quá trình ôn luyện
+model StudentPoint {
+  id          String   @id @default(cuid())
+  studentId   String
+  subjectId   String
+  attemptId   String
+  points      Int
+  // HARD_PERFECT=5pts(10đ), HARD_GREAT=3pts(>9đ), HARD_GOOD=1pt(>8đ), MEDIUM_GOOD=1pt(>=9đ)
+  reason      String
+  earnedAt    DateTime @default(now())
+
+  student Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  subject Subject @relation(fields: [subjectId], references: [id])
+  attempt Attempt @relation(fields: [attemptId], references: [id])
+}
+
+model GameRoom {
+  id                   String    @id @default(cuid())
+  code                 String    @unique
+  hostId               String
+  gradeId              String?
+  subjectId            String?
+  difficulty           String    @default("MEDIUM")
+  status               String    @default("WAITING")
+  currentQuestionIndex Int       @default(0)
+  questionStartedAt    DateTime?
+  secondsPerQuestion   Int       @default(20)
+  totalQuestions       Int       @default(10)
+  createdAt            DateTime  @default(now())
+  finishedAt           DateTime?
+
+  host         Student           @relation("HostedRooms", fields: [hostId], references: [id])
+  participants GameParticipant[]
+  questions    GameRoomQuestion[]
+  messages     GameMessage[]
+}
+
+model GameParticipant {
+  roomId    String
+  studentId String
+  score     Int      @default(0)
+  joinedAt  DateTime @default(now())
+
+  room    GameRoom   @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  student Student    @relation(fields: [studentId], references: [id])
+  answers GameAnswer[]
+
+  @@id([roomId, studentId])
+}
+
+model GameRoomQuestion {
+  roomId     String
+  questionId String
+  order      Int
+
+  room     GameRoom @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  question Question @relation(fields: [questionId], references: [id])
+
+  @@id([roomId, questionId])
+}
+
+model GameAnswer {
+  roomId           String
+  questionId       String
+  studentId        String
+  selectedOptionId String?
+  isCorrect        Boolean?
+  answeredAt       DateTime @default(now())
+  timeMs           Int      @default(0)
+  pointsEarned     Int      @default(0)
+
+  participant GameParticipant @relation(fields: [roomId, studentId], references: [roomId, studentId])
+  question    Question        @relation(fields: [questionId], references: [id])
+
+  @@id([roomId, questionId, studentId])
+}
+
+model GameMessage {
+  id         String   @id @default(cuid())
+  roomId     String
+  studentId  String
+  senderName String
+  message    String
+  createdAt  DateTime @default(now())
+
+  room    GameRoom @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  student Student  @relation(fields: [studentId], references: [id])
+}
+
+model Classroom {
+  id          String   @id @default(cuid())
+  name        String
+  code        String   @unique
+  teacherId   String?
+  description String?
+  createdAt   DateTime @default(now())
+
+  teacher     Teacher?              @relation(fields: [teacherId], references: [id])
+  members     ClassMember[]
+  invitations ClassInvitation[]
+  assignments ClassExamAssignment[]
+  parents     ClassParent[]
+}
+
+model ClassMember {
+  classId   String
+  studentId String
+  joinedAt  DateTime @default(now())
+
+  classroom Classroom @relation(fields: [classId], references: [id], onDelete: Cascade)
+  student   Student   @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@id([classId, studentId])
+}
+
+model ClassInvitation {
+  id        String   @id @default(cuid())
+  classId   String
+  studentId String
+  status    String   @default("PENDING") // PENDING, ACCEPTED, DECLINED
+  createdAt DateTime @default(now())
+
+  classroom Classroom @relation(fields: [classId], references: [id], onDelete: Cascade)
+  student   Student   @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@unique([classId, studentId])
+}
+
+model ClassExamAssignment {
+  id         String    @id @default(cuid())
+  classId    String
+  examId     String
+  assignedAt DateTime  @default(now())
+  openAt     DateTime?
+  dueDate    DateTime?
+  note       String?
+
+  classroom Classroom @relation(fields: [classId], references: [id], onDelete: Cascade)
+  exam      Exam      @relation(fields: [examId], references: [id], onDelete: Cascade)
+
+  @@unique([classId, examId])
+}
+
+model ClassParent {
+  classId  String
+  parentId String
+  addedAt  DateTime @default(now())
+
+  classroom Classroom @relation(fields: [classId], references: [id], onDelete: Cascade)
+  parent    Parent    @relation(fields: [parentId], references: [id], onDelete: Cascade)
+
+  @@id([classId, parentId])
+}
+
+model ChessRoom {
+  id          String    @id @default(cuid())
+  code        String    @unique
+  hostId      String
+  guestId     String?
+  hostName    String
+  guestName   String?
+  hostColor   String    @default("w")
+  fen         String    @default("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1")
+  moveHistory String    @default("[]")
+  status      String    @default("WAITING")
+  result      String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}

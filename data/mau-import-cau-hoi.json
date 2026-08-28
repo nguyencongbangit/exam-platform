@@ -1,0 +1,378 @@
+[
+  {
+    "___huong_dan___": "XÓA TRƯỜNG NÀY TRƯỚC KHI IMPORT. Xem bên dưới để hiểu cấu trúc.",
+    "___cac_truong___": {
+      "content": "Nội dung câu hỏi (BẮT BUỘC). Hỗ trợ LaTeX: $x^2$, $$\\frac{a}{b}$$",
+      "subjectCode": "Mã môn (BẮT BUỘC): TOAN | VAN | ANH | LY | HOA | SINH | KHTN | LICHSU_DIALY | GDCD | TINHOC | CONGNGHEE | TIENG_VIET | KHOAHOC | DAODUC | HDTN | AMNHAC | MYTHUAT | GDTC",
+      "gradeName": "Tên lớp (không bắt buộc): Lớp 5 | Lớp 6 | Lớp 7 | Lớp 8 | Lớp 9 | Lớp 10 | Lớp 11 | Lớp 12",
+      "topicName": "Tên chủ đề (không bắt buộc) — phải khớp CHÍNH XÁC tên trong hệ thống. Xem danh sách ở cuối file.",
+      "difficulty": "Độ khó (không bắt buộc, mặc định MEDIUM): EASY | MEDIUM | HARD | VERY_HARD",
+      "explanation": "Giải thích đáp án (không bắt buộc)",
+      "options": "Mảng 4 đáp án, đúng 1 isCorrect: true"
+    }
+  },
+
+  {
+    "___vi_du_toan___": "--- TOÁN LỚP 7 ---"
+  },
+  {
+    "content": "Số hữu tỉ nào sau đây có giá trị lớn nhất?",
+    "subjectCode": "TOAN",
+    "gradeName": "Lớp 7",
+    "topicName": "Số hữu tỉ",
+    "difficulty": "EASY",
+    "explanation": "So sánh các phân số bằng cách quy về mẫu chung hoặc đổi ra số thập phân: -1/2 = -0.5; 3/4 = 0.75; -2/3 ≈ -0.67; 1/3 ≈ 0.33. Vậy 3/4 lớn nhất.",
+    "options": [
+      { "key": "A", "content": "-1/2", "isCorrect": false },
+      { "key": "B", "content": "3/4", "isCorrect": true },
+      { "key": "C", "content": "-2/3", "isCorrect": false },
+      { "key": "D", "content": "1/3", "isCorrect": false }
+    ]
+  },
+  {
+    "content": "Tỉ lệ thức $\\frac{a}{b} = \\frac{c}{d}$ thì tính chất nào sau đây đúng?",
+    "subjectCode": "TOAN",
+    "gradeName": "Lớp 7",
+    "topicName": "Tỉ lệ thức & Dãy tỉ số bằng nhau",
+    "difficulty": "MEDIUM",
+    "explanation": "Tính chất cơ bản của tỉ lệ thức: nếu a/b = c/d thì a·d = b·c (tích ngoại tỉ bằng tích trung tỉ).",
+    "options": [
+      { "key": "A", "content": "a + d = b + c", "isCorrect": false },
+      { "key": "B", "content": "a · d = b · c", "isCorrect": true },
+      { "key": "C", "content": "a - d = b - c", "isCorrect": false },
+      { "key": "D", "content": "a · b = c · d", "isCorrect": false }
+    ]
+  },
+  {
+    "content": "Tam giác ABC và tam giác DEF bằng nhau. Biết AB = 5 cm, BC = 7 cm, AC = 6 cm, DE = 5 cm. Cạnh EF bằng bao nhiêu?",
+    "subjectCode": "TOAN",
+    "gradeName": "Lớp 7",
+    "topicName": "Tam giác bằng nhau & Tam giác đặc biệt",
+    "difficulty": "MEDIUM",
+    "explanation": "Tam giác ABC = Tam giác DEF nên các cạnh tương ứng bằng nhau: AB = DE = 5 cm, BC = EF = 7 cm, AC = DF = 6 cm.",
+    "options": [
+      { "key": "A", "content": "5 cm", "isCorrect": false },
+      { "key": "B", "content": "6 cm", "isCorrect": false },
+      { "key": "C", "content": "7 cm", "isCorrect": true },
+      { "key": "D", "content": "8 cm", "isCorrect": false }
+    ]
+  },
+  {
+    "content": "Đơn thức nào sau đây đồng dạng với đơn thức $3x^2y$?",
+    "subjectCode": "TOAN",
+    "gradeName": "Lớp 7",
+    "topicName": "Biểu thức đại số & Đa thức một biến",
+    "difficulty": "EASY",
+    "explanation": "Hai đơn thức đồng dạng khi có cùng phần biến. Phần biến của 3x²y là x²y. Chỉ -5x²y có cùng phần biến x²y.",
+    "options": [
+      { "key": "A", "content": "$5xy^2$", "isCorrect": false },
+      { "key": "B", "content": "$-5x^2y$", "isCorrect": true },
+      { "key": "C", "content": "$3x^2$", "isCorrect": false },
+      { "key": "D", "content": "$2xy$", "isCorrect": false }
+    ]
+  },
+  {
+    "content": "Trong thống kê, số trung bình cộng của dãy số: 4, 7, 3, 8, 3 là bao nhiêu?",
+    "subjectCode": "TOAN",
+    "gradeName": "Lớp 7",
+    "topicName": "Thống kê & Xác suất",
+    "difficulty": "EASY",
+    "explanation": "Số trung bình cộng = (4 + 7 + 3 + 8 + 3) / 5 = 25 / 5 = 5.",
+    "options": [
+      { "key": "A", "content": "4", "isCorrect": false },
+      { "key": "B", "content": "5", "isCorrect": true },
+      { "key": "C", "content": "6", "isCorrect": false },
+      { "key": "D", "content": "7", "isCorrect": false }
+    ]
+  },
+
+  {
+    "___vi_du_van___": "--- NGỮ VĂN LỚP 7 ---"
+  },
+  {
+    "content": "Biện pháp tu từ nào được sử dụng trong câu: \"Mặt trời xuống biển như hòn lửa\"?",
+    "subjectCode": "VAN",
+    "gradeName": "Lớp 7",
+    "topicName": "Tiếng Việt - Biện pháp tu từ",
+    "difficulty": "EASY",
+    "explanation": "Câu thơ dùng so sánh: mặt trời được so sánh với hòn lửa qua từ 'như'. Đây là so sánh ngang bằng.",
+    "options": [
+      { "key": "A", "content": "Nhân hóa", "isCorrect": false },
+      { "key": "B", "content": "So sánh", "isCorrect": true },
+      { "key": "C", "content": "Ẩn dụ", "isCorrect": false },
+      { "key": "D", "content": "Hoán dụ", "isCorrect": false }
+    ]
+  },
+  {
+    "content": "Văn bản biểu cảm có mục đích chính là gì?",
+    "subjectCode": "VAN",
+    "gradeName": "Lớp 7",
+    "topicName": "Tập làm văn - Biểu cảm",
+    "difficulty": "EASY",
+    "explanation": "Văn biểu cảm nhằm bộc lộ tình cảm, cảm xúc của người viết đối với con người, sự vật, hiện tượng trong cuộc sống.",
+    "options": [
+      { "key": "A", "content": "Kể lại sự việc theo trình tự thời gian", "isCorrect": false },
+      { "key": "B", "content": "Miêu tả chi tiết sự vật, con người", "isCorrect": false },
+      { "key": "C", "content": "Bộc lộ tình cảm, cảm xúc của người viết", "isCorrect": true },
+      { "key": "D", "content": "Cung cấp thông tin, số liệu chính xác", "isCorrect": false }
+    ]
+  },
+  {
+    "content": "Từ nào sau đây là từ láy?",
+    "subjectCode": "VAN",
+    "gradeName": "Lớp 7",
+    "topicName": "Tiếng Việt - Từ vựng",
+    "difficulty": "EASY",
+    "explanation": "Từ láy là từ có sự lặp lại âm thanh giữa các tiếng. 'Long lanh' có hai tiếng lặp phụ âm đầu 'l' → là từ láy. 'Bà con' và 'nhà cửa' là từ ghép; 'học sinh' cũng là từ ghép.",
+    "options": [
+      { "key": "A", "content": "Bà con", "isCorrect": false },
+      { "key": "B", "content": "Long lanh", "isCorrect": true },
+      { "key": "C", "content": "Nhà cửa", "isCorrect": false },
+      { "key": "D", "content": "Học sinh", "isCorrect": false }
+    ]
+  },
+
+  {
+    "___vi_du_anh___": "--- TIẾNG ANH LỚP 7 ---"
+  },
+  {
+    "content": "Choose the correct verb form: \"She _______ her hobby since she was 5 years old.\"",
+    "subjectCode": "ANH",
+    "gradeName": "Lớp 7",
+    "topicName": "Unit 1 - My Hobbies",
+    "difficulty": "MEDIUM",
+    "explanation": "We use Present Perfect with 'since' to describe an action that started in the past and continues to the present. 'has had' is the correct form for third person singular.",
+    "options": [
+      { "key": "A", "content": "has", "isCorrect": false },
+      { "key": "B", "content": "had", "isCorrect": false },
+      { "key": "C", "content": "has had", "isCorrect": true },
+      { "key": "D", "content": "have had", "isCorrect": false }
+    ]
+  },
+  {
+    "content": "Choose the correct passive voice: \"People speak English all over the world.\"",
+    "subjectCode": "ANH",
+    "gradeName": "Lớp 7",
+    "topicName": "Ngữ pháp - Câu bị động",
+    "difficulty": "MEDIUM",
+    "explanation": "Passive voice formula: S + is/are/am + V3. Subject becomes 'English', verb 'speak' → 'spoken'. 'English is spoken all over the world.'",
+    "options": [
+      { "key": "A", "content": "English speaks all over the world.", "isCorrect": false },
+      { "key": "B", "content": "English is spoken all over the world.", "isCorrect": true },
+      { "key": "C", "content": "English was spoken all over the world.", "isCorrect": false },
+      { "key": "D", "content": "English are spoken all over the world.", "isCorrect": false }
+    ]
+  },
+
+  {
+    "___vi_du_sinh___": "--- SINH HỌC LỚP 7 ---"
+  },
+  {
+    "content": "Đơn vị cơ bản cấu tạo nên cơ thể sinh vật là gì?",
+    "subjectCode": "SINH",
+    "gradeName": "Lớp 7",
+    "topicName": "Tế bào - Đơn vị cơ sở của sự sống",
+    "difficulty": "EASY",
+    "explanation": "Tế bào là đơn vị cơ bản của sự sống. Mọi sinh vật đều được cấu tạo từ một hoặc nhiều tế bào.",
+    "options": [
+      { "key": "A", "content": "Mô", "isCorrect": false },
+      { "key": "B", "content": "Tế bào", "isCorrect": true },
+      { "key": "C", "content": "Cơ quan", "isCorrect": false },
+      { "key": "D", "content": "Hệ cơ quan", "isCorrect": false }
+    ]
+  },
+  {
+    "content": "Quá trình trao đổi chất ở sinh vật gồm mấy giai đoạn chính?",
+    "subjectCode": "SINH",
+    "gradeName": "Lớp 7",
+    "topicName": "Trao đổi chất & Chuyển hóa năng lượng",
+    "difficulty": "MEDIUM",
+    "explanation": "Trao đổi chất gồm 2 giai đoạn: đồng hóa (tổng hợp chất hữu cơ, tích lũy năng lượng) và dị hóa (phân giải chất hữu cơ, giải phóng năng lượng).",
+    "options": [
+      { "key": "A", "content": "1 giai đoạn", "isCorrect": false },
+      { "key": "B", "content": "2 giai đoạn", "isCorrect": true },
+      { "key": "C", "content": "3 giai đoạn", "isCorrect": false },
+      { "key": "D", "content": "4 giai đoạn", "isCorrect": false }
+    ]
+  },
+
+  {
+    "___vi_du_lichsu___": "--- LỊCH SỬ & ĐỊA LÍ LỚP 7 ---"
+  },
+  {
+    "content": "Nhà Lý dời đô từ Hoa Lư về Thăng Long vào năm nào?",
+    "subjectCode": "LICHSU_DIALY",
+    "gradeName": "Lớp 7",
+    "topicName": "Lịch sử - Đại Việt thời Lý - Trần - Hồ",
+    "difficulty": "EASY",
+    "explanation": "Năm 1010, vua Lý Công Uẩn (Lý Thái Tổ) dời đô từ Hoa Lư (Ninh Bình) ra Đại La, đổi tên thành Thăng Long (nay là Hà Nội).",
+    "options": [
+      { "key": "A", "content": "968", "isCorrect": false },
+      { "key": "B", "content": "1009", "isCorrect": false },
+      { "key": "C", "content": "1010", "isCorrect": true },
+      { "key": "D", "content": "1054", "isCorrect": false }
+    ]
+  },
+  {
+    "content": "Châu Phi có đặc điểm địa hình nổi bật là gì?",
+    "subjectCode": "LICHSU_DIALY",
+    "gradeName": "Lớp 7",
+    "topicName": "Địa lí - Châu Phi",
+    "difficulty": "MEDIUM",
+    "explanation": "Châu Phi có địa hình chủ yếu là các cao nguyên và bồn địa. Địa hình tương đối bằng phẳng, không có nhiều dãy núi cao như châu Á hay châu Âu.",
+    "options": [
+      { "key": "A", "content": "Nhiều dãy núi cao trên 5000m", "isCorrect": false },
+      { "key": "B", "content": "Chủ yếu là đồng bằng thấp", "isCorrect": false },
+      { "key": "C", "content": "Chủ yếu là cao nguyên và bồn địa", "isCorrect": true },
+      { "key": "D", "content": "Nhiều bán đảo và quần đảo", "isCorrect": false }
+    ]
+  },
+
+  {
+    "___vi_du_gdcd___": "--- GDCD LỚP 7 ---"
+  },
+  {
+    "content": "Giữ chữ tín có nghĩa là gì?",
+    "subjectCode": "GDCD",
+    "gradeName": "Lớp 7",
+    "topicName": "Giữ chữ tín",
+    "difficulty": "EASY",
+    "explanation": "Giữ chữ tín là coi trọng lòng tin của mọi người đối với mình, biết thực hiện lời hứa và cam kết trong cuộc sống.",
+    "options": [
+      { "key": "A", "content": "Luôn nói thật trong mọi tình huống", "isCorrect": false },
+      { "key": "B", "content": "Thực hiện đúng lời hứa và cam kết với người khác", "isCorrect": true },
+      { "key": "C", "content": "Không bao giờ từ chối yêu cầu của người khác", "isCorrect": false },
+      { "key": "D", "content": "Tin tưởng tất cả mọi người xung quanh", "isCorrect": false }
+    ]
+  },
+
+  {
+    "___vi_du_tinhoc___": "--- TIN HỌC LỚP 7 ---"
+  },
+  {
+    "content": "Trong Excel, công thức nào dùng để tính tổng các ô từ A1 đến A5?",
+    "subjectCode": "TINHOC",
+    "gradeName": "Lớp 7",
+    "topicName": "Phần mềm bảng tính (Excel)",
+    "difficulty": "EASY",
+    "explanation": "Hàm SUM dùng để tính tổng. Cú pháp: =SUM(A1:A5) sẽ cộng tất cả giá trị từ ô A1 đến A5.",
+    "options": [
+      { "key": "A", "content": "=TOTAL(A1:A5)", "isCorrect": false },
+      { "key": "B", "content": "=ADD(A1,A5)", "isCorrect": false },
+      { "key": "C", "content": "=SUM(A1:A5)", "isCorrect": true },
+      { "key": "D", "content": "=COUNT(A1:A5)", "isCorrect": false }
+    ]
+  },
+
+  {
+    "___danh_sach_chu_de___": "DANH SÁCH TÊN CHỦ ĐỀ CHÍNH XÁC - LỚP 7",
+    "___toan___": [
+      "Số hữu tỉ",
+      "Số thực",
+      "Tỉ lệ thức & Dãy tỉ số bằng nhau",
+      "Góc & Đường thẳng song song",
+      "Tam giác bằng nhau & Tam giác đặc biệt",
+      "Các đường đồng quy trong tam giác",
+      "Hình khối thực tế",
+      "Biểu thức đại số & Đa thức một biến",
+      "Thống kê & Xác suất",
+      "Ôn tập Học kỳ 1",
+      "Ôn tập Học kỳ 2"
+    ],
+    "___van___": [
+      "Thơ (Đọc hiểu)",
+      "Truyện ngắn & Tiểu thuyết",
+      "Truyện dân gian & Trung đại",
+      "Tùy bút & Tản văn",
+      "Văn nghị luận",
+      "Văn bản thông tin",
+      "Tiếng Việt - Từ vựng",
+      "Tiếng Việt - Ngữ pháp câu",
+      "Tiếng Việt - Biện pháp tu từ",
+      "Tập làm văn - Biểu cảm",
+      "Tập làm văn - Nghị luận",
+      "Tập làm văn - Thuyết minh"
+    ],
+    "___anh___": [
+      "Unit 1 - My Hobbies",
+      "Unit 2 - Health",
+      "Unit 3 - Community Service",
+      "Unit 4 - Music and Arts",
+      "Unit 5 - Vietnamese Food and Drink",
+      "Unit 6 - The First University",
+      "Unit 7 - Traffic",
+      "Unit 8 - Films",
+      "Unit 9 - Festivals",
+      "Unit 10 - Sources of Energy",
+      "Unit 11 - Travelling in the Future",
+      "Unit 12 - An Overcrowded World",
+      "Ngữ pháp - Thì hiện tại",
+      "Ngữ pháp - Thì quá khứ",
+      "Ngữ pháp - Câu điều kiện",
+      "Ngữ pháp - Câu bị động",
+      "Ngữ pháp - Thì hoàn thành"
+    ],
+    "___vat_ly___": [
+      "Quang học",
+      "Âm học",
+      "Điện học"
+    ],
+    "___hoa___": [
+      "Nguyên tử - Nguyên tố hóa học",
+      "Phân tử - Đơn chất và Hợp chất",
+      "Hóa trị - Công thức hóa học",
+      "Phản ứng hóa học",
+      "Acid - Base - pH"
+    ],
+    "___sinh___": [
+      "Tế bào - Đơn vị cơ sở của sự sống",
+      "Từ tế bào đến cơ thể",
+      "Đa dạng thế giới sống & Phân loại sinh vật",
+      "Nấm & Thực vật",
+      "Đa dạng động vật",
+      "Trao đổi chất & Chuyển hóa năng lượng",
+      "Cảm ứng ở sinh vật",
+      "Sinh trưởng & Phát triển ở sinh vật",
+      "Sinh sản ở sinh vật",
+      "Hệ sinh thái & Sinh quyển"
+    ],
+    "___lichsu_dialy___": [
+      "Lịch sử - Tây Âu thời trung đại",
+      "Lịch sử - Trung Quốc thời phong kiến",
+      "Lịch sử - Đông Nam Á thời phong kiến",
+      "Lịch sử - Đại Việt thời Ngô - Đinh - Tiền Lê",
+      "Lịch sử - Đại Việt thời Lý - Trần - Hồ",
+      "Lịch sử - Đại Việt thời Lê sơ",
+      "Lịch sử - Vùng đất phía Nam thế kỷ X-XVI",
+      "Địa lí - Châu Phi",
+      "Địa lí - Châu Mỹ",
+      "Địa lí - Châu Đại Dương & Nam Cực",
+      "Địa lí - Biển và Đại dương thế giới",
+      "Địa lí - Môi trường & Phát triển bền vững"
+    ],
+    "___gdcd___": [
+      "Tự hào về truyền thống quê hương",
+      "Quan tâm, cảm thông và chia sẻ",
+      "Học tập tự giác, tích cực",
+      "Giữ chữ tín",
+      "Bảo tồn di sản văn hóa",
+      "Ứng phó với tâm lý căng thẳng",
+      "Phòng, chống tệ nạn xã hội",
+      "Quyền và nghĩa vụ công dân trong gia đình"
+    ],
+    "___tinhoc___": [
+      "Thông tin và xã hội",
+      "Mạng máy tính và Internet",
+      "Đạo đức, pháp luật & văn hóa ICT",
+      "Giải quyết vấn đề với máy tính",
+      "Phần mềm trình chiếu (PowerPoint)",
+      "Phần mềm bảng tính (Excel)"
+    ],
+    "___congnghee___": [
+      "Trồng trọt & Lâm nghiệp",
+      "Chăn nuôi",
+      "Thủy sản",
+      "An toàn lao động trong nông nghiệp"
+    ]
+  }
+]

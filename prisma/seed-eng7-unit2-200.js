@@ -1,0 +1,243 @@
+// 200 câu hỏi Unit 2 - Health - Tiếng Anh lớp 7
+const { PrismaClient } = require('@prisma/client');
+const p = new PrismaClient();
+
+const TOPIC_ID = 'cmt322xjh0003eq3rx7vmrnj9'; // Unit 2 - Health
+
+const QUESTIONS = [
+  // ── TỪ VỰNG SỨC KHOẺ (50 câu) ──
+  { d: 'EASY', q: 'I have a ___. My head hurts very much.', opts: ['A. headache', 'B. toothache', 'C. stomachache', 'D. backache'], a: 'A' },
+  { d: 'EASY', q: 'She has a ___. Her tooth really hurts.', opts: ['A. toothache', 'B. headache', 'C. earache', 'D. sore throat'], a: 'A' },
+  { d: 'EASY', q: 'He has a ___. His stomach hurts after eating bad food.', opts: ['A. stomachache', 'B. headache', 'C. backache', 'D. toothache'], a: 'A' },
+  { d: 'EASY', q: 'She has a high ___. The thermometer shows 39°C.', opts: ['A. fever', 'B. cough', 'C. rash', 'D. bruise'], a: 'A' },
+  { d: 'EASY', q: 'He has a ___ and keeps coughing all day.', opts: ['A. cold', 'B. fever', 'C. fracture', 'D. cut'], a: 'A' },
+  { d: 'EASY', q: 'A ___ is a person trained to treat sick people.', opts: ['A. doctor', 'B. teacher', 'C. driver', 'D. chef'], a: 'A' },
+  { d: 'EASY', q: 'You should take ___ when you have a headache.', opts: ['A. medicine', 'B. food', 'C. exercise', 'D. holiday'], a: 'A' },
+  { d: 'EASY', q: 'Eating too much fast food can make you ___.', opts: ['A. overweight', 'B. energetic', 'C. fit', 'D. strong'], a: 'A' },
+  { d: 'EASY', q: 'Regular ___ keeps your heart healthy and strong.', opts: ['A. exercise', 'B. sleeping', 'C. reading', 'D. eating junk food'], a: 'A' },
+  { d: 'EASY', q: 'You should ___ at least 8 glasses of water every day.', opts: ['A. drink', 'B. eat', 'C. cook', 'D. buy'], a: 'A' },
+  { d: 'EASY', q: 'Fruits and vegetables are ___ for your health.', opts: ['A. good', 'B. bad', 'C. harmful', 'D. dangerous'], a: 'A' },
+  { d: 'EASY', q: 'She went to the ___ because her tooth hurt.', opts: ['A. dentist', 'B. librarian', 'C. teacher', 'D. mechanic'], a: 'A' },
+  { d: 'EASY', q: 'A ___ is a place where sick people are treated.', opts: ['A. hospital', 'B. school', 'C. market', 'D. cinema'], a: 'A' },
+  { d: 'EASY', q: 'He has a sore ___. It hurts when he swallows.', opts: ['A. throat', 'B. eye', 'C. hand', 'D. foot'], a: 'A' },
+  { d: 'EASY', q: 'She has a ___ on her arm – red spots that itch a lot.', opts: ['A. rash', 'B. bruise', 'C. fracture', 'D. blister'], a: 'A' },
+  { d: 'EASY', q: 'The ___ gave him an injection to prevent flu.', opts: ['A. nurse', 'B. librarian', 'C. coach', 'D. pilot'], a: 'A' },
+  { d: 'EASY', q: 'He ___ his leg playing football and had to go to hospital.', opts: ['A. broke', 'B. cooked', 'C. painted', 'D. lost'], a: 'A' },
+  { d: 'EASY', q: 'A ___ diet includes vegetables, fruit, protein, and carbohydrates.', opts: ['A. balanced', 'B. junk', 'C. unhealthy', 'D. sweet'], a: 'A' },
+  { d: 'EASY', q: 'Sleeping enough helps your body ___ after a long day.', opts: ['A. recover', 'B. weaken', 'C. gain weight', 'D. lose energy'], a: 'A' },
+  { d: 'EASY', q: 'You ___ smoke – it is very harmful to your lungs.', opts: ['A. shouldn\'t', 'B. should', 'C. must', 'D. can'], a: 'A' },
+  { d: 'MEDIUM', q: 'The doctor told him to take a ___ three times a day.', opts: ['A. tablet', 'B. bottle', 'C. book', 'D. bag'], a: 'A' },
+  { d: 'MEDIUM', q: 'She felt ___ – everything was spinning around her.', opts: ['A. dizzy', 'B. energetic', 'C. excited', 'D. happy'], a: 'A' },
+  { d: 'MEDIUM', q: 'He is ___ to peanuts – eating them causes a severe allergic reaction.', opts: ['A. allergic', 'B. addicted', 'C. attracted', 'D. attached'], a: 'A' },
+  { d: 'MEDIUM', q: 'A ___ is a medical professional who performs operations.', opts: ['A. surgeon', 'B. dentist', 'C. pharmacist', 'D. optician'], a: 'A' },
+  { d: 'MEDIUM', q: 'The ___ at the pharmacy gave her the prescribed medicine.', opts: ['A. pharmacist', 'B. surgeon', 'C. librarian', 'D. coach'], a: 'A' },
+  { d: 'MEDIUM', q: '"Symptoms" of a cold include runny nose, ___, and sore throat.', opts: ['A. sneezing', 'B. dancing', 'C. laughing', 'D. running'], a: 'A' },
+  { d: 'MEDIUM', q: 'He ___ from insomnia – he can\'t fall asleep at night.', opts: ['A. suffers', 'B. recovers', 'C. enjoys', 'D. benefits'], a: 'A' },
+  { d: 'MEDIUM', q: 'A ___ check-up helps detect health problems early.', opts: ['A. regular', 'B. rare', 'C. boring', 'D. dangerous'], a: 'A' },
+  { d: 'MEDIUM', q: 'She was ___ from the hospital after five days of treatment.', opts: ['A. discharged', 'B. arrested', 'C. selected', 'D. invited'], a: 'A' },
+  { d: 'MEDIUM', q: 'Good ___ hygiene means brushing your teeth twice a day.', opts: ['A. dental', 'B. mental', 'C. physical', 'D. social'], a: 'A' },
+  { d: 'MEDIUM', q: 'A ___ is a blue or black mark on skin caused by a hit or fall.', opts: ['A. bruise', 'B. rash', 'C. scar', 'D. fracture'], a: 'A' },
+  { d: 'MEDIUM', q: 'He has a ___ in his leg – the bone is broken.', opts: ['A. fracture', 'B. rash', 'C. blister', 'D. bruise'], a: 'A' },
+  { d: 'MEDIUM', q: 'She went on a ___ to lose weight – she ate only vegetables and fruits.', opts: ['A. diet', 'B. trip', 'C. holiday', 'D. strike'], a: 'A' },
+  { d: 'MEDIUM', q: '"Obese" means ___.',  opts: ['A. very overweight in a way that is dangerous to health', 'B. slightly overweight', 'C. very thin and underweight', 'D. fit and athletic'], a: 'A' },
+  { d: 'MEDIUM', q: 'Vitamin C helps boost your ___ system to fight infections.', opts: ['A. immune', 'B. nervous', 'C. digestive', 'D. skeletal'], a: 'A' },
+  { d: 'MEDIUM', q: 'She has ___ – her blood sugar level is too high.', opts: ['A. diabetes', 'B. flu', 'C. a cold', 'D. a rash'], a: 'A' },
+  { d: 'MEDIUM', q: 'A ___ is a substance that prevents a disease by training the immune system.', opts: ['A. vaccine', 'B. bandage', 'C. tablet', 'D. thermometer'], a: 'A' },
+  { d: 'MEDIUM', q: 'The doctor ___ the patient to rest for one week.', opts: ['A. advised', 'B. forced', 'C. prevented', 'D. allowed'], a: 'A' },
+  { d: 'HARD', q: '"Sedentary lifestyle" means a lifestyle with ___.',  opts: ['A. very little physical activity – sitting most of the time', 'B. intense daily exercise', 'C. a healthy and balanced routine', 'D. lots of outdoor activities'], a: 'A' },
+  { d: 'HARD', q: '"Cardiovascular" relates to the ___ system.', opts: ['A. heart and blood vessels', 'B. digestive', 'C. skeletal', 'D. nervous'], a: 'A' },
+  { d: 'HARD', q: 'A "chronic" illness is one that ___.',  opts: ['A. lasts for a long time or keeps coming back', 'B. goes away after one week', 'C. only affects children', 'D. is never serious'], a: 'A' },
+  { d: 'HARD', q: '"Hypertension" is the medical term for ___.',  opts: ['A. high blood pressure', 'B. low blood pressure', 'C. high blood sugar', 'D. low blood sugar'], a: 'A' },
+  { d: 'HARD', q: 'Which word describes the ability of the body to resist disease?', opts: ['A. immunity', 'B. flexibility', 'C. stamina', 'D. agility'], a: 'A' },
+  { d: 'HARD', q: '"Malnutrition" means ___.',  opts: ['A. lack of proper nutrition leading to health problems', 'B. eating too much food', 'C. getting enough vitamins', 'D. having a balanced diet'], a: 'A' },
+  { d: 'HARD', q: 'Aerobic exercise such as jogging improves ___.',  opts: ['A. cardiovascular fitness and lung capacity', 'B. vocabulary skills', 'C. reading speed', 'D. cooking ability'], a: 'A' },
+  { d: 'HARD', q: '"Preventive healthcare" focuses on ___.',  opts: ['A. avoiding illness before it occurs', 'B. treating illness after it occurs', 'C. performing surgery', 'D. prescribing medicine'], a: 'A' },
+  { d: 'HARD', q: 'The term "mental health" refers to ___.',  opts: ['A. emotional and psychological well-being', 'B. physical strength', 'C. dental health', 'D. weight management'], a: 'A' },
+  { d: 'HARD', q: 'Which vitamin is mainly found in citrus fruits and helps prevent scurvy?', opts: ['A. Vitamin C', 'B. Vitamin D', 'C. Vitamin A', 'D. Vitamin B12'], a: 'A' },
+  { d: 'HARD', q: '"Metabolism" refers to ___.',  opts: ['A. chemical processes in the body that convert food into energy', 'B. the process of sleeping', 'C. the process of breathing', 'D. the process of thinking'], a: 'A' },
+  { d: 'HARD', q: 'What does "BMI" measure?', opts: ['A. Body Mass Index – a measure of body fat based on height and weight', 'B. Blood Medical Index', 'C. Basic Muscle Intensity', 'D. Body Movement Indicator'], a: 'A' },
+
+  // ── SHOULD / SHOULDN'T (20 câu) ──
+  { d: 'EASY', q: 'You ___ eat a lot of vegetables to stay healthy.', opts: ['A. should', 'B. shouldn\'t', 'C. mustn\'t', 'D. can\'t'], a: 'A' },
+  { d: 'EASY', q: 'You ___ stay up late – it is bad for your health.', opts: ['A. shouldn\'t', 'B. should', 'C. must', 'D. can'], a: 'A' },
+  { d: 'EASY', q: 'She has a toothache. She ___ see a dentist.', opts: ['A. should', 'B. shouldn\'t', 'C. can\'t', 'D. won\'t'], a: 'A' },
+  { d: 'EASY', q: 'He has a fever. He ___ go to school today.', opts: ['A. shouldn\'t', 'B. should', 'C. must', 'D. can'], a: 'A' },
+  { d: 'EASY', q: 'You ___ drink plenty of water every day.', opts: ['A. should', 'B. shouldn\'t', 'C. can\'t', 'D. mustn\'t'], a: 'A' },
+  { d: 'EASY', q: 'She ___ eat junk food every day – it is unhealthy.', opts: ['A. shouldn\'t', 'B. should', 'C. must', 'D. can'], a: 'A' },
+  { d: 'EASY', q: 'He is tired. He ___ rest for a while.', opts: ['A. should', 'B. shouldn\'t', 'C. can\'t', 'D. won\'t'], a: 'A' },
+  { d: 'EASY', q: 'You ___ wash your hands before eating.', opts: ['A. should', 'B. shouldn\'t', 'C. can\'t', 'D. mustn\'t'], a: 'A' },
+  { d: 'MEDIUM', q: 'She has a stomachache. What should she do?', opts: ['A. She should rest and drink warm water.', 'B. She should eat spicy food.', 'C. She should exercise hard.', 'D. She should drink soda.'], a: 'A' },
+  { d: 'MEDIUM', q: 'Choose the correct advice for someone with a cold:', opts: ['A. You should rest, drink warm fluids, and see a doctor if it gets worse.', 'B. You should go swimming immediately.', 'C. You should eat only spicy food.', 'D. You should exercise vigorously.'], a: 'A' },
+  { d: 'MEDIUM', q: '"Should" is used to give ___.',  opts: ['A. advice or a recommendation', 'B. a strict order', 'C. permission', 'D. ability'], a: 'A' },
+  { d: 'MEDIUM', q: 'Which sentence gives the BEST health advice?', opts: ['A. You should exercise at least 30 minutes a day.', 'B. You shouldn\'t sleep more than 4 hours.', 'C. You should eat only fast food.', 'D. You shouldn\'t drink any water.'], a: 'A' },
+  { d: 'MEDIUM', q: 'He wants to lose weight. What ___ he do?', opts: ['A. should', 'B. shouldn\'t', 'C. can\'t', 'D. won\'t'], a: 'A' },
+  { d: 'MEDIUM', q: 'You have a headache. You ___ stare at screens for too long.', opts: ['A. shouldn\'t', 'B. should', 'C. must', 'D. can'], a: 'A' },
+  { d: 'MEDIUM', q: 'The doctor said: "You ___ (quit) smoking immediately."', opts: ['A. should quit', 'B. should to quit', 'C. should quitting', 'D. should quitted'], a: 'A' },
+  { d: 'HARD', q: 'What is the difference between "should" and "must"?', opts: ['A. "Should" is a recommendation; "must" is a strong obligation', 'B. They are exactly the same', 'C. "Should" is stronger than "must"', 'D. "Must" is only for positive sentences'], a: 'A' },
+  { d: 'HARD', q: 'Choose the BEST health advice using "should":',  opts: ['A. You should eat a variety of nutrient-rich foods and avoid processed snacks.', 'B. You should eat candy three times a day.', 'C. You should avoid all vegetables.', 'D. You should never sleep more than 4 hours.'], a: 'A' },
+  { d: 'HARD', q: '"You shouldn\'t take medicine without a doctor\'s prescription." This means ___.',  opts: ['A. It is not advisable to self-medicate.', 'B. You must always take medicine.', 'C. Doctors never prescribe medicine.', 'D. Medicine is always harmful.'], a: 'A' },
+  { d: 'HARD', q: 'Rewrite: "I advise you to sleep earlier." → "You ___ sleep earlier."', opts: ['A. should', 'B. must', 'C. can', 'D. will'], a: 'A' },
+  { d: 'HARD', q: 'Which response uses "should" most APPROPRIATELY?', opts: ['A. "You have a backache, so you should see a physiotherapist and avoid heavy lifting."', 'B. "You should eat everything on the menu."', 'C. "You should never visit a doctor."', 'D. "You should stay sick at home forever."'], a: 'A' },
+
+  // ── ĐỌC HIỂU / NGỮ CẢNH (30 câu) ──
+  { d: 'EASY', q: '"He goes to the gym three times a week." This shows he has a ___ lifestyle.', opts: ['A. healthy and active', 'B. lazy', 'C. dangerous', 'D. boring'], a: 'A' },
+  { d: 'EASY', q: '"She eats vegetables, fruits, and lean protein daily." Her diet is ___.',  opts: ['A. balanced and nutritious', 'B. unhealthy', 'C. dangerous', 'D. very expensive'], a: 'A' },
+  { d: 'EASY', q: 'Read: "Tom hasn\'t slept well for a week. He feels exhausted." "Exhausted" means ___.',  opts: ['A. extremely tired', 'B. very happy', 'C. fully energetic', 'D. slightly bored'], a: 'A' },
+  { d: 'EASY', q: '"She sneezed and had a runny nose all day." She probably has a ___.',  opts: ['A. cold', 'B. fracture', 'C. rash', 'D. bruise'], a: 'A' },
+  { d: 'EASY', q: '"He went to the clinic and the doctor gave him antibiotics." Antibiotics are used to treat ___.',  opts: ['A. bacterial infections', 'B. broken bones', 'C. eye problems', 'D. dental pain'], a: 'A' },
+  { d: 'MEDIUM', q: 'Read: "Anna runs every morning. She eats a balanced diet and sleeps 8 hours a night." What word BEST describes Anna?', opts: ['A. healthy', 'B. sick', 'C. overweight', 'D. lazy'], a: 'A' },
+  { d: 'MEDIUM', q: '"The doctor prescribed rest, lots of fluids, and paracetamol." What is paracetamol?', opts: ['A. A painkiller and fever reducer', 'B. A type of food', 'C. A sport drink', 'D. A vitamin supplement'], a: 'A' },
+  { d: 'MEDIUM', q: 'Read: "He skips breakfast, eats fast food for lunch, and snacks on chips all evening." His eating habit is ___.',  opts: ['A. very unhealthy', 'B. very balanced', 'C. perfect for health', 'D. highly recommended'], a: 'A' },
+  { d: 'MEDIUM', q: '"She lost 10 kilograms by changing her diet and exercising." The main cause was ___.',  opts: ['A. diet change and exercise', 'B. stress', 'C. sleeping more', 'D. taking medicine'], a: 'A' },
+  { d: 'MEDIUM', q: '"Regular hand-washing can prevent many illnesses." What does "prevent" mean?', opts: ['A. stop from happening', 'B. cure after it happens', 'C. ignore', 'D. cause'], a: 'A' },
+  { d: 'MEDIUM', q: 'Read: "He has been coughing for two weeks. The doctor found he has bronchitis." "Bronchitis" affects the ___.',  opts: ['A. airways / lungs', 'B. stomach', 'C. skin', 'D. eyes'], a: 'A' },
+  { d: 'MEDIUM', q: '"She always feels tired no matter how much she sleeps." This might indicate ___.',  opts: ['A. an underlying health problem', 'B. she is very fit', 'C. she exercises too much', 'D. she eats too much'], a: 'A' },
+  { d: 'MEDIUM', q: 'Read the dialogue: "How are you feeling?" "Not well. I have a high fever and a sore throat." What should the person do?', opts: ['A. See a doctor and rest at home.', 'B. Go swimming immediately.', 'C. Eat spicy food.', 'D. Exercise vigorously.'], a: 'A' },
+  { d: 'MEDIUM', q: '"Stress can weaken the immune system." This means stressed people are more likely to ___.',  opts: ['A. get sick', 'B. get stronger', 'C. sleep better', 'D. gain muscle'], a: 'A' },
+  { d: 'MEDIUM', q: '"She drinks lemon and honey tea when she has a sore throat." This is an example of a ___ remedy.', opts: ['A. natural / home', 'B. surgical', 'C. chemical', 'D. prescription'], a: 'A' },
+  { d: 'HARD', q: 'Read: "He was diagnosed with type 2 diabetes due to poor diet and lack of exercise." What could have PREVENTED this?', opts: ['A. A balanced diet and regular physical activity', 'B. Eating more sugar', 'C. Sleeping less', 'D. Taking no medicine at all'], a: 'A' },
+  { d: 'HARD', q: '"The patient was put on a drip because she was severely dehydrated." "Dehydrated" means ___.',  opts: ['A. lacking enough water in the body', 'B. having too much energy', 'C. being very overweight', 'D. having broken bones'], a: 'A' },
+  { d: 'HARD', q: '"Physical health and mental health are closely connected." Which example BEST supports this?', opts: ['A. Exercise reduces stress and improves mood.', 'B. Reading a book makes your bones stronger.', 'C. Eating fruit improves mathematical skills.', 'D. Sleeping makes you gain weight.'], a: 'A' },
+  { d: 'HARD', q: '"After the surgery, he needed months of rehabilitation." "Rehabilitation" means ___.',  opts: ['A. a process of recovery to restore health and function', 'B. another surgery', 'C. a vacation', 'D. a diet plan'], a: 'A' },
+  { d: 'HARD', q: 'Read: "Children who eat breakfast perform better academically." This suggests breakfast ___.',  opts: ['A. improves concentration and cognitive performance', 'B. causes children to sleep in class', 'C. has no effect on learning', 'D. is only important for adults'], a: 'A' },
+  { d: 'HARD', q: '"A sedentary lifestyle increases the risk of heart disease." "Sedentary" most closely means ___.',  opts: ['A. inactive – spending most time sitting', 'B. very active', 'C. outdoors-based', 'D. diet-related'], a: 'A' },
+  { d: 'HARD', q: 'Read: "The WHO recommends at least 150 minutes of moderate exercise per week." 150 minutes equals ___.',  opts: ['A. 2 hours 30 minutes', 'B. 1 hour 30 minutes', 'C. 3 hours', 'D. 1 hour'], a: 'A' },
+  { d: 'HARD', q: '"Prevention is better than cure." This proverb means ___.',  opts: ['A. It is better to stop illness from occurring than to treat it later.', 'B. Cures are more effective than prevention.', 'C. Doctors prefer treating sick patients.', 'D. Medicine is the only solution.'], a: 'A' },
+  { d: 'HARD', q: 'Read: "She takes supplements including omega-3, iron, and probiotics." What are "supplements"?', opts: ['A. Products taken to add nutrients that may be missing from the diet', 'B. Types of vegetables', 'C. Prescription medicines for illness', 'D. Equipment for exercise'], a: 'A' },
+  { d: 'HARD', q: '"Emotional eating" refers to eating ___.',  opts: ['A. in response to emotions like stress or sadness, not hunger', 'B. only healthy food when happy', 'C. regular meals at fixed times', 'D. with family during celebrations'], a: 'A' },
+  { d: 'EASY', q: '"He took the medicine as prescribed." "Prescribed" means ___.',  opts: ['A. officially recommended by a doctor', 'B. bought without advice', 'C. thrown away', 'D. shared with a friend'], a: 'A' },
+  { d: 'EASY', q: 'Sunscreen ___ your skin from harmful UV rays.', opts: ['A. protects', 'B. harms', 'C. burns', 'D. darkens'], a: 'A' },
+  { d: 'MEDIUM', q: 'He exercises every day, but he still eats a lot of junk food. What is the PROBLEM?', opts: ['A. He doesn\'t have a fully healthy lifestyle because diet also matters.', 'B. He is perfectly healthy.', 'C. He exercises too much.', 'D. He needs more rest.'], a: 'A' },
+  { d: 'MEDIUM', q: '"Smoking is the leading cause of preventable death worldwide." "Preventable" means ___.',  opts: ['A. able to be avoided or stopped', 'B. unable to be stopped', 'C. very expensive to treat', 'D. caused by bad luck'], a: 'A' },
+  { d: 'HARD', q: 'What is the MOST complete definition of "good health"?', opts: ['A. A state of complete physical, mental, and social well-being', 'B. Having no injuries', 'C. Being able to run fast', 'D. Taking vitamins every day'], a: 'A' },
+
+  // ── NGỮ PHÁP: SHOULD / HAD BETTER / OUGHT TO (15 câu) ──
+  { d: 'MEDIUM', q: '"Had better" is used to give ___ advice about a situation.', opts: ['A. urgent or strong', 'B. light and casual', 'C. past', 'D. future only'], a: 'A' },
+  { d: 'MEDIUM', q: 'He had better ___ the doctor before taking any medicine.', opts: ['A. see', 'B. seeing', 'C. to see', 'D. saw'], a: 'A' },
+  { d: 'MEDIUM', q: '"You ought to exercise more." "Ought to" is similar in meaning to ___.',  opts: ['A. should', 'B. must', 'C. can', 'D. will'], a: 'A' },
+  { d: 'MEDIUM', q: 'She ought ___ sleep earlier – she looks very tired.', opts: ['A. to', 'B. for', 'C. in', 'D. at'], a: 'A' },
+  { d: 'MEDIUM', q: 'Choose the CORRECT sentence:', opts: ['A. You had better see a doctor immediately.', 'B. You had better to see a doctor.', 'C. You had better seeing a doctor.', 'D. You had better saw a doctor.'], a: 'A' },
+  { d: 'MEDIUM', q: 'He ___ quit smoking before it damages his health further.', opts: ['A. had better', 'B. had better to', 'C. has better', 'D. have better'], a: 'A' },
+  { d: 'HARD', q: 'What is the NEGATIVE form of "You had better go to the clinic"?', opts: ['A. You had better not go to the clinic.', 'B. You hadn\'t better go to the clinic.', 'C. You had better don\'t go to the clinic.', 'D. You had not better go to the clinic.'], a: 'A' },
+  { d: 'HARD', q: '"Had better" implies a ___ if the advice is not followed.', opts: ['A. warning or negative consequence', 'B. simple preference', 'C. past experience', 'D. possibility in the future'], a: 'A' },
+  { d: 'HARD', q: 'Choose the sentence that uses "ought to" CORRECTLY:', opts: ['A. Children ought to eat more vegetables.', 'B. Children ought eating more vegetables.', 'C. Children ought to eating more vegetables.', 'D. Children oughts to eat more vegetables.'], a: 'A' },
+  { d: 'HARD', q: 'Rank the strength of obligation: which is STRONGEST?', opts: ['A. must > had better > should > ought to', 'B. should > must > had better', 'C. ought to > must > should', 'D. can > should > must'], a: 'A' },
+  { d: 'EASY', q: 'You ___ eat breakfast every morning. It gives you energy.', opts: ['A. should', 'B. shouldn\'t', 'C. can\'t', 'D. mustn\'t'], a: 'A' },
+  { d: 'EASY', q: 'She has a headache. She ___ take an aspirin and rest.', opts: ['A. should', 'B. shouldn\'t', 'C. won\'t', 'D. can\'t'], a: 'A' },
+  { d: 'MEDIUM', q: 'The doctor said: "You ___ (had better / not / eat) fried food after the surgery."', opts: ['A. had better not eat', 'B. had better not to eat', 'C. hadn\'t better eat', 'D. had better not eating'], a: 'A' },
+  { d: 'MEDIUM', q: 'She ought ___ see a specialist about her knee pain.', opts: ['A. to', 'B. for', 'C. at', 'D. of'], a: 'A' },
+  { d: 'HARD', q: 'Choose the sentence with the MOST urgent advice:', opts: ['A. You had better get to the hospital right away!', 'B. You should consider going to the hospital.', 'C. You might want to see a doctor sometime.', 'D. You could visit the doctor if you feel like it.'], a: 'A' },
+
+  // ── GIAO TIẾP / HỘI THOẠI (20 câu) ──
+  { d: 'EASY', q: 'A: "What\'s wrong with you?" B: "___"', opts: ['A. I have a headache and feel dizzy.', 'B. I am happy today.', 'C. I ate lunch at noon.', 'D. I go to school every day.'], a: 'A' },
+  { d: 'EASY', q: 'A: "How are you feeling today?" B: "Not very well. I have a ___."', opts: ['A. cold and sore throat', 'B. new car', 'C. good grade', 'D. fun hobby'], a: 'A' },
+  { d: 'EASY', q: 'A: "Should I take this medicine?" B: "Yes, you ___. The doctor prescribed it."', opts: ['A. should', 'B. shouldn\'t', 'C. can\'t', 'D. won\'t'], a: 'A' },
+  { d: 'EASY', q: 'A: "What should I do for a sore throat?" B: "You should ___ warm tea with honey."', opts: ['A. drink', 'B. eat', 'C. cook', 'D. buy'], a: 'A' },
+  { d: 'EASY', q: 'A: "I feel tired all the time." B: "You should ___."', opts: ['A. get more sleep and see a doctor', 'B. eat more junk food', 'C. stop sleeping', 'D. drink coffee all night'], a: 'A' },
+  { d: 'MEDIUM', q: 'A: "I\'ve been sneezing and have a runny nose." B: "You ___ probably have a cold. Have you seen a doctor?"', opts: ['A. might', 'B. must not', 'C. should not', 'D. can\'t'], a: 'A' },
+  { d: 'MEDIUM', q: 'A: "The doctor told me to cut back on salt." B: "That\'s because too much salt can cause ___."', opts: ['A. high blood pressure', 'B. strong bones', 'C. good eyesight', 'D. better sleep'], a: 'A' },
+  { d: 'MEDIUM', q: 'A: "I want to stay healthy. What do you suggest?" B: "___"', opts: ['A. Eat a balanced diet, exercise regularly, and sleep enough.', 'B. Eat only fast food.', 'C. Never go to the doctor.', 'D. Stop drinking water.'], a: 'A' },
+  { d: 'MEDIUM', q: 'A: "My back hurts after sitting all day." B: "You ___ take regular breaks and stretch."', opts: ['A. should', 'B. shouldn\'t', 'C. can\'t', 'D. won\'t'], a: 'A' },
+  { d: 'MEDIUM', q: 'A: "How often should I exercise?" B: "Experts recommend ___ of moderate exercise a week."', opts: ['A. at least 150 minutes', 'B. just 10 minutes', 'C. never – rest is better', 'D. 10 hours daily'], a: 'A' },
+  { d: 'MEDIUM', q: 'Doctor: "You ___ eat less sugar – your blood sugar is too high." Patient: "I understand, doctor."', opts: ['A. should', 'B. can', 'C. will', 'D. may'], a: 'A' },
+  { d: 'MEDIUM', q: 'A: "Is it important to go for regular health check-ups?" B: "___"', opts: ['A. Absolutely – they can detect problems early before they get serious.', 'B. No, only sick people need check-ups.', 'C. Only if you feel very ill.', 'D. It\'s a waste of time.'], a: 'A' },
+  { d: 'HARD', q: 'A: "I\'ve been feeling anxious and can\'t concentrate lately." B: "You ___ consider speaking to a counsellor – mental health matters too."', opts: ['A. should', 'B. shouldn\'t', 'C. can\'t', 'D. won\'t'], a: 'A' },
+  { d: 'HARD', q: 'A: "My child refuses to eat vegetables." B: "You ___ try making them into fun shapes or mixing them into sauces."', opts: ['A. could / might', 'B. must not', 'C. can\'t', 'D. had better not'], a: 'A' },
+  { d: 'HARD', q: 'A: "I\'m always tired even after 9 hours of sleep." B: "That could indicate anaemia or thyroid issues – you ___ see a doctor."', opts: ['A. should definitely', 'B. shouldn\'t', 'C. had better not', 'D. must never'], a: 'A' },
+  { d: 'HARD', q: 'A: "What are the long-term effects of poor diet?" B: "___"', opts: ['A. Obesity, diabetes, heart disease, and weakened immune system.', 'B. Better eyesight and strong bones.', 'C. Improved athletic performance.', 'D. Higher energy levels and better mood.'], a: 'A' },
+  { d: 'EASY', q: 'A: "Do you exercise regularly?" B: "Yes, I ___ every morning."', opts: ['A. jog', 'B. jogged', 'C. to jog', 'D. jogging'], a: 'A' },
+  { d: 'MEDIUM', q: 'A: "What do you do to stay fit?" B: "I avoid junk food and ___ to the gym three times a week."', opts: ['A. go', 'B. went', 'C. going', 'D. gone'], a: 'A' },
+  { d: 'MEDIUM', q: 'A: "Is walking a good form of exercise?" B: "Definitely! It\'s ___ and easy to do every day."', opts: ['A. low-impact and beneficial', 'B. very dangerous', 'C. not effective at all', 'D. only for elderly people'], a: 'A' },
+  { d: 'HARD', q: 'A: "Some people say drinking 8 glasses of water is a myth. Is it true?" B: "___"', opts: ['A. Water needs vary by person, but staying well hydrated is definitely important for health.', 'B. Yes, you should drink 8 glasses no matter what.', 'C. Water is not important for health.', 'D. Only athletes need to drink water.'], a: 'A' },
+
+  // ── SO SÁNH / LỰA CHỌN LỐI SỐNG (15 câu) ──
+  { d: 'EASY', q: 'Apples are ___ than chips as a snack.', opts: ['A. healthier', 'B. worse', 'C. unhealthier', 'D. more dangerous'], a: 'A' },
+  { d: 'EASY', q: 'Walking is ___ than driving for short distances in terms of health.', opts: ['A. better', 'B. worse', 'C. more dangerous', 'D. more expensive'], a: 'A' },
+  { d: 'MEDIUM', q: 'Smoking is ___ one of the most harmful habits for your body.', opts: ['A. considered', 'B. considering', 'C. to consider', 'D. consider'], a: 'A' },
+  { d: 'MEDIUM', q: 'Cycling to school is ___ (good) for your health than going by car.', opts: ['A. better', 'B. gooder', 'C. more good', 'D. best'], a: 'A' },
+  { d: 'MEDIUM', q: 'Home-cooked meals are ___ than fast food for your body.', opts: ['A. much healthier', 'B. much unhealthier', 'C. less healthy', 'D. not as good'], a: 'A' },
+  { d: 'MEDIUM', q: 'Getting 8 hours of sleep is ___ to your health than sleeping only 4 hours.', opts: ['A. more beneficial', 'B. less beneficial', 'C. more harmful', 'D. equally harmful'], a: 'A' },
+  { d: 'MEDIUM', q: 'Water is the ___ drink for hydration – better than sodas or energy drinks.', opts: ['A. best', 'B. worst', 'C. most dangerous', 'D. least effective'], a: 'A' },
+  { d: 'HARD', q: 'Yoga is often considered less ___ but more ___ than weightlifting.', opts: ['A. intense / meditative', 'B. relaxing / dangerous', 'C. expensive / boring', 'D. popular / difficult'], a: 'A' },
+  { d: 'HARD', q: 'Which sentence is GRAMMATICALLY correct and logically sound?', opts: ['A. A vegetarian diet can be just as healthy as one that includes meat, if planned properly.', 'B. A vegetarian diet is always healthier than any other diet.', 'C. Meat is the most important food for good health.', 'D. Vegetables are less important than protein.'], a: 'A' },
+  { d: 'HARD', q: 'Identify the HEALTHIEST daily routine:', opts: ['A. 7-8 hours sleep, balanced diet, 30 min exercise, limited screen time', 'B. 4 hours sleep, fast food, no exercise, 12 hours of gaming', 'C. No breakfast, heavy dinner, no physical activity', 'D. Only eating fruits, 2 hours of sleep, excessive exercise'], a: 'A' },
+  { d: 'EASY', q: 'Fresh juice is ___ than soft drinks.', opts: ['A. healthier', 'B. worse', 'C. more harmful', 'D. less nutritious'], a: 'A' },
+  { d: 'MEDIUM', q: 'Meditation is one of the ___ ways to manage stress.', opts: ['A. most effective', 'B. least useful', 'C. most dangerous', 'D. most complicated'], a: 'A' },
+  { d: 'MEDIUM', q: 'A short nap of 20 minutes can be ___ than a 2-hour nap for afternoon energy.', opts: ['A. more refreshing', 'B. less refreshing', 'C. more harmful', 'D. more expensive'], a: 'A' },
+  { d: 'HARD', q: '"The dose makes the poison." Applied to health, this means ___.',  opts: ['A. Even healthy things can be harmful in excess.', 'B. All medicine is poisonous.', 'C. More exercise always means better health.', 'D. Vitamins should never be taken.'], a: 'A' },
+  { d: 'HARD', q: 'Choose the statement MOST supported by research:', opts: ['A. People who exercise regularly live longer and have a better quality of life.', 'B. Exercise is only beneficial for young people.', 'C. Diet has no effect on long-term health.', 'D. Mental health has no connection to physical activity.'], a: 'A' },
+
+  // ── SUY LUẬN / TÌNH HUỐNG (30 câu) ──
+  { d: 'EASY', q: 'If you eat too much sugar, you might get ___.',  opts: ['A. cavities and tooth decay', 'B. stronger bones', 'C. better eyesight', 'D. faster running speed'], a: 'A' },
+  { d: 'EASY', q: 'If you don\'t sleep enough, you will feel ___ the next day.', opts: ['A. tired and unfocused', 'B. energetic and fresh', 'C. very healthy', 'D. very strong'], a: 'A' },
+  { d: 'EASY', q: 'She exercises daily. Therefore, she is likely to be ___.',  opts: ['A. fit and healthy', 'B. overweight', 'C. sick frequently', 'D. very tired'], a: 'A' },
+  { d: 'EASY', q: 'He never washes his hands. This increases the risk of ___.',  opts: ['A. spreading germs and getting sick', 'B. getting stronger', 'C. sleeping better', 'D. growing taller'], a: 'A' },
+  { d: 'EASY', q: 'She hasn\'t eaten anything all day. She must be very ___.',  opts: ['A. hungry and weak', 'B. happy and energetic', 'C. full and satisfied', 'D. sleepy but fine'], a: 'A' },
+  { d: 'MEDIUM', q: 'He smokes a pack of cigarettes a day. Long term, this will likely cause ___.',  opts: ['A. lung cancer and respiratory disease', 'B. stronger lungs', 'C. better concentration', 'D. improved mood'], a: 'A' },
+  { d: 'MEDIUM', q: 'She drinks 8 glasses of water daily, eats balanced meals, and sleeps 8 hours. What can you conclude?', opts: ['A. She follows a very healthy lifestyle.', 'B. She is unhealthy.', 'C. She exercises too much.', 'D. She has a poor diet.'], a: 'A' },
+  { d: 'MEDIUM', q: 'If stress is not managed, it can lead to ___.',  opts: ['A. physical illness and mental health problems', 'B. stronger immune system', 'C. better sleeping patterns', 'D. increased physical strength'], a: 'A' },
+  { d: 'MEDIUM', q: 'A child who watches TV for 6 hours a day and rarely goes outside may develop ___.',  opts: ['A. poor eyesight and lack of physical fitness', 'B. excellent vision', 'C. strong social skills', 'D. great physical health'], a: 'A' },
+  { d: 'MEDIUM', q: 'She went to the gym every day for a month but saw no results. The most likely reason is ___.',  opts: ['A. her diet was still unhealthy', 'B. gyms don\'t work', 'C. exercise is ineffective', 'D. she exercised too much'], a: 'A' },
+  { d: 'MEDIUM', q: 'A person who is anaemic should eat more ___ to increase iron levels.', opts: ['A. leafy greens and red meat', 'B. sugar and candy', 'C. fried food', 'D. fizzy drinks'], a: 'A' },
+  { d: 'MEDIUM', q: 'Why is it important to take the FULL course of antibiotics?', opts: ['A. To kill all the bacteria and prevent antibiotic resistance', 'B. Because antibiotics taste good', 'C. Because stopping early makes you stronger', 'D. Because the doctor says so without reason'], a: 'A' },
+  { d: 'MEDIUM', q: 'If you ___ (skip) breakfast regularly, your concentration at school will suffer.', opts: ['A. skip', 'B. skips', 'C. skipping', 'D. skipped'], a: 'A' },
+  { d: 'MEDIUM', q: '"Excessive" means ___.',  opts: ['A. too much, more than is necessary or healthy', 'B. just the right amount', 'C. not enough', 'D. very little'], a: 'A' },
+  { d: 'MEDIUM', q: 'Which food group provides the MOST energy for the body?', opts: ['A. Carbohydrates', 'B. Vitamins', 'C. Water', 'D. Fibre'], a: 'A' },
+  { d: 'HARD', q: 'Why do doctors recommend not taking antibiotics for viral infections like the common cold?', opts: ['A. Antibiotics only kill bacteria, not viruses.', 'B. Antibiotics are too expensive.', 'C. Cold viruses are too strong.', 'D. Antibiotics cause colds to worsen.'], a: 'A' },
+  { d: 'HARD', q: 'Which scenario BEST illustrates the "ripple effect" of poor sleep?', opts: ['A. Poor sleep → poor concentration → lower grades → increased stress → worse sleep', 'B. Poor sleep → more energy → better sport performance', 'C. Poor sleep → weight loss → better mood', 'D. Poor sleep → stronger immune system'], a: 'A' },
+  { d: 'HARD', q: 'What is the concept behind "holistic health"?', opts: ['A. Considering physical, mental, social, and emotional well-being together', 'B. Only treating physical symptoms', 'C. Relying only on medicine', 'D. Focusing only on diet'], a: 'A' },
+  { d: 'HARD', q: 'Antibiotic resistance occurs when ___.',  opts: ['A. bacteria evolve to survive antibiotic treatment due to overuse', 'B. people become immune to bacteria naturally', 'C. antibiotics are taken too rarely', 'D. vaccines replace antibiotics'], a: 'A' },
+  { d: 'HARD', q: 'A person with a broken leg and good mental health will recover faster than one with a broken leg AND depression. This supports the idea that ___.',  opts: ['A. mental health significantly impacts physical recovery', 'B. broken legs always take the same time to heal', 'C. depression makes bones heal faster', 'D. mental health has no impact on physical health'], a: 'A' },
+  { d: 'EASY', q: 'If you feel sick, you ___ see a doctor.', opts: ['A. should', 'B. shouldn\'t', 'C. can\'t', 'D. won\'t'], a: 'A' },
+  { d: 'EASY', q: 'Washing your hands ___ helps prevent the spread of diseases.', opts: ['A. regularly', 'B. never', 'C. rarely', 'D. occasionally'], a: 'A' },
+  { d: 'MEDIUM', q: '"You are what you eat" means ___.',  opts: ['A. Your food choices directly affect your health and body.', 'B. Food defines your personality.', 'C. You should only eat what you like.', 'D. Eating and identity are unrelated.'], a: 'A' },
+  { d: 'MEDIUM', q: 'What is the MAIN risk of being overweight?', opts: ['A. Increased risk of heart disease, diabetes, and joint problems', 'B. Improved athletic ability', 'C. Better immune system', 'D. Faster metabolism'], a: 'A' },
+  { d: 'MEDIUM', q: 'Which is the HEALTHIEST cooking method?', opts: ['A. Steaming', 'B. Deep frying', 'C. Grilling with lots of oil', 'D. Charcoal burning'], a: 'A' },
+  { d: 'HARD', q: 'Which person has the MOST balanced lifestyle?', opts: ['A. Exercises 4x weekly, eats varied nutritious food, sleeps 8 hours, manages stress', 'B. Runs daily but eats only chips and drinks soda', 'C. Sleeps 12 hours but never exercises', 'D. Eats perfectly but sleeps 3 hours and works 18 hours'], a: 'A' },
+  { d: 'HARD', q: '"A sound mind in a sound body" (Juvenal) suggests ___.',  opts: ['A. Physical and mental health are deeply connected and both equally important', 'B. Only physical fitness matters', 'C. Mental health is more important than physical health', 'D. Ancient wisdom is no longer relevant'], a: 'A' },
+  { d: 'HARD', q: 'If a community lacks access to clean water, the MOST likely health consequence is ___.',  opts: ['A. increased rates of waterborne diseases like cholera and typhoid', 'B. improved immune systems', 'C. better nutrition', 'D. reduced air pollution'], a: 'A' },
+  { d: 'HARD', q: 'Type 2 diabetes can often be PREVENTED by ___.',  opts: ['A. maintaining a healthy weight through diet and regular exercise', 'B. taking insulin from childhood', 'C. avoiding all carbohydrates', 'D. sleeping more than 10 hours'], a: 'A' },
+  { d: 'HARD', q: 'The "Five Pillars of Health" typically include sleep, nutrition, exercise, stress management, and ___.',  opts: ['A. social connection', 'B. watching television', 'C. shopping', 'D. working overtime'], a: 'A' },
+];
+
+async function main() {
+  const admin = await p.user.findFirst({ where: { role: 'ADMIN' }, select: { id: true } });
+  if (!admin) throw new Error('Admin not found');
+
+  let count = 0;
+  for (const q of QUESTIONS) {
+    const keys = ['A', 'B', 'C', 'D'];
+    const correctIndex = keys.indexOf(q.a);
+    await p.question.create({
+      data: {
+        content: q.q,
+        subjectId: 'sub-anh',
+        gradeId: 'grade-7',
+        topicId: TOPIC_ID,
+        difficulty: q.d,
+        questionType: 'MULTIPLE_CHOICE',
+        status: 'ACTIVE',
+        createdById: admin.id,
+        explanation: `Đáp án đúng: ${q.a}. ${q.opts[correctIndex]}`,
+        options: {
+          create: q.opts.map((text, i) => ({
+            optionKey: keys[i],
+            content: text,
+            isCorrect: i === correctIndex,
+            sortOrder: i,
+          })),
+        },
+      },
+    });
+    count++;
+    if (count % 50 === 0) console.log(`  ${count}/${QUESTIONS.length} câu...`);
+  }
+
+  const total = await p.question.count({ where: { subjectId: 'sub-anh', gradeId: 'grade-7' } });
+  const unit2 = await p.question.count({ where: { topicId: TOPIC_ID } });
+  console.log(`\n✅ Đã thêm ${count} câu`);
+  console.log(`📌 Unit 2 - Health: ${unit2} câu`);
+  console.log(`📊 Tổng Tiếng Anh lớp 7: ${total} câu`);
+}
+
+main().catch(console.error).finally(() => p.$disconnect());
